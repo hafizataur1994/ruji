@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="1024" height="1024">
+<defs><clipPath id="c"><rect width="220" height="220" rx="48"/></clipPath></defs>
+<rect width="220" height="220" rx="48" fill="#E11D48"/>
+<g clip-path="url(#c)"><path transform="translate(-80,-20)" fill-rule="evenodd" fill="#fff" d="M150 70 H222 C256 70 276 92 276 120 C276 144 262 160 240 166 L282 250 H238 L200 170 H190 V250 H150 Z M190 104 V138 H220 C234 138 240 131 240 121 C240 111 234 104 220 104 Z"/></g>
+</svg>
