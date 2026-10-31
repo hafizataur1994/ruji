@@ -105,19 +105,16 @@ button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px soli
 (function(){
 var KEY="adda-v1", COLORS=["#E11D48","#0F766E","#B45309","#9D174D","#5B21B6","#166534"];
 var now=Date.now(), M=60000;
-var DEMO="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><rect width='800' height='450' fill='%230F766E'/><circle cx='620' cy='120' r='60' fill='%23F2A900'/><path d='M0 330Q200 260 400 330T800 310V450H0Z' fill='%23fff' opacity='.4'/></svg>";
-var seed=[
- {id:"s1",author:"রহিম উদ্দিন",text:"আজ সকালে নদীর পাড়ে হাঁটতে গিয়ে কী সুন্দর কুয়াশা দেখলাম! সবাই একবার ঘুরে আসুন।",img:DEMO,t:now-25*M,likes:["সুমি আক্তার"],comments:[{a:"সুমি আক্তার",text:"ছবি দিলে ভালো হতো ভাই!"}]},
- {id:"s2",author:"সুমি আক্তার",text:"নতুন একটা বই শুরু করলাম। আপনারা এ মাসে কী পড়ছেন?",img:"",t:now-3*60*M,likes:[],comments:[]},
- {id:"s3",author:"নাসির হোসেন",text:"রুজিতে স্বাগতম! এখানে সবাই নিজের কথা বলতে পারবেন।",img:"",t:now-26*60*M,likes:["রহিম উদ্দিন","সুমি আক্তার"],comments:[]}
-];
-var S=load(), open={}, draftImg="", rv={}, mode="post", draftVid="", VM={}, PH={post:"মনে কী চলছে?",reel:"রিলের ক্যাপশন লিখুন",story:"স্টোরিতে কী বলবেন?"}, PB={post:"পোস্ট করুন",reel:"রিল দিন",story:"স্টোরি দিন"}, tab="home", chat="", sq="", sopen=false, hid={}, ex={};
-function load(){try{var d=JSON.parse(localStorage.getItem(KEY));if(d&&d.posts){d.posts.forEach(function(p){if(p.id==="s1"&&!p.img)p.img=DEMO});if(!d.stories)d.stories=seedSt();return d}}catch(e){}return{me:"",posts:[],stories:seedSt()}}
-function seedSt(){return[{id:"st1",author:"সুমি আক্তার",text:"আজকের আবহাওয়াটা খুব সুন্দর।",img:"",v:0,t:now-2*60*M},{id:"st2",author:"নাসির হোসেন",text:"নতুন কিছু শিখছি।",img:"",v:0,t:now-5*60*M}]}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(Object.assign({},S,{posts:[]})))}catch(e){toast("জায়গা শেষ, ছবিটি সেভ হয়নি")}}
+var SRV=["posts","stories","users","cm","msgs","nt","fq","mk","fw","bl","uid","me","verified","needPw","pv","phone"];
+var S=load(), open={}, draftImg="", rv={}, mode="post", draftVid="", VM={}, PHT={post:"মনে কী চলছে?",reel:"রিলের ক্যাপশন লিখুন",story:"স্টোরিতে কী বলবেন?"}, PB={post:"পোস্ট করুন",reel:"রিল দিন",story:"স্টোরি দিন"}, tab="home", chat="", sq="", sopen=false, hid={}, ex={};
+function blank(){return{posts:[],stories:[],users:{},cm:{},msgs:[],nt:[],fq:[],mk:[],fw:[],bl:{}}}
+function load(){var d={};try{var x=JSON.parse(localStorage.getItem(KEY));if(x&&typeof x==="object")d=x}catch(e){}SRV.forEach(function(k){delete d[k]});["fr","stories"].forEach(function(k){delete d[k]});return Object.assign({me:""},d,blank())}
+function save(){try{var o={};for(var k in S)if(SRV.indexOf(k)<0)o[k]=S[k];localStorage.setItem(KEY,JSON.stringify(o))}catch(e){toast("জায়গা শেষ, সেভ হয়নি")}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function col(n){var h=0;for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))>>>0;return COLORS[h%COLORS.length]}
-function av(n){if(n===S.me&&S.pf&&S.pf.img)return '<div class="av" style="background:url(\''+S.pf.img+'\') center/cover"></div>';return '<div class="av" style="background:'+col(n)+'">'+esc(Array.from(n)[0]||"?")+'</div>'}
+var PH={},PL={};
+function av(n,u){var im=(u&&PH[u])||(n===S.me&&S.pf&&S.pf.img);if(im)return '<div class="av" style="background:url(\''+im+'\') center/cover"></div>';return '<div class="av" style="background:'+col(n)+'">'+esc(Array.from(n)[0]||"?")+'</div>'}
+function loadPh(l){l.forEach(function(p){var u=p&&p.uid;if(!u||PL[u])return;PL[u]=1;FB.getPhoto(u).then(function(d){if(!d||!d.img)return;PH[u]=d.img;if(u===S.uid){S.pf=S.pf||{};S.pf.lock=!!d.locked;S.pf.img=d.img;save()}render()}).catch(function(){})})}
 function bn(n){return n.toLocaleString("bn-BD")}
 function ago(t){var m=Math.floor((Date.now()-t)/M);if(m<1)return"এইমাত্র";if(m<60)return bn(m)+" মিনিট আগে";var h=Math.floor(m/60);if(h<24)return bn(h)+" ঘণ্টা আগে";return bn(Math.floor(h/24))+" দিন আগে"}
 function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="show";clearTimeout(toast.k);toast.k=setTimeout(function(){t.className=""},2200)}
@@ -126,32 +123,33 @@ function render(){
  nb();var nv=document.getElementById("nav");nv.style.display=S.me&&S.verified&&!S.needPw?"":"none";Array.prototype.forEach.call(nv.querySelectorAll("[data-t]"),function(b){b.className=b.dataset.t===tab?"on":""});var app=document.getElementById("app"),meEl=document.getElementById("me");
  if(S.me&&!S.verified){meEl.innerHTML="";verify(app);return}
  if(!S.uid){meEl.innerHTML="";app.innerHTML=PHONE_ON?authView():emailView();if(PHONE_ON)bindAuth();else bindEmail();return}if(!S.me||S.needPw){meEl.innerHTML="";app.innerHTML=nameView();bindName();return}
- meEl.innerHTML='<button class="ic" data-n="add" aria-label="নতুন পোস্ট">'+ic('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>')+'</button><button class="ic" data-n="search" aria-label="খুঁজুন">'+ic('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>')+'</button><button class="ic" data-n="msg" aria-label="মেসেজ">'+ic('<path d="M4 5h16v11H9l-5 4z"/>')+'</button>';
+ meEl.innerHTML='<button class="ic" data-n="add" aria-label="নতুন পোস্ট">'+ic('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>')+'</button><button class="ic" data-n="search" aria-label="খুঁজুন">'+ic('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>')+'</button><button class="ic" data-n="msg" aria-label="মেসেজ">'+ic('<path d="M4 5h16v11H9l-5 4z"/>')+msgDot()+'</button>';
  if(tab==="friends"){app.innerHTML=frView();return}if(tab==="notif"){app.innerHTML=ntView();return}if(tab==="market"){app.innerHTML=mkView();bindMk();return}if(tab==="msg"){app.innerHTML=chView();return}
- var h=(tab==="me"?profCard():"")+saverBar()+(tab==="reel"?"":upg())+(tab==="home"?storyBar():"")+searchBar()+'<div class="box"><div class="seg" role="tablist">'+segs()+'</div><div class="row" style="align-items:flex-start">'+av(S.me)+'<textarea id="tx" placeholder="'+esc(S.me)+', '+PH[mode]+'" aria-label="নতুন পোস্ট"></textarea></div><div id="pv"></div><div class="tools"><label><button type="button" id="ph">'+(mode==='reel'?'ভিডিও বাছুন':'ছবি বা ভিডিও')+'</button><input type="file" id="fl" accept="'+(mode==='reel'?'video/*':'image/*,video/*')+'" hidden></label><button class="pri" id="pb" disabled>'+PB[mode]+'</button></div></div>';
- var ps=S.posts.filter(function(p){return !hid[p.id]&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
+ var h=(tab==="me"?profCard():"")+saverBar()+(tab==="reel"?"":upg())+(tab==="home"?storyBar():"")+searchBar()+peopleRes()+'<div class="box"><div class="seg" role="tablist">'+segs()+'</div><div class="row" style="align-items:flex-start">'+av(S.me)+'<textarea id="tx" placeholder="'+esc(S.me)+', '+PHT[mode]+'" aria-label="নতুন পোস্ট"></textarea></div><div id="pv"></div><div class="tools"><label><button type="button" id="ph">'+(mode==='reel'?'ভিডিও বাছুন':'ছবি বা ভিডিও')+'</button><input type="file" id="fl" accept="'+(mode==='reel'?'video/*':'image/*,video/*')+'" hidden></label><button class="pri" id="pb" disabled>'+PB[mode]+'</button></div></div>';
+ var ps=S.posts.filter(function(p){return !hid[p.id]&&!isBl(p.uid)&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
  if(!ps.length)h+='<div class="empty">এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন।</div>';
  ps.forEach(function(p){
   var liked=p.likes.indexOf(S.uid)>-1;if(p.kind==="reel"){h+=reelCard(p,liked);return}
-  h+='<article class="box" data-id="'+p.id+'"><div class="hd">'+av(p.author)+'<div><b>'+esc(p.author)+bd(p.author)+'</b><small>'+ago(p.t)+(p.ed?' · সম্পাদিত':'')+' · সবার জন্য</small>'+(p.kind==="reel"?' <span class="tag">রিল</span>':'')+'</div>'+((p.uid===S.uid)?'<button data-a="edit" style="margin-left:auto">সম্পাদনা</button><button data-a="del" aria-label="পোস্ট মুছুন">মুছুন</button>':'')+((p.uid&&p.uid!==S.uid)?'<button data-a="fl" class="fol2 '+((S.fw||[]).indexOf(p.uid)>-1?'on':'')+'" style="margin-left:auto">'+((S.fw||[]).indexOf(p.uid)>-1?'ফলো করছেন':'ফলো')+'</button>':'')+'<button data-a="hide" aria-label="পোস্ট লুকান" style="'+((p.uid)?'':'margin-left:auto')+'">✕</button>'+'</div>'
+  h+='<article class="box" data-id="'+p.id+'"><div class="hd">'+av(p.author,p.uid)+'<div><b>'+esc(p.author)+bd(p.author)+'</b><small>'+ago(p.t)+(p.ed?' · সম্পাদিত':'')+' · সবার জন্য</small>'+(p.kind==="reel"?' <span class="tag">রিল</span>':'')+'</div>'+((p.uid===S.uid)?'<button data-a="edit" style="margin-left:auto">সম্পাদনা</button><button data-a="del" aria-label="পোস্ট মুছুন">মুছুন</button>':'')+((p.uid&&p.uid!==S.uid)?'<button data-a="fl" class="fol2 '+((S.fw||[]).indexOf(p.uid)>-1?'on':'')+'" style="margin-left:auto">'+((S.fw||[]).indexOf(p.uid)>-1?'ফলো করছেন':'ফলো')+'</button>':'')+'<button data-a="hide" aria-label="পোস্ট লুকান" style="'+((p.uid)?'':'margin-left:auto')+'">✕</button>'+((p.uid&&p.uid!==S.uid)?'<button data-a="mn" aria-label="আরও">⋯</button>':'')+'</div>'+(mn[p.id]&&p.uid!==S.uid?'<div class="row" style="margin:0 0 8px"><button data-a="rep">🚩 রিপোর্ট করুন</button><button data-a="blk">🚫 ব্লক করুন</button></div>':'')
   +(edt[p.id]?edBox(p):(p.text?txt(p):''))+(p.img?pimg(p):'')+(p.v?pvid(p):'')
   +actBar(p,liked);
-  if(open[p.id]){h+='<div class="cm">'+p.comments.map(function(c){return'<p><b>'+esc(c.a)+'</b>'+esc(c.text)+'</p>'}).join("")+'<div class="row"><input type="text" data-in maxlength="300" placeholder="মন্তব্য লিখুন" aria-label="মন্তব্য"><button class="pri" data-a="send">পাঠান</button></div></div>'}
+  if(open[p.id]){h+='<div class="cm">'+cmList(p)+'<div class="row"><input type="text" data-in maxlength="300" placeholder="মন্তব্য লিখুন" aria-label="মন্তব্য"><button class="pri" data-a="send">পাঠান</button></div></div>'}
   h+='</article>'});
- h+='<p class="note">পোস্ট, লাইক ও মন্তব্য সবাই দেখতে পায়। প্রোটোটাইপ: স্টোরি, বন্ধু ও মেসেজ এখনো শুধু আপনার ফোনে থাকে।</p>';
+ h+='<p class="note">পোস্ট, লাইক, মন্তব্য, স্টোরি, বন্ধু, মেসেজ ও বাজার সবই সবার জন্য আসল ডাটাবেসে থাকে। সংরক্ষণ ও ডেটা সেভার শুধু আপনার ফোনে।</p>';
  app.innerHTML=h;
  var tx=document.getElementById("tx"),pb=document.getElementById("pb"),fl=document.getElementById("fl");
  var chk=function(){pb.disabled=mode==="reel"?!draftVid:!(tx.value.trim()||draftImg||draftVid)};
  tx.oninput=chk;
  document.getElementById("ph").onclick=function(){fl.click()};
  fl.onchange=function(){var f=fl.files[0];if(!f)return;if(f.type.indexOf("video")===0){if(f.size>40*1048576){toast("ভিডিও ৪০ এমবির বেশি হওয়া যাবে না");return}draftVid=URL.createObjectURL(f);draftImg="";pv();chk()}else shrink(f,function(d){draftImg=d;draftVid="";pv();chk()})};
- pb.onclick=function(){var o={id:"st"+Date.now(),author:S.me,text:tx.value.trim(),img:draftImg,v:draftVid?1:0,t:Date.now()};if(mode==="story"){if(draftVid)VM[o.id]=draftVid;S.stories.push(o);draftImg="";draftVid="";save();render();toast("স্টোরি দেওয়া হয়েছে");return}if(draftVid||mode==="reel"){toast("ভিডিও আপলোড পরের ধাপে আসছে");return}pb.disabled=true;FB.add({uid:S.uid,author:S.me,text:o.text,img:draftImg,kind:"post",t:Date.now(),likes:[],comments:[]}).then(function(){draftImg="";render();toast("পোস্ট হয়েছে")}).catch(function(x){pb.disabled=false;fail(x)})};
+ pb.onclick=function(){var o={id:"st"+Date.now(),author:S.me,text:tx.value.trim(),img:draftImg,v:draftVid?1:0,t:Date.now()};if(mode==="story"){if(draftVid){toast("ভিডিও স্টোরি পরের ধাপে আসছে");return}if(!o.text&&!o.img)return;pb.disabled=true;FB.addStory({uid:S.uid,author:S.me,text:o.text,img:draftImg,t:Date.now()}).then(function(){draftImg="";mode="post";render();toast("স্টোরি দেওয়া হয়েছে")}).catch(function(x){pb.disabled=false;fail(x,"stories")});return}if(draftVid||mode==="reel"){toast("ভিডিও আপলোড পরের ধাপে আসছে");return}pb.disabled=true;FB.add({uid:S.uid,author:S.me,text:o.text,img:draftImg,kind:"post",t:Date.now(),likes:[],comments:[]}).then(function(){draftImg="";render();toast("পোস্ট হয়েছে")}).catch(function(x){pb.disabled=false;fail(x,"posts")})};
 
  pv();chk();
 }
 var vs={step:1,phone:'',code:''};
 function bd(n){if(n!==S.me||!S.verified||!S.pv)return'';var l=S.level||1;return' <span class="vb v'+l+'" title="'+['','ফোন যাচাই','ফোন ও সেলফি যাচাই','ফোন, সেলফি ও এনআইডি যাচাই'][l]+'">'+['','✓','✓✓','★'][l]+'</span>'}
-function upg(){var l=S.level||1;if(l>=3)return'';var nx=l===1?'সেলফি দিয়ে ✓✓ ব্যাজ নিন':'এনআইডি দিয়ে ★ ব্যাজ নিন';return'<div class="box"><b>ব্যাজ বাড়ান</b><p style="color:var(--mute);margin:4px 0 10px">✓ ফোন · ✓✓ ফোন ও সেলফি · ★ ফোন, সেলফি ও এনআইডি</p><button type="button" class="pri" data-up="1">'+nx+'</button><input type="file" id="upf" accept="image/*" hidden><p style="color:var(--mute);font-size:14px;margin:10px 0 0">প্রোটোটাইপ: ছবি কোথাও পাঠানো বা সেভ হয় না।</p></div>'}
+function upg(){return''}
+function upgOld(){var l=S.level||1;if(l>=3)return'';var nx=l===1?'সেলফি দিয়ে ✓✓ ব্যাজ নিন':'এনআইডি দিয়ে ★ ব্যাজ নিন';return'<div class="box"><b>ব্যাজ বাড়ান</b><p style="color:var(--mute);margin:4px 0 10px">✓ ফোন · ✓✓ ফোন ও সেলফি · ★ ফোন, সেলফি ও এনআইডি</p><button type="button" class="pri" data-up="1">'+nx+'</button><input type="file" id="upf" accept="image/*" hidden><p style="color:var(--mute);font-size:14px;margin:10px 0 0">প্রোটোটাইপ: ছবি কোথাও পাঠানো বা সেভ হয় না।</p></div>'}
 function en(s){return s.replace(/[০-৯]/g,function(d){return '০১২৩৪৫৬৭৮৯'.indexOf(d)})}
 function verify(app){
  if(vs.step===1){
@@ -169,12 +167,12 @@ function verify(app){
 }
 function pvid(p){if(!VM[p.id])return'<p class="phold" style="display:grid;place-items:center;text-align:center;padding:8px">ভিডিওটি এই প্রোটোটাইপে সেভ থাকে না, নতুন করে দিন।</p>';if(S.saver&&!rv[p.id])return'<button class="phold" data-a="show">ভিডিও দেখুন</button>';return'<video class="pimg" controls playsinline preload="metadata" src="'+VM[p.id]+'"></video>'}
 function segs(){return[["post","পোস্ট"],["reel","রিল"],["story","স্টোরি"]].map(function(x){return'<button type="button" data-md="'+x[0]+'" role="tab" aria-selected="'+(mode===x[0])+'" class="sg'+(mode===x[0]?' on':'')+'">'+x[1]+'</button>'}).join("")}
-function storyBar(){var seen={},list=S.stories.filter(function(s){return Date.now()-s.t<864e5}).sort(function(a,b){return b.t-a.t}).filter(function(s){if(seen[s.author])return false;seen[s.author]=1;return true});return'<div class="stories"><button class="st add" data-md="story" aria-label="স্টোরি যোগ করুন"><span class="ring">+</span><small>স্টোরি তৈরি</small></button>'+list.map(function(s){return'<button class="st" data-st="'+s.id+'"><span class="ring" style="background:'+col(s.author)+'">'+esc(Array.from(s.author)[0])+'</span><small>'+esc(s.author.split(" ")[0])+'</small></button>'}).join("")+'</div>'}
-function viewSt(id){var s=S.stories.filter(function(x){return x.id===id})[0];if(!s)return;var o=document.createElement("div");o.className="sv";o.setAttribute("role","dialog");var inner=(s.img?'<img src="'+s.img+'" alt="">':'')+(s.v&&VM[s.id]?'<video src="'+VM[s.id]+'" autoplay muted playsinline controls></video>':'')+(s.v&&!VM[s.id]?'<p>ভিডিওটি এই প্রোটোটাইপে সেভ থাকে না।</p>':'')+(s.text?'<p>'+esc(s.text)+'</p>':'');o.innerHTML='<div class="svh">'+av(s.author)+'<b>'+esc(s.author)+'</b><small>'+ago(s.t)+'</small><button type="button" aria-label="বন্ধ করুন">✕</button></div><div class="svb">'+inner+'</div>';var tm;var close=function(){clearTimeout(tm);o.remove()};tm=setTimeout(close,s.v?30000:6000);o.onclick=function(e){if(e.target.tagName!=="VIDEO")close()};document.body.appendChild(o)}
+function storyBar(){var seen={},list=S.stories.filter(function(s){return Date.now()-s.t<864e5&&!isBl(s.uid)}).sort(function(a,b){return b.t-a.t}).filter(function(s){if(seen[s.uid])return false;seen[s.uid]=1;return true});return'<div class="stories"><button class="st add" data-md="story" aria-label="স্টোরি যোগ করুন"><span class="ring">+</span><small>স্টোরি তৈরি</small></button>'+list.map(function(s){return'<button class="st" data-st="'+esc(s.id)+'"><span class="ring" style="background:'+col(s.author)+'">'+esc(Array.from(s.author)[0]||"?")+'</span><small>'+esc(s.author.split(" ")[0])+'</small></button>'}).join("")+'</div>'}
+function viewSt(id){var s=S.stories.filter(function(x){return x.id===id})[0];if(!s)return;var o=document.createElement("div");o.className="sv";o.setAttribute("role","dialog");var inner=(s.img?'<img src="'+s.img+'" alt="">':'')+(s.text?'<p>'+esc(s.text)+'</p>':'');o.innerHTML='<div class="svh">'+av(s.author,s.uid)+'<b>'+esc(s.author)+'</b><small>'+ago(s.t)+'</small>'+(s.uid===S.uid?'<button type="button" data-sdel="1">মুছুন</button>':'')+'<button type="button" aria-label="বন্ধ করুন">✕</button></div><div class="svb">'+inner+'</div>';var tm;var close=function(){clearTimeout(tm);o.remove()};tm=setTimeout(close,8000);o.onclick=function(e){if(e.target.dataset&&e.target.dataset.sdel){clearTimeout(tm);if(confirm("এই স্টোরিটি মুছবেন?"))FB.delStory(s.id).then(close).catch(function(x){fail(x,"stories")});else tm=setTimeout(close,8000);return}close()};document.body.appendChild(o)}
 var P={like:'<path d="M7 11v9H4v-9z"/><path d="M7 11l4-8c1.6 0 2.6 1.1 2.3 2.7L12.8 9H19a2 2 0 0 1 2 2.4l-1.2 6A2 2 0 0 1 17.8 19H7"/>',cm:'<path d="M4 5h16v11H9l-5 4z"/>',sh:'<path d="M14 4l7 7-7 7v-4c-5 0-8 1-10 5 1-6 4-10 10-11z"/>',sv:'<path d="M6 3h12v18l-6-4-6 4z"/>'};
 function ab(a,icon,count,on,label){return'<button data-a="'+a+'" class="ab'+(on?' on':'')+'" aria-label="'+label+'" aria-pressed="'+!!on+'">'+icon+count+'</button>'}
 function actBar(p,liked){var sv=!!(S.sv&&S.sv[p.id]),n=function(x){return x?'<span>'+bn(x)+'</span>':''};return'<div class="act2">'+ab("like",ic(P.like,liked?"currentColor":""),n(p.likes.length),liked,"পছন্দ")+ab("cm",ic(P.cm),n(p.comments.length),open[p.id],"মন্তব্য")+ab("sh",ic(P.sh),n(p.sh||0),false,"শেয়ার")+'<span style="flex:1"></span>'+ab("sv",ic(P.sv,sv?"currentColor":""),"",sv,"সংরক্ষণ")+'</div>'}
-function cmBox(p){return'<div class="cm rlc">'+p.comments.map(function(c){return'<p><b>'+esc(c.a)+'</b>'+esc(c.text)+'</p>'}).join("")+'<div class="row"><input type="text" data-in maxlength="300" placeholder="মন্তব্য লিখুন" aria-label="মন্তব্য"><button class="pri" data-a="send">পাঠান</button></div></div>'}
+function cmBox(p){return'<div class="cm rlc">'+cmList(p)+'<div class="row"><input type="text" data-in maxlength="300" placeholder="মন্তব্য লিখুন" aria-label="মন্তব্য"><button class="pri" data-a="send">পাঠান</button></div></div>'}
 function reelCard(p,liked){var sv=!!(S.sv&&S.sv[p.id]),t=p.text||"",c=t.length>80&&!ex[p.id]?esc(t.slice(0,80))+'… <button class="more" data-a="more" style="color:#fff">আরও</button>':esc(t),own=(p.uid===S.uid),fw=(S.fw||[]).indexOf(p.uid)>-1;var m=!VM[p.id]?'<p class="rlh">ভিডিওটি এই প্রোটোটাইপে সেভ থাকে না, নতুন করে দিন।</p>':(S.saver&&!rv[p.id]?'<button class="phold" data-a="show">ভিডিও দেখুন</button>':'<video controls playsinline preload="metadata" src="'+VM[p.id]+'"></video>');return'<article class="box rl" data-id="'+p.id+'"><div class="rlm">'+m+'<div class="rtop">'+(own?'<button data-a="del" aria-label="পোস্ট মুছুন">মুছুন</button>':'')+'<button data-a="hide" aria-label="পোস্ট লুকান">✕</button></div><div class="rail">'+ab("like",ic(P.like,liked?"currentColor":""),'<span>'+bn(p.likes.length)+'</span>',liked,"পছন্দ")+ab("cm",ic(P.cm),'<span>'+bn(p.comments.length)+'</span>',open[p.id],"মন্তব্য")+ab("sh",ic(P.sh),'<span>'+bn(p.sh||0)+'</span>',false,"শেয়ার")+ab("sv",ic(P.sv,sv?"currentColor":""),"",sv,"সংরক্ষণ")+'</div><div class="cap"><div class="nm">'+esc(p.author)+bd(p.author)+(own?'':'<button class="fol" data-a="fl">'+(fw?'ফলো করছেন':'ফলো')+'</button>')+'</div><div>'+c+'</div><small>'+ago(p.t)+'</small></div></div>'+(open[p.id]?cmBox(p):'')+'</article>'}
 function ic(p,f){return'<svg viewBox="0 0 24 24" width="22" height="22" fill="'+(f||'none')+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>'}
 function txt(p){if(p.text.length>140&&!ex[p.id])return'<p class="txt">'+esc(p.text.slice(0,140))+'… <button class="more" data-a="more">আরও</button></p>';return'<p class="txt">'+esc(p.text)+'</p>'}
@@ -182,55 +180,72 @@ function cnt(p){if(!p.likes.length&&!p.comments.length)return'';return'<div clas
 function searchBar(){return sopen?'<div class="box row"><input type="text" id="sq" placeholder="পোস্ট বা নাম খুঁজুন" aria-label="খুঁজুন" value="'+esc(sq)+'"><button class="pri" data-s="1">খুঁজুন</button></div>':''}
 function profCard(){var l=S.level||1,pf=S.pf||{},big=pf.img?'<div class="av" style="width:72px;height:72px;margin:auto;background:url(\''+pf.img+'\') center/cover"></div>':'<div class="av" style="width:72px;height:72px;font-size:28px;margin:auto;background:'+col(S.me)+'">'+esc(Array.from(S.me)[0])+'</div>';
  return'<div class="box" style="text-align:center">'+big+'<h2 style="margin:8px 0 2px">'+esc(S.me)+bd(S.me)+'</h2><div style="color:var(--mute)">'+(S.pv?['','ফোন যাচাই করা','ফোন ও সেলফি যাচাই করা','ফোন, সেলফি ও এনআইডি যাচাই করা'][l]:'ফ্রি অ্যাকাউন্ট (ফোন যাচাই হয়নি)')+'</div>'
- +(pfEdit?'<textarea id="bio" maxlength="120" placeholder="নিজের সম্পর্কে ছোট করে লিখুন" aria-label="পরিচিতি" style="margin-top:10px;min-height:64px">'+esc(pf.bio||"")+'</textarea><div class="row" style="justify-content:center;margin-top:8px"><button class="pri" data-pf="save">সেভ</button><button data-pf="cancel">বাতিল</button></div>':(pf.bio?'<p style="margin:10px 0 0;overflow-wrap:anywhere">'+esc(pf.bio)+'</p>':'')+'<div class="row" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><button data-pf="photo" style="border:1px solid var(--line)">ছবি বদলান</button><button data-pf="bio" style="border:1px solid var(--line)">'+(pf.bio?'পরিচিতি বদলান':'পরিচিতি লিখুন')+'</button></div>')
- +'<input type="file" id="pff" accept="image/*" hidden></div><div class="box"><b>ডেটা ব্যাকআপ</b><p style="color:var(--mute);margin:4px 0 10px;font-size:14px">আপনার পোস্ট, বন্ধু, মেসেজ ও বাজারের তথ্য এই ফোনের ব্রাউজারে আছে। ফাইলে নামিয়ে রাখলে হারানোর ভয় থাকে না। ফাইলটি নিজের কাছে গোপন রাখুন।</p><div class="row" style="flex-wrap:wrap"><button class="pri" data-bk="out">ফাইলে নামান</button><button data-bk="in" style="border:1px solid var(--line)">ফাইল থেকে ফেরত নিন</button></div><input type="file" id="bkf" accept=".json,application/json" hidden></div><div class="box"><button data-lo="1" style="border:1px solid var(--line)">বের হোন</button></div>'}
+ +(pfEdit?'<textarea id="bio" maxlength="120" placeholder="নিজের সম্পর্কে ছোট করে লিখুন" aria-label="পরিচিতি" style="margin-top:10px;min-height:64px">'+esc(pf.bio||"")+'</textarea><div class="row" style="justify-content:center;margin-top:8px"><button class="pri" data-pf="save">সেভ</button><button data-pf="cancel">বাতিল</button></div>':(pf.bio?'<p style="margin:10px 0 0;overflow-wrap:anywhere">'+esc(pf.bio)+'</p>':'')+'<div class="row" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><button data-pf="photo" style="border:1px solid var(--line)">ছবি বদলান</button><button data-pf="lock" style="border:1px solid var(--line)">'+(pf.lock?"🔓 ছবি খুলে দিন":"🔒 ছবি লক করুন")+'</button><button data-pf="bio" style="border:1px solid var(--line)">'+(pf.bio?'পরিচিতি বদলান':'পরিচিতি লিখুন')+'</button></div>')
+ +'<input type="file" id="pff" accept="image/*" hidden></div>'+blkBox()+'<div class="box"><button data-lo="1" style="border:1px solid var(--line)">বের হোন</button></div>'}
 function pimg(p){if(S.saver&&!rv[p.id])return'<button class="phold" data-a="show">ছবি দেখুন</button>';return'<img class="pimg" data-zoom alt="" src="'+p.img+'">'}
 function saverBar(){return'<div class="box row" style="justify-content:space-between"><div><b>ডেটা সেভার</b><div style="color:var(--mute);font-size:14px">'+(S.saver?'ছবি লুকানো আছে, চাইলে দেখুন বাটনে চাপুন':'বন্ধ, সব ছবি দেখা যাচ্ছে')+'</div></div><button class="'+(S.saver?'pri':'')+'" style="border:1px solid var(--line)" data-sv="1" role="switch" aria-checked="'+!!S.saver+'">'+(S.saver?'চালু':'বন্ধ')+'</button></div>'}
 function pv(){var e=document.getElementById("pv");if(!e)return;e.innerHTML=draftImg||draftVid?'<div class="prev">'+(draftVid?'<video src="'+draftVid+'" muted playsinline controls style="width:100%;max-height:260px;border-radius:10px"></video>':'<img alt="" src="'+draftImg+'">')+'<button id="rm">সরান</button></div>':"";var r=document.getElementById("rm");if(r)r.onclick=function(){draftImg="";draftVid="";pv();var b=document.getElementById("pb");b.disabled=mode==="reel"||!document.getElementById("tx").value.trim()}}
-function shrink(f,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,800/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.7))};im.src=r.result};r.readAsDataURL(f)}
+function shrink(f,cb,mx){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,(mx||800)/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.7))};im.src=r.result};r.readAsDataURL(f)}
  
-var PPL=["রহিম উদ্দিন","সুমি আক্তার","নাসির হোসেন","ফাতেমা বেগম","করিম মিয়া"];
-function FR(){if(!S.fr)S.fr={"সুমি আক্তার":"friend","রহিম উদ্দিন":"in"};if(!S.msgs)S.msgs={"সুমি আক্তার":[{m:0,text:"আসসালামু আলাইকুম! রুজিতে স্বাগতম।",t:Date.now()-90*M}]}}
-function who(s){FR();return PPL.filter(function(n){return n!==S.me&&(s?S.fr[n]===s:!S.fr[n])})}
-function prow(n,b){return'<div class="box row">'+av(n)+'<b style="flex:1">'+esc(n)+'</b>'+b+'</div>'}
-function fb(a,n,t,pri){return'<button'+(pri?' class="pri"':'')+' data-f="'+a+'" data-p="'+esc(n)+'">'+t+'</button>'}
-function frView(){var h='<h2 style="margin:0 0 10px">বন্ধু</h2>',a=who("in"),f=who("friend"),o=who("out"),k=who();
+function isBl(u){return !!(u&&S.bl&&S.bl[u])}
+function nm(u){return(S.users[u]&&S.users[u].name)||"ব্যবহারকারী"}
+function frRec(u){for(var i=0;i<S.fq.length;i++){var r=S.fq[i];if((r.from===S.uid&&r.to===u)||(r.to===S.uid&&r.from===u))return r}return null}
+function frSt(u){var r=frRec(u);if(!r)return"";if(r.st==="accepted")return"friend";return r.from===S.uid?"out":"in"}
+function who(s){return Object.keys(S.users).filter(function(u){return u!==S.uid&&!isBl(u)&&(s?frSt(u)===s:!frSt(u))}).sort(function(a,b){return nm(a).localeCompare(nm(b))})}
+function prow(u,b){return'<div class="box row">'+av(nm(u),u)+'<b style="flex:1;min-width:0;overflow-wrap:anywhere">'+esc(nm(u))+'</b>'+b+'</div>'}
+function fb(a,u,t,pri){return'<button'+(pri?' class="pri"':'')+' data-f="'+a+'" data-p="'+esc(u)+'">'+t+'</button>'}
+function frView(){var h='<h2 style="margin:0 0 10px">বন্ধু</h2>',a=who("in"),f=who("friend"),o=who("out"),k=who().slice(0,30);
  var sec=function(t,l,fn){return l.length?'<h3 style="margin:14px 0 8px">'+t+'</h3>'+l.map(fn).join(""):''};
- h+=sec("বন্ধুর অনুরোধ",a,function(n){return prow(n,fb("acc",n,"গ্রহণ",1)+fb("del",n,"মুছুন"))});
- h+=sec("আপনার বন্ধু ("+bn(f.length)+")",f,function(n){return prow(n,fb("chat",n,"মেসেজ",1)+fb("un",n,"সরান"))});
- h+=sec("পাঠানো অনুরোধ",o,function(n){return prow(n,'<small style="color:var(--mute)">পাঠানো হয়েছে</small>'+fb("can",n,"বাতিল"))});
- h+=sec("পরিচিত হতে পারেন",k,function(n){return prow(n,fb("add",n,"বন্ধু হোন",1))});
- if(!a.length&&!f.length&&!o.length&&!k.length)h+='<div class="empty">এখনো কেউ নেই।</div>';
- return h+'<p class="note">প্রোটোটাইপ: বন্ধু তালিকা শুধু আপনার ব্রাউজারে থাকে।</p>'}
-function chView(){FR();
- if(!chat){var fs=who("friend");return'<h2 style="margin:0 0 10px">মেসেজ</h2>'+(fs.length?fs.map(function(n){var L=S.msgs[n]||[],l=L[L.length-1];return'<button class="box row" style="width:100%;text-align:left;color:var(--ink)" data-c="open" data-p="'+esc(n)+'">'+av(n)+'<span style="flex:1;min-width:0"><b>'+esc(n)+'</b><small style="display:block;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(l?(l.m?"আপনি: ":"")+esc(l.text):"নতুন চ্যাট শুরু করুন")+'</small></span></button>'}).join(""):'<div class="empty">মেসেজ করতে আগে কাউকে বন্ধু বানান।<br><br><button class="pri" data-c="fr">বন্ধু খুঁজুন</button></div>')}
- var L=S.msgs[chat]||[];
- return'<div class="box row"><button data-c="back" aria-label="ফিরে যান">←</button>'+av(chat)+'<b>'+esc(chat)+'</b></div><div class="box" style="display:grid;gap:8px;min-height:180px;align-content:start">'+(L.length?L.map(function(x){return'<div style="justify-self:'+(x.m?'end':'start')+';max-width:80%;padding:8px 12px;border-radius:14px;overflow-wrap:anywhere;background:'+(x.m?'var(--brand)':'var(--bg)')+';color:'+(x.m?'var(--on-brand)':'var(--ink)')+'">'+esc(x.text)+'<small style="display:block;opacity:.7;font-size:12px">'+ago(x.t)+'</small></div>'}).join(""):'<div class="empty">প্রথম মেসেজটি পাঠান।</div>')+'</div><div class="box row"><input type="text" id="mi" maxlength="500" placeholder="মেসেজ লিখুন" aria-label="মেসেজ"><button class="pri" data-c="send">পাঠান</button></div><p class="note">প্রোটোটাইপ: মেসেজ শুধু আপনার ব্রাউজারে থাকে, অন্যের কাছে যায় না।</p>'}
-function sendMsg(){var i=document.getElementById("mi"),v=i.value.trim();if(!v)return;FR();(S.msgs[chat]=S.msgs[chat]||[]).push({m:1,text:v,t:Date.now()});save();render();scrollTo(0,document.body.scrollHeight);document.getElementById("mi").focus()}
+ h+=sec("বন্ধুর অনুরোধ",a,function(u){return prow(u,fb("acc",u,"গ্রহণ",1)+fb("del",u,"মুছুন"))});
+ h+=sec("আপনার বন্ধু ("+bn(f.length)+")",f,function(u){return prow(u,fb("chat",u,"মেসেজ",1)+fb("un",u,"সরান"))});
+ h+=sec("পাঠানো অনুরোধ",o,function(u){return prow(u,'<small style="color:var(--mute)">পাঠানো হয়েছে</small>'+fb("can",u,"বাতিল"))});
+ h+=sec("পরিচিত হতে পারেন",k,function(u){return prow(u,fb("add",u,"বন্ধু হোন",1))});
+ if(!a.length&&!f.length&&!o.length&&!k.length)h+='<div class="empty">এখনো কেউ নেই। আরও মানুষ যোগ দিলে এখানে দেখা যাবে।</div>';
+ return h}
+function peopleRes(){if(!sq)return'';var l=Object.keys(S.users).filter(function(u){return u!==S.uid&&!isBl(u)&&nm(u).indexOf(sq)>-1}).slice(0,10);if(!l.length)return'';return'<div class="box"><b>মানুষ</b></div>'+l.map(function(u){var s=frSt(u);return prow(u,s==="friend"?fb("chat",u,"মেসেজ",1):s==="in"?fb("acc",u,"গ্রহণ",1):s==="out"?'<small style="color:var(--mute)">পাঠানো হয়েছে</small>':fb("add",u,"বন্ধু হোন",1))}).join("")}
+function blkBox(){var l=Object.keys(S.bl||{});if(!l.length)return'';return'<div class="box"><b>ব্লক করা ব্যবহারকারী</b>'+l.map(function(u){return'<div class="row" style="margin-top:8px"><span style="flex:1">'+esc(nm(u))+'</span><button data-bl="'+esc(u)+'" style="border:1px solid var(--line)">আনব্লক</button></div>'}).join("")+'</div>'}
+function cmList(p){return p.comments.map(function(c){return'<p><b>'+esc(c.a)+'</b>'+esc(c.text)+((c.id&&(c.uid===S.uid||p.uid===S.uid))?' <button data-a="cdel" data-cid="'+esc(c.id)+'" aria-label="মন্তব্য মুছুন" style="padding:0 6px;font-size:13px">✕</button>':'')+'</p>'}).join("")}
+function mergeCm(){S.posts.forEach(function(p){p.comments=(p.lc||[]).concat(S.cm[p.id]||[])})}
+function conv(u){return S.msgs.filter(function(m){return(m.from===u&&m.to===S.uid)||(m.from===S.uid&&m.to===u)}).sort(function(a,b){return a.t-b.t})}
+function partners(){var seen={};S.msgs.forEach(function(m){seen[m.from===S.uid?m.to:m.from]=1});who("friend").forEach(function(u){seen[u]=1});return Object.keys(seen).filter(function(u){return !isBl(u)&&S.users[u]})}
+function lastT(u){var c=conv(u);return c.length?c[c.length-1].t:0}
+function unread(u){var r=(S.rd||{})[u]||0;return S.msgs.filter(function(m){return m.from===u&&m.to===S.uid&&m.t>r}).length}
+function msgDot(){var n=0;S.msgs.forEach(function(m){if(m.to===S.uid&&!isBl(m.from)&&m.t>((S.rd||{})[m.from]||0))n++});return n?'<span class="dot" style="margin-left:2px">'+bn(n)+'</span>':''}
+function chView(){
+ if(!chat){var ps=partners().sort(function(a,b){return lastT(b)-lastT(a)});return'<h2 style="margin:0 0 10px">মেসেজ</h2>'+(ps.length?ps.map(function(u){var L=conv(u),l=L[L.length-1],n=unread(u);return'<button class="box row" style="width:100%;text-align:left;color:var(--ink)" data-c="open" data-p="'+esc(u)+'">'+av(nm(u),u)+'<span style="flex:1;min-width:0"><b>'+esc(nm(u))+'</b><small style="display:block;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(l?(l.from===S.uid?"আপনি: ":"")+esc(l.text):"নতুন চ্যাট শুরু করুন")+'</small></span>'+(n?'<span class="dot">'+bn(n)+'</span>':'')+'</button>'}).join(""):'<div class="empty">মেসেজ করতে আগে কাউকে বন্ধু বানান।<br><br><button class="pri" data-c="fr">বন্ধু খুঁজুন</button></div>')}
+ S.rd=S.rd||{};S.rd[chat]=Date.now();var L=conv(chat);
+ return'<div class="box row"><button data-c="back" aria-label="ফিরে যান">←</button>'+av(nm(chat),chat)+'<b style="flex:1">'+esc(nm(chat))+'</b></div><div class="box" style="display:grid;gap:8px;min-height:180px;align-content:start">'+(L.length?L.map(function(x){var me=x.from===S.uid;return'<div style="justify-self:'+(me?'end':'start')+';max-width:80%;padding:8px 12px;border-radius:14px;overflow-wrap:anywhere;background:'+(me?'var(--brand)':'var(--bg)')+';color:'+(me?'var(--on-brand)':'var(--ink)')+'">'+esc(x.text)+'<small style="display:block;opacity:.7;font-size:12px">'+ago(x.t)+'</small></div>'}).join(""):'<div class="empty">প্রথম মেসেজটি পাঠান।</div>')+'</div><div class="box row"><input type="text" id="mi" maxlength="500" placeholder="মেসেজ লিখুন" aria-label="মেসেজ"><button class="pri" data-c="send">পাঠান</button></div>'}
+function sendMsg(){var i=document.getElementById("mi"),v=i.value.trim();if(!v)return;i.value="";FB.send(S.uid,chat,v).then(function(){scrollTo(0,document.body.scrollHeight)}).catch(function(x){i.value=v;fail(x,"msgs")})}
 document.getElementById("app").addEventListener("click",function(e){
  var f=e.target.closest("[data-f]"),c=e.target.closest("[data-c]");
- if(f){var n=f.dataset.p,a=f.dataset.f;FR();
-  if(a==="acc"){S.fr[n]="friend";addN("👥",n+"-এর সঙ্গে আপনি এখন বন্ধু","friends");toast(n+" এখন আপনার বন্ধু")}
-  else if(a==="add"){S.fr[n]="out";toast("অনুরোধ পাঠানো হয়েছে")}
-  else if(a==="chat"){chat=n;tab="msg";render();scrollTo(0,document.body.scrollHeight);return}
-  else delete S.fr[n];
-  save();render();return}
- if(c){var a2=c.dataset.c;FR();
-  if(a2==="open"){chat=c.dataset.p;render();scrollTo(0,document.body.scrollHeight)}
+ if(f){var u=f.dataset.p,a=f.dataset.f,r=frRec(u);
+  if(a==="acc"){if(r)FB.frAccept(r.id).then(function(){FB.notify(u,"facc","");toast(nm(u)+" এখন আপনার বন্ধু")}).catch(function(x){fail(x,"frs")})}
+  else if(a==="add"){FB.frSend(S.uid,u).then(function(){FB.notify(u,"freq","");toast("অনুরোধ পাঠানো হয়েছে")}).catch(function(x){fail(x,"frs")})}
+  else if(a==="chat"){chat=u;tab="msg";S.rd=S.rd||{};S.rd[u]=Date.now();save();render();scrollTo(0,document.body.scrollHeight)}
+  else if(a==="un"){if(r&&confirm(nm(u)+"-কে বন্ধু তালিকা থেকে সরাবেন?"))FB.frDel(r.id).catch(function(x){fail(x,"frs")})}
+  else if(r)FB.frDel(r.id).catch(function(x){fail(x,"frs")});
+  return}
+ if(c){var a2=c.dataset.c;
+  if(a2==="open"){chat=c.dataset.p;S.rd=S.rd||{};S.rd[chat]=Date.now();save();render();scrollTo(0,document.body.scrollHeight)}
   else if(a2==="back"){chat="";render()}
   else if(a2==="fr"){tab="friends";render()}
   else if(a2==="send")sendMsg()}
 });
 document.getElementById("app").addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="mi")sendMsg()});
+document.getElementById("app").addEventListener("click",function(e){var b=e.target.closest("[data-bl]");if(b)FB.unblock(b.dataset.bl).then(function(){toast("আনব্লক করা হয়েছে")}).catch(function(x){fail(x,"blocks")})});
 document.getElementById("app").addEventListener("click",function(e){
  var b=e.target.closest("[data-a]");if(!b)return;
  var art=b.closest("article"),p=S.posts.filter(function(x){return x.id===art.dataset.id})[0],a=b.dataset.a;
- if(a==="like"){FB.like(p.id,S.uid,p.likes.indexOf(S.uid)<0).catch(fail)}
- else if(a==="fl"){if(!p.uid)return;FB.follow(S.uid,p.uid,(S.fw||[]).indexOf(p.uid)<0).catch(fail)}else if(a==="sv"){S.sv=S.sv||{};var i2=S.sv[p.id]?1:-1;if(i2>-1)delete S.sv[p.id];else S.sv[p.id]=1;save();render();toast(i2>-1?"সংরক্ষণ সরানো হয়েছে":"সংরক্ষণ করা হয়েছে")}else if(a==="hide"){hid[p.id]=1;render();toast("পোস্ট লুকানো হয়েছে")}else if(a==="more"){ex[p.id]=1;render()}
+ if(a==="like"){var on=p.likes.indexOf(S.uid)<0;FB.like(p.id,S.uid,on).then(function(){if(on)FB.notify(p.uid,"like",p.id)}).catch(function(x){fail(x,"posts")})}
+ else if(a==="fl"){if(!p.uid)return;var fon=(S.fw||[]).indexOf(p.uid)<0;FB.follow(S.uid,p.uid,fon).then(function(){if(fon)FB.notify(p.uid,"follow","")}).catch(function(x){fail(x,"follows")})}else if(a==="sv"){S.sv=S.sv||{};var i2=S.sv[p.id]?1:-1;if(i2>-1)delete S.sv[p.id];else S.sv[p.id]=1;save();render();toast(i2>-1?"সংরক্ষণ সরানো হয়েছে":"সংরক্ষণ করা হয়েছে")}else if(a==="hide"){hid[p.id]=1;render();toast("পোস্ট লুকানো হয়েছে")}else if(a==="more"){ex[p.id]=1;render()}
  else if(a==="show"){rv[p.id]=true;render()}
  else if(a==="cm"){open[p.id]=!open[p.id];render()}
- else if(a==="del"){if(confirm("এই পোস্টটি মুছে ফেলবেন?")){FB.del(p.id).catch(fail)}}
- else if(a==="send"){var inp=art.querySelector("[data-in]"),v=inp.value.trim();if(!v)return;FB.comment(p.id,{uid:S.uid,a:S.me,text:v,t:Date.now()}).catch(fail)}
+ else if(a==="del"){if(confirm("এই পোস্টটি মুছে ফেলবেন?")){FB.del(p.id,(S.cm[p.id]||[]).map(function(c){return c.id})).catch(function(x){fail(x,"posts")})}}
+ else if(a==="mn"){mn[p.id]=!mn[p.id];render()}
+ else if(a==="rep"){var rs=prompt("কেন রিপোর্ট করছেন? সংক্ষেপে লিখুন");if(rs===null)return;FB.report({kind:"post",ref:p.id,reason:String(rs||"").slice(0,200)}).then(function(){mn[p.id]=0;render();toast("রিপোর্ট পাঠানো হয়েছে। ধন্যবাদ")}).catch(function(x){fail(x,"reports")})}
+ else if(a==="blk"){if(confirm(p.author+"-কে ব্লক করবেন? তাঁর পোস্ট ও মেসেজ আপনি আর দেখবেন না।"))FB.block(p.uid).then(function(){toast("ব্লক করা হয়েছে")}).catch(function(x){fail(x,"blocks")})}
+ else if(a==="cdel"){FB.cdel(b.dataset.cid).catch(function(x){fail(x,"comments")})}
+ else if(a==="send"){var inp=art.querySelector("[data-in]"),v=inp.value.trim();if(!v)return;inp.value="";FB.comment(p.id,{uid:S.uid,a:S.me,text:v,t:Date.now()}).then(function(){FB.notify(p.uid,"comment",p.id)}).catch(function(x){inp.value=v;fail(x,"comments")})}
  else if(a==="sh"){p.sh=(p.sh||0)+1;save();render();var t=(p.text||"").slice(0,120);try{navigator.clipboard.writeText(p.author+": "+t).then(function(){toast("কপি হয়েছে")},function(){toast("কপি করা যায়নি")})}catch(x){toast("কপি করা যায়নি")}}
 });
 document.getElementById("app").addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.matches("[data-in]")){e.target.closest("article").querySelector('[data-a="send"]').click()}});
@@ -242,46 +257,49 @@ document.getElementById("app").addEventListener("click",function(e){if(e.target.
 document.getElementById("app").addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="sq"){sq=e.target.value.trim();render();document.getElementById("sq").focus()}});
 var mkF="all",mkQ="",mkOpen=false,mkImg="";
 function ph(c,e){return"data:image/svg+xml;utf8,"+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' fill='"+c+"'/><text x='100' y='128' font-size='90' text-anchor='middle'>"+e+"</text></svg>")}
-function FN(){var d=Date.now();if(!S.nt)S.nt=[{id:"n1",e:"👥",text:"রহিম উদ্দিন আপনাকে বন্ধুর অনুরোধ পাঠিয়েছেন",t:d-20*M,r:0,go:"friends"},{id:"n2",e:"💬",text:"সুমি আক্তার আপনাকে মেসেজ পাঠিয়েছেন",t:d-80*M,r:0,go:"msg"},{id:"n3",e:"👋",text:"রুজিতে স্বাগতম! প্রোফাইল ও ব্যাজ সম্পূর্ণ করুন",t:d-300*M,r:1,go:"me"}];
- if(!S.mk)S.mk=[{id:"m1",by:"করিম মিয়া",title:"ব্যবহৃত সাইকেল, ভালো অবস্থায়",price:4500,place:"মিরপুর, ঢাকা",img:ph("#0F766E","🚲"),t:d-120*M,sold:0,saved:[]},{id:"m2",by:"ফাতেমা বেগম",title:"দেশি মুরগির ডিম (১২টি)",price:220,place:"সাভার, ঢাকা",img:ph("#B45309","🥚"),t:d-600*M,sold:0,saved:[]},{id:"m3",by:"নাসির হোসেন",title:"ব্যবহৃত স্মার্টফোন, বক্স সহ",price:9500,place:"কুমিল্লা",img:ph("#5B21B6","📱"),t:d-1500*M,sold:0,saved:[]},{id:"m4",by:"সুমি আক্তার",title:"হাতে বোনা কাঁথা",price:1800,place:"রাজশাহী",img:ph("#9D174D","🧵"),t:d-3000*M,sold:0,saved:[]}]}
-function addN(e,text,go){FN();S.nt.unshift({id:"n"+Date.now(),e:e,text:text,t:Date.now(),r:0,go:go})}
-function nb(){FN();var u=S.nt.filter(function(n){return !n.r}).length,b=document.querySelector('#nav [data-t="notif"]');if(b)b.innerHTML='বিজ্ঞপ্তি'+(u?' <span class="dot">'+bn(u)+'</span>':'')}
-function ntView(){FN();var u=S.nt.filter(function(n){return !n.r}).length;return'<div class="pt"><h2>বিজ্ঞপ্তি</h2>'+(u?'<button data-k="readall">সব পড়া হয়েছে</button>':'')+'</div>'+(S.nt.length?S.nt.map(function(n){return'<button class="nr'+(n.r?'':' un')+'" data-k="go" data-id="'+n.id+'"><span class="ni">'+n.e+'</span><span style="flex:1;min-width:0">'+esc(n.text)+'<br><small>'+ago(n.t)+'</small></span>'+(n.r?'':'<span class="ud"></span>')+'</button>'}).join(""):'<div class="empty">এখনো কোনো বিজ্ঞপ্তি নেই।</div>')}
-function mkGrid(){FN();var l=S.mk.filter(function(m){return(mkF==="all"||(mkF==="saved"&&m.saved.indexOf(S.me)>-1)||(mkF==="mine"&&m.by===S.me))&&(!mkQ||m.title.indexOf(mkQ)>-1)});if(!l.length)return'<div class="empty">কোনো জিনিস পাওয়া যায়নি।</div>';return'<div class="mg">'+l.map(function(m){var sv=m.saved.indexOf(S.me)>-1,own=m.by===S.me;return'<div class="mc'+(m.sold?' so':'')+'"><img data-zoom alt="" src="'+m.img+'">'+(m.sold?'<span class="sold">বিক্রি হয়েছে</span>':'')+'<button class="hrt" data-k="save" data-id="'+m.id+'" aria-label="সংরক্ষণ" aria-pressed="'+sv+'" style="color:'+(sv?'#FF6B9A':'#fff')+'">'+ic(P.sv,sv?"currentColor":"")+'</button><div class="mb"><span class="pr">৳ '+bn(m.price)+'</span><span class="mt">'+esc(m.title)+'</span><span class="ms">'+esc(m.place)+' · '+ago(m.t)+'</span><span class="ms">'+esc(m.by)+'</span><div class="mx">'+(own?'<button data-k="sold" data-id="'+m.id+'">'+(m.sold?'আবার বিক্রয়ে':'বিক্রি হয়েছে')+'</button><button data-k="kdel" data-id="'+m.id+'">মুছুন</button>':'<button class="pri" data-k="msg" data-p="'+esc(m.by)+'">মেসেজ</button>')+'</div></div></div>'}).join("")+'</div>'}
-function mkView(){var f=function(v,t){return'<button class="chip'+(mkF===v?' on':'')+'" data-k="flt" data-v="'+v+'">'+t+'</button>'};return'<div class="pt"><h2>বাজার</h2><button class="pri" data-k="sell">'+(mkOpen?'বন্ধ করুন':'+ বিক্রি করুন')+'</button></div>'+(mkOpen?'<div class="box" style="display:grid;gap:10px"><input type="text" id="mt" maxlength="60" placeholder="জিনিসের নাম" aria-label="জিনিসের নাম"><input type="text" id="mp" inputmode="numeric" maxlength="8" placeholder="দাম (টাকা)" aria-label="দাম"><input type="text" id="ml" maxlength="40" placeholder="এলাকা, যেমন মিরপুর, ঢাকা" aria-label="এলাকা"><div id="mpv"></div><div class="row"><button type="button" data-k="pick" style="border:1px solid var(--line)">ছবি বাছুন</button><input type="file" id="mf" accept="image/*" hidden><span style="flex:1"></span><button class="pri" data-k="post">প্রকাশ করুন</button></div><p id="mer" role="alert" style="color:var(--like);margin:0"></p></div>':'')+'<input type="text" id="mq" placeholder="বাজারে খুঁজুন" aria-label="বাজারে খুঁজুন" value="'+esc(mkQ)+'" style="margin-bottom:10px"><div class="chips">'+f("all","সব")+f("saved","সংরক্ষিত")+f("mine","আমার বিজ্ঞাপন")+'</div><div id="mg">'+mkGrid()+'</div><p class="note">প্রোটোটাইপ: বিজ্ঞাপন শুধু আপনার ব্রাউজারে থাকে।</p>'}
+function nb(){var u=S.nt.filter(function(n){return !n.r}).length,b=document.querySelector('#nav [data-t="notif"]');if(b)b.innerHTML='বিজ্ঞপ্তি'+(u?' <span class="dot">'+bn(u)+'</span>':'')}
+function nTxt(n){var w=nm(n.from);return n.type==="like"?w+" আপনার পোস্ট পছন্দ করেছেন":n.type==="comment"?w+" আপনার পোস্টে মন্তব্য করেছেন":n.type==="follow"?w+" আপনাকে ফলো করেছেন":n.type==="freq"?w+" আপনাকে বন্ধুর অনুরোধ পাঠিয়েছেন":n.type==="facc"?w+" আপনার বন্ধুর অনুরোধ গ্রহণ করেছেন":w+" আপনাকে একটি বার্তা পাঠিয়েছেন"}
+function nIc(t){return t==="like"?"❤️":t==="comment"?"💬":t==="follow"?"👤":"👥"}
+function ntView(){var u=S.nt.filter(function(n){return !n.r}).length;return'<div class="pt"><h2>বিজ্ঞপ্তি</h2>'+(u?'<button data-k="readall">সব পড়া হয়েছে</button>':'')+'</div>'+(S.nt.length?S.nt.map(function(n){return'<button class="nr'+(n.r?'':' un')+'" data-k="go" data-id="'+esc(n.id)+'"><span class="ni">'+nIc(n.type)+'</span><span style="flex:1;min-width:0">'+esc(nTxt(n))+'<br><small>'+ago(n.t)+'</small></span>'+(n.r?'':'<span class="ud"></span>')+'</button>'}).join(""):'<div class="empty">এখনো কোনো বিজ্ঞপ্তি নেই।</div>')}
+function mkGrid(){var l=S.mk.filter(function(m){return!isBl(m.uid)&&(mkF==="all"||(mkF==="saved"&&(S.mks||{})[m.id])||(mkF==="mine"&&m.uid===S.uid))&&(!mkQ||m.title.indexOf(mkQ)>-1)});if(!l.length)return'<div class="empty">কোনো জিনিস পাওয়া যায়নি।</div>';return'<div class="mg">'+l.map(function(m){var sv=!!(S.mks||{})[m.id],own=m.uid===S.uid;return'<div class="mc'+(m.sold?' so':'')+'"><img data-zoom alt="" src="'+m.img+'">'+(m.sold?'<span class="sold">বিক্রি হয়েছে</span>':'')+'<button class="hrt" data-k="save" data-id="'+m.id+'" aria-label="সংরক্ষণ" aria-pressed="'+sv+'" style="color:'+(sv?'#FF6B9A':'#fff')+'">'+ic(P.sv,sv?"currentColor":"")+'</button><div class="mb"><span class="pr">৳ '+bn(m.price)+'</span><span class="mt">'+esc(m.title)+'</span><span class="ms">'+esc(m.place)+' · '+ago(m.t)+'</span><span class="ms">'+esc(m.by)+'</span><div class="mx">'+(own?'<button data-k="sold" data-id="'+m.id+'">'+(m.sold?'আবার বিক্রয়ে':'বিক্রি হয়েছে')+'</button><button data-k="kdel" data-id="'+m.id+'">মুছুন</button>':'<button class="pri" data-k="msg" data-p="'+esc(m.uid)+'">মেসেজ</button>')+'</div></div></div>'}).join("")+'</div>'}
+function mkView(){var f=function(v,t){return'<button class="chip'+(mkF===v?' on':'')+'" data-k="flt" data-v="'+v+'">'+t+'</button>'};return'<div class="pt"><h2>বাজার</h2><button class="pri" data-k="sell">'+(mkOpen?'বন্ধ করুন':'+ বিক্রি করুন')+'</button></div>'+(mkOpen?'<div class="box" style="display:grid;gap:10px"><input type="text" id="mt" maxlength="60" placeholder="জিনিসের নাম" aria-label="জিনিসের নাম"><input type="text" id="mp" inputmode="numeric" maxlength="8" placeholder="দাম (টাকা)" aria-label="দাম"><input type="text" id="ml" maxlength="40" placeholder="এলাকা, যেমন মিরপুর, ঢাকা" aria-label="এলাকা"><div id="mpv"></div><div class="row"><button type="button" data-k="pick" style="border:1px solid var(--line)">ছবি বাছুন</button><input type="file" id="mf" accept="image/*" hidden><span style="flex:1"></span><button class="pri" data-k="post">প্রকাশ করুন</button></div><p id="mer" role="alert" style="color:var(--like);margin:0"></p></div>':'')+'<input type="text" id="mq" placeholder="বাজারে খুঁজুন" aria-label="বাজারে খুঁজুন" value="'+esc(mkQ)+'" style="margin-bottom:10px"><div class="chips">'+f("all","সব")+f("saved","সংরক্ষিত")+f("mine","আমার বিজ্ঞাপন")+'</div><div id="mg">'+mkGrid()+'</div>'}
 function bindMk(){var q=document.getElementById("mq"),f=document.getElementById("mf");q.oninput=function(){mkQ=q.value.trim();document.getElementById("mg").innerHTML=mkGrid()};if(f)f.onchange=function(){var x=f.files[0];if(!x)return;shrink(x,function(d){mkImg=d;document.getElementById("mpv").innerHTML='<img alt="" src="'+d+'" style="width:100%;max-height:200px;object-fit:cover;border-radius:10px">'})}}
-document.getElementById("app").addEventListener("click",function(e){var b=e.target.closest("[data-k]");if(!b)return;var k=b.dataset.k,id=b.dataset.id;FN();
- if(k==="readall"){S.nt.forEach(function(n){n.r=1})}
- else if(k==="go"){var n=S.nt.filter(function(x){return x.id===id})[0];if(n){n.r=1;tab=n.go;chat=""}}
- else if(k==="sell"){mkOpen=!mkOpen;mkImg=""}
- else if(k==="flt"){mkF=b.dataset.v}
- else if(k==="pick"){document.getElementById("mf").click();return}
- else if(k==="msg"){tab="msg";chat=b.dataset.p}
- else if(k==="post"){var t=document.getElementById("mt").value.trim(),pr=parseInt(en(document.getElementById("mp").value.trim()),10),pl=document.getElementById("ml").value.trim();if(!t||!(pr>0)||!pl){document.getElementById("mer").textContent="নাম, দাম আর এলাকা দিন।";return}S.mk.unshift({id:"m"+Date.now(),by:S.me,title:t,price:pr,place:pl,img:mkImg||ph("#E11D48","🛍️"),t:Date.now(),sold:0,saved:[]});mkOpen=false;mkImg="";addN("🛍️","আপনার বিজ্ঞাপন বাজারে প্রকাশিত হয়েছে","market");toast("বিজ্ঞাপন প্রকাশিত হয়েছে")}
- else{var m=S.mk.filter(function(x){return x.id===id})[0];if(!m)return;if(k==="save"){var i=m.saved.indexOf(S.me);if(i>-1)m.saved.splice(i,1);else m.saved.push(S.me)}else if(k==="sold")m.sold=m.sold?0:1;else if(k==="kdel"){if(!confirm("এই বিজ্ঞাপনটি মুছে ফেলবেন?"))return;S.mk=S.mk.filter(function(x){return x!==m})}}
- save();render();if(k==="msg")scrollTo(0,document.body.scrollHeight)});
+document.getElementById("app").addEventListener("click",function(e){var b=e.target.closest("[data-k]");if(!b)return;var k=b.dataset.k,id=b.dataset.id;
+ if(k==="readall"){S.nt.forEach(function(n){if(!n.r)FB.markRead(n.id).catch(function(){})});return}
+ if(k==="go"){var n=S.nt.filter(function(x){return x.id===id})[0];if(n){if(!n.r)FB.markRead(n.id).catch(function(){});tab=(n.type==="freq"||n.type==="facc")?"friends":"home";chat="";render();scrollTo(0,0)}return}
+ if(k==="sell"){mkOpen=!mkOpen;mkImg="";render();return}
+ if(k==="flt"){mkF=b.dataset.v;render();return}
+ if(k==="pick"){document.getElementById("mf").click();return}
+ if(k==="msg"){chat=b.dataset.p;tab="msg";S.rd=S.rd||{};S.rd[chat]=Date.now();save();render();scrollTo(0,document.body.scrollHeight);return}
+ if(k==="post"){var t=document.getElementById("mt").value.trim(),pr=parseInt(en(document.getElementById("mp").value.trim()),10),pl=document.getElementById("ml").value.trim();if(!t||!(pr>0)||!pl){document.getElementById("mer").textContent="নাম, দাম আর এলাকা দিন।";return}b.disabled=true;FB.mkAdd({uid:S.uid,by:S.me,title:t,price:pr,place:pl,img:mkImg||ph("#E11D48","🛍️"),t:Date.now(),sold:false}).then(function(){mkOpen=false;mkImg="";render();toast("বিজ্ঞাপন প্রকাশিত হয়েছে")}).catch(function(x){b.disabled=false;fail(x,"market")});return}
+ var m=S.mk.filter(function(x){return x.id===id})[0];if(!m)return;
+ if(k==="save"){S.mks=S.mks||{};if(S.mks[m.id])delete S.mks[m.id];else S.mks[m.id]=1;save();render()}
+ else if(k==="sold"){FB.mkSold(m.id,!m.sold).catch(function(x){fail(x,"market")})}
+ else if(k==="kdel"){if(confirm("এই বিজ্ঞাপনটি মুছে ফেলবেন?"))FB.mkDel(m.id).catch(function(x){fail(x,"market")})}
+});
 if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
-var edt={},pfEdit=false,TK="ruji-theme";
+var edt={},mn={},pfEdit=false,TK="ruji-theme";
 function edBox(p){return'<textarea data-ed maxlength="2000" aria-label="পোস্ট সম্পাদনা" style="margin-bottom:8px">'+esc(p.text)+'</textarea><div class="row" style="margin-bottom:10px"><button class="pri" data-a="esave">সেভ</button><button data-a="ecan">বাতিল</button></div>'}
 function th(){var v="";try{v=localStorage.getItem(TK)||""}catch(e){}return v}
 function applyTh(){var v=th(),r=document.documentElement,b=document.getElementById("th");if(v)r.setAttribute("data-theme",v);else r.removeAttribute("data-theme");if(b)b.textContent=v==="dark"?"🌙":v==="light"?"☀️":"◐"}
 document.getElementById("th").onclick=function(){var v=th(),n=v===""?"light":v==="light"?"dark":"";try{localStorage.setItem(TK,n)}catch(e){}applyTh();toast(n==="dark"?"ডার্ক মোড":n==="light"?"লাইট মোড":"ফোনের সেটিং অনুযায়ী")};
 applyTh();
 document.getElementById("app").addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a;if(a!=="edit"&&a!=="esave"&&a!=="ecan")return;var art=b.closest("article"),p=S.posts.filter(function(x){return x.id===art.dataset.id})[0];if(!p)return;
- if(a==="edit")edt[p.id]=1;else if(a==="ecan")delete edt[p.id];else{var v=art.querySelector("[data-ed]").value.trim();if(!v&&!p.img&&!p.v){toast("লেখা খালি রাখা যাবে না");return}FB.set(p.id,{text:v,ed:1}).catch(fail);delete edt[p.id];toast("পোস্ট সম্পাদিত হয়েছে")}render()});
+ if(a==="edit")edt[p.id]=1;else if(a==="ecan")delete edt[p.id];else{var v=art.querySelector("[data-ed]").value.trim();if(!v&&!p.img&&!p.v){toast("লেখা খালি রাখা যাবে না");return}FB.set(p.id,{text:v,ed:1}).catch(function(x){fail(x,"posts")});delete edt[p.id];toast("পোস্ট সম্পাদিত হয়েছে")}render()});
 document.getElementById("app").addEventListener("click",function(e){var z=e.target.closest("[data-zoom]");if(!z)return;var o=document.createElement("div");o.className="sv";o.setAttribute("role","dialog");o.setAttribute("aria-label","ছবি");o.innerHTML='<div class="svh"><button type="button" aria-label="বন্ধ করুন">✕</button></div><div class="svb"><img alt="" src="'+z.src+'" style="max-height:85vh"></div>';o.onclick=function(){o.remove()};document.body.appendChild(o)});
 document.getElementById("app").addEventListener("click",function(e){var b=e.target.closest("[data-pf],[data-bk]");if(!b)return;
  if(b.dataset.pf){var a=b.dataset.pf;S.pf=S.pf||{};
   if(a==="photo"){document.getElementById("pff").click();return}
-  if(a==="bio")pfEdit=true;else if(a==="cancel")pfEdit=false;else if(a==="save"){S.pf.bio=document.getElementById("bio").value.trim();pfEdit=false;save();toast("পরিচিতি সেভ হয়েছে")}
+  if(a==="lock"){if(!S.pf.img){toast("আগে ছবি দিন");return}var nl=!S.pf.lock;S.pf.lock=nl;save();render();FB.lockPhoto(nl).then(function(){toast(nl?"ছবি লক হয়েছে। অন্যরা দেখবে না":"ছবি সবার জন্য খোলা")}).catch(function(x){S.pf.lock=!nl;save();render();fail(x)});return}
+  if(a==="bio")pfEdit=true;else if(a==="cancel")pfEdit=false;else if(a==="save"){S.pf.bio=document.getElementById("bio").value.trim();pfEdit=false;save();FB.setBio(S.pf.bio).then(function(){toast("পরিচিতি সেভ হয়েছে")}).catch(function(x){fail(x,"users")})}
   render();return}
  if(b.dataset.bk==="out"){var bl=new Blob([JSON.stringify(Object.assign({},S,{posts:[],uid:""}))],{type:"application/json"}),u=URL.createObjectURL(bl),l=document.createElement("a");l.href=u;l.download="ruji-backup-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(l);l.click();l.remove();setTimeout(function(){URL.revokeObjectURL(u)},1000);toast("ব্যাকআপ ফাইল নামছে")}
  else document.getElementById("bkf").click()});
 document.getElementById("app").addEventListener("change",function(e){var t=e.target,f=t.files&&t.files[0];if(!f)return;
- if(t.id==="pff"){t.value="";shrink(f,function(d){S.pf=S.pf||{};S.pf.img=d;save();render();toast("ছবি বদলানো হয়েছে")})}
+ if(t.id==="pff"){t.value="";shrink(f,function(d){S.pf=S.pf||{};S.pf.img=d;PH[S.uid]=d;save();render();FB.setPhoto(d,!!S.pf.lock).then(function(){toast("ছবি বদলানো হয়েছে")}).catch(fail)},200)}
  else if(t.id==="bkf"){t.value="";var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(!d||!Array.isArray(d.posts)||typeof d.me!=="string")throw 0;if(!confirm("বর্তমান সব তথ্য ফাইলের তথ্য দিয়ে বদলে যাবে। চালিয়ে যাবেন?"))return;if(!d.stories)d.stories=seedSt();d.me=S.me;d.uid=S.uid;d.verified=S.verified;d.posts=S.posts;S=d;save();render();toast("তথ্য ফেরত আনা হয়েছে")}catch(x){toast("এটি রুজির সঠিক ব্যাকআপ ফাইল নয়")}};r.readAsText(f)}});
 var ready=false,unsub=null,unf=null,am="login";
-function fail(x){var c=x&&x.code||"";toast(c==="permission-denied"?"অনুমতি নেই। Firebase Rules ঠিকমতো দেওয়া হয়েছে কি?":"সমস্যা হয়েছে, আবার চেষ্টা করুন")}
+function fail(x,w){var c=x&&x.code||"";toast(c==="permission-denied"?"অনুমতি নেই"+(w?" ["+w+"]":"")+"। Firebase Rules নতুন করে Publish করা হয়েছে কি?":c==="failed-precondition"?"Firebase-এ ইনডেক্স লাগবে"+(w?" ["+w+"]":""):"সমস্যা হয়েছে ["+(c||"?")+(w?" "+w:"")+"]")}
 function typing(){var a=document.activeElement;return!!(a&&(a.tagName==="TEXTAREA"||a.type==="text"||a.type==="password")&&a.value)}
 var PHONE_ON=false,oa={mode:"login",step:1,phone:""},SK="ruji-sms",smsT=0;
 function smsGet(){var n=new Date(),t=n.getFullYear()+"-"+n.getMonth()+"-"+n.getDate(),d={d:t,n:0,l:0};try{var x=JSON.parse(localStorage.getItem(SK));if(x&&x.d===t)d=x}catch(e){}return d}
@@ -326,9 +344,24 @@ function nameView(){var nw=!S.me;return'<div class="box"><h2 style="margin:0 0 4
 function bindName(){var nw=!S.me,go=function(){var n=nw?document.getElementById("an").value.trim():"",pw=document.getElementById("aw").value,er=document.getElementById("aer");if(nw&&n.length<2){er.textContent="কমপক্ষে ২ অক্ষরের নাম লিখুন";return}if(pw.length<6){er.textContent="পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে";return}er.textContent="";var b=document.getElementById("ag");b.disabled=true;FB.setup(n,pw).then(function(){if(nw)S.me=n;S.needPw=false;oa.mode="login";render();toast("পাসওয়ার্ড সেভ হয়েছে")}).catch(function(x){b.disabled=false;er.textContent=aerr(x&&x.code)})};
  document.getElementById("ag").onclick=go;document.getElementById("aw").onkeydown=function(e){if(e.key==="Enter")go()}}
 document.getElementById("app").addEventListener("click",function(e){if(e.target.closest("[data-lo]"))FB.logout()});
+var unsubs=[];
+function stopWatch(){unsubs.forEach(function(f){try{f()}catch(e){}});unsubs=[]}
+function rr(){clearTimeout(rr.k);rr.k=setTimeout(function(){if(!typing())render()},60)}
+function startWatch(uid){var W=function(n){return function(x){fail(x,n)}},add=function(f){unsubs.push(f)};
+ add(FB.watch(function(l){S.posts=l;mergeCm();loadPh(l);rr()},W("posts")));
+ add(FB.watchComments(function(l){var m={};l.sort(function(a,b){return a.t-b.t}).forEach(function(c){(m[c.post]=m[c.post]||[]).push(c)});S.cm=m;mergeCm();rr()},W("comments")));
+ add(FB.watchUsers(function(m){S.users=m;var mu=m[S.uid];if(mu){S.pf=S.pf||{};if(typeof mu.bio==="string"){if(S.pf.bio!==mu.bio){S.pf.bio=mu.bio;save()}}else if(S.pf.bio)FB.setBio(S.pf.bio).catch(function(){})}rr()},W("users")));
+ add(FB.watchFollows(uid,function(l){S.fw=l;rr()},W("follows")));
+ add(FB.watchStories(function(l){S.stories=l;rr()},W("stories")));
+ add(FB.watchFr(uid,function(l){S.fq=l;rr()},W("frs")));
+ add(FB.watchMsgs(uid,function(l){S.msgs=l;rr()},W("msgs")));
+ add(FB.watchNotifs(uid,function(l){S.nt=l.sort(function(a,b){return b.t-a.t});rr()},W("notifs")));
+ add(FB.watchMarket(function(l){S.mk=l;rr()},W("market")));
+ add(FB.watchBlocks(uid,function(m){S.bl=m;rr()},W("blocks")))}
 function boot(){FB.onUser(function(u){S.uid=u?u.uid:"";S.me=u?(u.displayName||window.__nn||""):"";S.phone=u&&u.phoneNumber||"";S.needPw=!!u&&(FB.needPw()||oa.mode==="reset");S.verified=!!u;S.pv=!!(u&&u.phoneNumber);S.level=S.level||1;
- if(u&&!unsub){unsub=FB.watch(function(l){S.posts=l;if(!typing())render()},fail);unf=FB.watchFollows(u.uid,function(l){S.fw=l;if(!typing())render()},fail)}
- if(!u){if(unsub){unsub();unsub=null}if(unf){unf();unf=null}S.fw=[];S.posts=[];tab="home";oa={mode:"login",step:1,phone:""};FB.reset()}
+ if(u&&S.me)FB.ensureUser(S.me).catch(function(x){fail(x,"users")});
+ if(u)loadPh([{uid:u.uid}]);if(u&&!unsubs.length)startWatch(u.uid);
+ if(!u){stopWatch();var z=blank();Object.keys(z).forEach(function(k){S[k]=z[k]});PH={};PL={};tab="home";chat="";oa={mode:"login",step:1,phone:""};FB.reset()}
  ready=true;render()})}
 if(window.FB)boot();else addEventListener("fb-ready",boot);
 setTimeout(function(){if(!ready)document.getElementById("app").innerHTML='<div class="empty">লোড করা যাচ্ছে না। ইন্টারনেট সংযোগ দেখে পাতাটি আবার খুলুন।</div>'},10000);
@@ -337,9 +370,11 @@ setTimeout(function(){if(!ready)document.getElementById("app").innerHTML='<div c
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,RecaptchaVerifier,signInWithPhoneNumber,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,EmailAuthProvider,linkWithCredential,updatePassword,updateProfile,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{getFirestore,collection,doc,addDoc,updateDoc,deleteDoc,onSnapshot,query,orderBy,limit,where,setDoc,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getFirestore,collection,doc,addDoc,updateDoc,deleteDoc,onSnapshot,query,orderBy,limit,where,setDoc,getDoc,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 var app=initializeApp({apiKey:"AIzaSyC8-2etuX_Pd7wmMY-P9El0omNu3R-Z6EM",authDomain:"ruji-65f33.firebaseapp.com",projectId:"ruji-65f33",storageBucket:"ruji-65f33.firebasestorage.app",messagingSenderId:"1048988656486",appId:"1:1048988656486:web:42a738852930f4e07c1ea7"});
-var auth=getAuth(app),db=getFirestore(app),PC=collection(db,"posts"),RV=null,CR=null;auth.languageCode="bn";function pe(ph){return String(ph).replace("+","")+"@phone.ruji.app"}
+var auth=getAuth(app),db=getFirestore(app),PC=collection(db,"posts"),RV=null,CR=null;
+function ld(d){var x=d.data();x.id=d.id;return x}
+function dual(c,f1,f2,uid,mp,cb,err){var a=[],b=[],em=function(){var m={};a.concat(b).forEach(function(r){m[r.id]=r});cb(Object.keys(m).map(function(k){return m[k]}))},u1=onSnapshot(query(collection(db,c),where(f1,"==",uid)),function(s){a=s.docs.map(mp);em()},err),u2=onSnapshot(query(collection(db,c),where(f2,"==",uid)),function(s){b=s.docs.map(mp);em()},err);return function(){u1();u2()}}auth.languageCode="bn";function pe(ph){return String(ph).replace("+","")+"@phone.ruji.app"}
 window.FB={
  onUser:function(cb){return onAuthStateChanged(auth,cb)},
  sendCode:function(ph){FB.reset();RV=new RecaptchaVerifier(auth,"rc",{size:"invisible"});return signInWithPhoneNumber(auth,ph,RV).then(function(r){CR=r})},
@@ -347,19 +382,47 @@ window.FB={
  emailSignup:function(n,e,pw){window.__nn=n;return createUserWithEmailAndPassword(auth,e,pw).then(function(c){return updateProfile(c.user,{displayName:n}).catch(function(){})}).then(function(){window.__nn=""},function(x){window.__nn="";throw x})},
  emailLogin:function(e,pw){window.__nn="";return signInWithEmailAndPassword(auth,e,pw)},
  resetMail:function(e){return sendPasswordResetEmail(auth,e)},
+ getPhoto:function(u){return getDoc(doc(db,"photos",u)).then(function(s){return s.exists()?s.data():null})},
+ setPhoto:function(img,lk){return setDoc(doc(db,"photos",auth.currentUser.uid),{img:img,locked:!!lk,t:Date.now()})},
+ lockPhoto:function(lk){return updateDoc(doc(db,"photos",auth.currentUser.uid),{locked:!!lk})},
  login:function(ph,pw){return signInWithEmailAndPassword(auth,pe(ph),pw)},
  needPw:function(){var u=auth.currentUser;return !!u&&!u.providerData.some(function(d){return d.providerId==="password"})},
  setup:function(n,pw){var u=auth.currentUser,t=n?updateProfile(u,{displayName:n}):Promise.resolve();return t.then(function(){return u.providerData.some(function(d){return d.providerId==="password"})?updatePassword(u,pw):linkWithCredential(u,EmailAuthProvider.credential(pe(u.phoneNumber),pw))})},
  reset:function(){try{if(RV)RV.clear()}catch(e){}RV=null;CR=null},
  logout:function(){return signOut(auth)},
- watch:function(cb,err){return onSnapshot(query(PC,orderBy("t","desc"),limit(100)),function(s){cb(s.docs.map(function(d){var x=d.data();x.id=d.id;x.likes=x.likes||[];x.comments=x.comments||[];return x}))},err)},
+ watch:function(cb,err){return onSnapshot(query(PC,orderBy("t","desc"),limit(100)),function(s){cb(s.docs.map(function(d){var x=d.data();x.id=d.id;x.likes=x.likes||[];x.lc=x.comments||[];x.comments=x.lc;return x}))},err)},
  add:function(o){return addDoc(PC,o)},
  set:function(id,o){return updateDoc(doc(db,"posts",id),o)},
- del:function(id){return deleteDoc(doc(db,"posts",id))},
+ del:function(id,cids){return Promise.all((cids||[]).map(function(c){return deleteDoc(doc(db,"comments",c)).catch(function(){})})).then(function(){return deleteDoc(doc(db,"posts",id))})},
  watchFollows:function(uid,cb,err){return onSnapshot(query(collection(db,"follows"),where("follower","==",uid)),function(s){cb(s.docs.map(function(d){return d.data().followee}))},err)},
  follow:function(me,other,on){var r=doc(db,"follows",me+"_"+other);return on?setDoc(r,{follower:me,followee:other,t:Date.now()}):deleteDoc(r)},
  like:function(id,uid,on){return updateDoc(doc(db,"posts",id),{likes:on?arrayUnion(uid):arrayRemove(uid)})},
- comment:function(id,c){return updateDoc(doc(db,"posts",id),{comments:arrayUnion(c)})}
+ comment:function(id,c){return addDoc(collection(db,"comments"),{post:id,uid:c.uid,a:c.a,text:c.text,t:c.t})},
+ cdel:function(id){return deleteDoc(doc(db,"comments",id))},
+ watchComments:function(cb,err){return onSnapshot(query(collection(db,"comments"),orderBy("t","desc"),limit(500)),function(s){cb(s.docs.map(ld))},err)},
+ ensureUser:function(n){return setDoc(doc(db,"users",auth.currentUser.uid),{name:n},{merge:true})},
+ setBio:function(b){return setDoc(doc(db,"users",auth.currentUser.uid),{bio:b},{merge:true})},
+ watchUsers:function(cb,err){return onSnapshot(query(collection(db,"users"),limit(300)),function(s){var m={};s.docs.forEach(function(d){m[d.id]=d.data()});cb(m)},err)},
+ watchStories:function(cb,err){return onSnapshot(query(collection(db,"stories"),where("t",">",Date.now()-864e5)),function(s){cb(s.docs.map(ld))},err)},
+ addStory:function(o){return addDoc(collection(db,"stories"),o)},
+ delStory:function(id){return deleteDoc(doc(db,"stories",id))},
+ watchFr:function(uid,cb,err){return dual("frs","from","to",uid,function(d){var x=d.data();return{id:d.id,from:x.from,to:x.to,st:x.status,t:x.t}},cb,err)},
+ frSend:function(me,u){return setDoc(doc(db,"frs",me+"_"+u),{from:me,to:u,status:"pending",t:Date.now()})},
+ frAccept:function(id){return updateDoc(doc(db,"frs",id),{status:"accepted"})},
+ frDel:function(id){return deleteDoc(doc(db,"frs",id))},
+ watchMsgs:function(uid,cb,err){return dual("msgs","from","to",uid,ld,cb,err)},
+ send:function(me,u,text){return addDoc(collection(db,"msgs"),{from:me,to:u,text:text,t:Date.now()})},
+ watchNotifs:function(uid,cb,err){return onSnapshot(query(collection(db,"notifs"),where("to","==",uid)),function(s){cb(s.docs.map(ld))},err)},
+ notify:function(to,type,ref){var me=auth.currentUser&&auth.currentUser.uid;if(!to||!me||to===me)return Promise.resolve();var o={to:to,from:me,type:type,ref:ref||"",t:Date.now(),r:false};return(type==="comment"?addDoc(collection(db,"notifs"),o):setDoc(doc(db,"notifs",type+"_"+me+"_"+to+"_"+(ref||"")),o)).catch(function(){})},
+ markRead:function(id){return updateDoc(doc(db,"notifs",id),{r:true})},
+ watchMarket:function(cb,err){return onSnapshot(query(collection(db,"market"),orderBy("t","desc"),limit(100)),function(s){cb(s.docs.map(ld))},err)},
+ mkAdd:function(o){return addDoc(collection(db,"market"),o)},
+ mkSold:function(id,v){return updateDoc(doc(db,"market",id),{sold:!!v})},
+ mkDel:function(id){return deleteDoc(doc(db,"market",id))},
+ watchBlocks:function(uid,cb,err){return onSnapshot(query(collection(db,"blocks"),where("blocker","==",uid)),function(s){var m={};s.docs.forEach(function(d){m[d.data().blocked]=true});cb(m)},err)},
+ block:function(u){var me=auth.currentUser.uid;return setDoc(doc(db,"blocks",me+"_"+u),{blocker:me,blocked:u,t:Date.now()})},
+ unblock:function(u){return deleteDoc(doc(db,"blocks",auth.currentUser.uid+"_"+u))},
+ report:function(o){return addDoc(collection(db,"reports"),{by:auth.currentUser.uid,kind:o.kind,ref:o.ref,reason:o.reason||"",t:Date.now()})}
 };
 dispatchEvent(new Event("fb-ready"));
 </script>
