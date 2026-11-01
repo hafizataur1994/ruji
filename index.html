@@ -147,6 +147,42 @@ textarea,input{font-size:16px}
 @media (min-width:900px){#wd{display:grid}}
 :root[data-wide="1"] .bar,:root[data-wide="1"] main,:root[data-wide="1"] .nv{max-width:900px}
 @media (hover:hover){.ic:hover,.hdr button:hover,.pm button:hover,.chip:hover,.sg:hover{background:var(--line)}.act2 .ab:hover{filter:brightness(.96)}.nv button:hover{color:var(--ink)}}
+
+/* ===== ফেসবুক-ধাঁচের বাম মেনু ===== */
+nav{z-index:14}
+#dw{position:fixed;left:0;right:0;top:0;bottom:var(--nh,56px);z-index:12;visibility:hidden;pointer-events:none;transition:visibility 0s linear .22s}
+#dw.on{visibility:visible;pointer-events:auto;transition-delay:0s}
+.dwscrim{position:absolute;inset:0;background:rgba(10,14,28,.5);opacity:0;transition:opacity .22s}
+#dw.on .dwscrim{opacity:1}
+.dwd{position:absolute;left:0;top:0;bottom:0;width:min(89vw,420px);background:var(--card);overflow-y:auto;overscroll-behavior:contain;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 18px;transform:translateX(-100%);transition:transform .22s ease;box-shadow:2px 0 18px rgba(0,0,0,.2)}
+#dw.on .dwd{transform:none}
+.avb{flex:none;padding:0;border-radius:50%;background:none;display:grid;line-height:0}
+.dwx{display:block;margin:0 0 6px auto;width:36px;height:36px;padding:0;border-radius:50%;background:var(--bg);color:var(--ink);font-size:16px}
+.dwc{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 1px 2px rgba(22,32,58,.06),0 6px 18px rgba(22,32,58,.08);margin-bottom:16px}
+.dwp{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:0;text-align:left;color:var(--ink);font-weight:700;font-size:18px}
+.dwp .av{width:52px;height:52px;font-size:20px}
+.dwn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dwbell{flex:none;position:relative;width:44px;height:44px;padding:0;border-radius:50%;background:var(--bg);color:var(--ink);display:grid;place-items:center}
+.dwbell .dot,.dwr .dot{margin:0}
+.dwbell .dot{position:absolute;top:-4px;right:-4px}
+.dwh{margin:4px 0 10px;font-size:18px;font-weight:700}
+.dwsc{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;margin-bottom:6px}
+.sc{flex:none;width:88px;padding:0;color:var(--ink);text-align:left}
+.scp{display:grid;place-items:center;width:88px;height:88px;border-radius:14px;color:#fff;font-size:30px;font-weight:700;margin-bottom:4px}
+.sc small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.dwr{display:flex;width:100%;align-items:center;gap:14px;padding:12px 4px;color:var(--ink);font-size:17px;font-weight:500;text-align:left;border-radius:10px}
+.dwr svg{flex:none;width:26px;height:26px}
+.dwl{flex:1;min-width:0}
+.dwmore{width:100%;padding:12px;margin:8px 0 14px;background:var(--bg);color:var(--ink);font-weight:600;border-radius:12px}
+.dwf{border-top:1px solid var(--line)}
+.dwf .dwr{padding:15px 4px}
+.dwb{padding:0 4px 12px;color:var(--mute);font-size:15px}
+.dwb p{margin:0 0 8px}
+.dws{display:flex;justify-content:space-between;align-items:center;width:100%;padding:11px 12px;margin-bottom:6px;background:var(--bg);color:var(--ink);border-radius:10px;text-align:left}
+.dws b{color:var(--brand)}
+.dwout{width:100%;margin-top:14px;padding:14px;background:var(--bg);color:var(--ink);font-weight:700;border-radius:12px}
+@media (hover:hover){.dwr:hover,.dws:hover,.dwmore:hover,.dwout:hover{background:var(--line)}}
+@media (prefers-reduced-motion:reduce){#dw,.dwscrim,.dwd{transition:none}}
 </style>
 </head>
 <body>
@@ -170,6 +206,7 @@ textarea,input{font-size:16px}
 <button data-t="notif" aria-label="বিজ্ঞপ্তি"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></svg></button>
 <button data-t="me" aria-label="প্রোফাইল"><span class="nav-av"></span></button>
 </div></nav>
+<div id="dw" aria-hidden="true"><div class="dwscrim" data-mclose="1"></div><aside class="dwd" role="dialog" aria-label="মেনু"></aside></div>
 <div id="toast" role="status"></div>
 <script>
 (function(){
@@ -191,14 +228,14 @@ function ago(t){var m=Math.floor((Date.now()-t)/M);if(m<1)return"এইমাত
 function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="show";clearTimeout(toast.k);toast.k=setTimeout(function(){t.className=""},2200)}
  
 function render(){
- nb();navMe();var nv=document.getElementById("nav");nv.style.display=S.me&&S.verified&&!S.needPw?"":"none";Array.prototype.forEach.call(nv.querySelectorAll("[data-t]"),function(b){b.className=b.dataset.t===tab?"on":""});var app=document.getElementById("app"),meEl=document.getElementById("me");
+ nb();navMe();if(dwOpen){if(S.me&&S.uid&&S.verified&&!S.needPw)dwDraw();else setMenu(false)}var nv=document.getElementById("nav");nv.style.display=S.me&&S.verified&&!S.needPw?"":"none";Array.prototype.forEach.call(nv.querySelectorAll("[data-t]"),function(b){b.className=(dwOpen?b.dataset.t==="me":b.dataset.t===tab)?"on":""});var app=document.getElementById("app"),meEl=document.getElementById("me");
  if(S.me&&!S.verified){meEl.innerHTML="";verify(app);return}
  if(!S.uid){meEl.innerHTML="";app.innerHTML=PHONE_ON?authView():emailView();if(PHONE_ON)bindAuth();else bindEmail();return}if(!S.me||S.needPw){meEl.innerHTML="";app.innerHTML=nameView();bindName();return}
  meEl.innerHTML='<button class="ic" data-n="add" aria-label="নতুন পোস্ট">'+ic('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>')+'</button><button class="ic" data-n="search" aria-label="খুঁজুন">'+ic('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>')+'</button><button class="ic" data-n="msg" aria-label="মেসেজ">'+ic('<path d="M4 5h16v11H9l-5 4z"/>')+msgDot()+'</button>';
  if(tab==="friends"){app.innerHTML=frView();return}if(tab==="notif"){app.innerHTML=ntView();return}if(tab==="market"){app.innerHTML=mkView();bindMk();return}if(tab==="msg"){app.innerHTML=chView();return}
- var h=(tab==="me"?profCard()+saverBar():"")+(tab==="reel"?"":upg())+(tab==="home"?storyBar():"")+searchBar()+peopleRes()+'<div class="box cmp"><div class="cmp1">'+av(S.me)+'<textarea id="tx" rows="1" placeholder="'+PHT[mode]+'" aria-label="নতুন পোস্ট"></textarea><button type="button" id="ph" class="ic cph" aria-label="'+(mode==='reel'?'ভিডিও বাছুন':'ছবি বা ভিডিও')+'">'+ic('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/>')+'</button><input type="file" id="fl" accept="'+(mode==='reel'?'video/*':'image/*,video/*')+'" hidden></div><div id="pv"></div><div class="cmp2"><div class="seg" role="tablist">'+segs()+'</div><button class="pri" id="pb" disabled>'+PB[mode]+'</button></div></div>';
- var ps=S.posts.filter(function(p){return !hid[p.id]&&!isBl(p.uid)&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
- if(!ps.length)h+='<div class="empty">এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন।</div>';
+ var h=(tab==="me"?profCard()+saverBar():"")+(tab==="reel"?"":upg())+(tab==="home"?storyBar():"")+searchBar()+peopleRes()+(tab==="saved"?'<div class="pt"><h2>সংরক্ষিত পোস্ট</h2></div>':'<div class="box cmp"><div class="cmp1"><button type="button" class="avb" data-menu="1" aria-label="মেনু খুলুন বা বন্ধ করুন">'+av(S.me)+'</button><textarea id="tx" rows="1" placeholder="'+PHT[mode]+'" aria-label="নতুন পোস্ট"></textarea><button type="button" id="ph" class="ic cph" aria-label="'+(mode==='reel'?'ভিডিও বাছুন':'ছবি বা ভিডিও')+'">'+ic('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/>')+'</button><input type="file" id="fl" accept="'+(mode==='reel'?'video/*':'image/*,video/*')+'" hidden></div><div id="pv"></div><div class="cmp2"><div class="seg" role="tablist">'+segs()+'</div><button class="pri" id="pb" disabled>'+PB[mode]+'</button></div></div>');
+ var ps=S.posts.filter(function(p){return !hid[p.id]&&!isBl(p.uid)&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):tab==="saved"?!!(S.sv&&S.sv[p.id]):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
+ if(!ps.length)h+='<div class="empty">'+(tab==="saved"?"এখনো কিছু সংরক্ষণ করা হয়নি।":"এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন।")+'</div>';
  ps.forEach(function(p){
   var liked=p.likes.indexOf(S.uid)>-1;if(p.kind==="reel"){h+=reelCard(p,liked);return}
   h+='<article class="box post" data-id="'+p.id+'">'+postHd(p)
@@ -208,7 +245,7 @@ function render(){
   h+='</article>'});
  if(tab==="me")h+='<p class="note">পোস্ট, লাইক, মন্তব্য, স্টোরি, বন্ধু, মেসেজ ও বাজার সবই সবার জন্য আসল ডাটাবেসে থাকে। সংরক্ষণ ও ডেটা সেভার শুধু আপনার ফোনে।</p>';
  app.innerHTML=h;
- var tx=document.getElementById("tx"),pb=document.getElementById("pb"),fl=document.getElementById("fl");
+ var tx=document.getElementById("tx"),pb=document.getElementById("pb"),fl=document.getElementById("fl");if(!tx)return;
  var chk=function(){pb.disabled=mode==="reel"?!draftVid:!(tx.value.trim()||draftImg||draftVid)};
  tx.oninput=function(){chk();tx.style.height="auto";tx.style.height=Math.min(tx.scrollHeight,150)+"px"};
  document.getElementById("ph").onclick=function(){fl.click()};
@@ -339,7 +376,7 @@ document.getElementById("app").addEventListener("click",function(e){
 document.getElementById("app").addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.matches("[data-in]")){e.target.closest("article").querySelector('[data-a="send"]').click()}});
 document.getElementById("app").addEventListener("click",function(e){if(e.target.closest("[data-up]"))document.getElementById("upf").click();if(e.target.closest("[data-sv]")){S.saver=!S.saver;rv={};save();render();toast(S.saver?"ডেটা সেভার চালু":"ডেটা সেভার বন্ধ")}var m=e.target.closest("[data-md]");if(m){mode=m.dataset.md;draftImg="";draftVid="";render();var t=document.getElementById("tx");if(t)t.focus()}var st=e.target.closest("[data-st]");if(st)viewSt(st.dataset.st)});
 document.getElementById("app").addEventListener("change",function(e){if(e.target.id!=="upf"||!e.target.files[0])return;e.target.value="";toast("যাচাই হচ্ছে...");setTimeout(function(){S.level=Math.min(3,(S.level||1)+1);save();render();toast(S.level===2?"সেলফি যাচাই হয়েছে":"এনআইডি যাচাই হয়েছে")},900)});
-document.getElementById("nav").addEventListener("click",function(e){var b=e.target.closest("[data-t]");if(!b)return;var t=b.dataset.t;if(t==="home"||t==="reel"||t==="me"||t==="friends"||t==="notif"||t==="market"){tab=t;chat="";render();scrollTo(0,0)}else toast("এটি শীঘ্রই আসছে")});
+document.getElementById("nav").addEventListener("click",function(e){var b=e.target.closest("[data-t]");if(!b)return;var t=b.dataset.t;if(t==="me"){setMenu(!dwOpen);return}setMenu(false);if(t==="home"||t==="reel"||t==="me"||t==="friends"||t==="notif"||t==="market"){tab=t;chat="";render();scrollTo(0,0)}else toast("এটি শীঘ্রই আসছে")});
 document.getElementById("me").addEventListener("click",function(e){var b=e.target.closest("[data-n]");if(!b)return;var n=b.dataset.n;if(n==="add"){tab="home";render();var t=document.getElementById("tx");if(t){t.scrollIntoView({block:"center"});t.focus()}}else if(n==="search"){sopen=!sopen;if(!sopen)sq="";tab="home";render();var q=document.getElementById("sq");if(q)q.focus()}else{tab="msg";chat="";render();scrollTo(0,0)}});
 document.getElementById("app").addEventListener("click",function(e){if(e.target.closest("[data-s]")){sq=document.getElementById("sq").value.trim();render()}});
 document.getElementById("app").addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="sq"){sq=e.target.value.trim();render();document.getElementById("sq").focus()}});
@@ -372,6 +409,42 @@ function th(){var v="";try{v=localStorage.getItem(TK)||""}catch(e){}return v}
 function applyTh(){var v=th(),r=document.documentElement,b=document.getElementById("th");if(v)r.setAttribute("data-theme",v);else r.removeAttribute("data-theme");if(b)b.textContent=v==="dark"?"🌙":v==="light"?"☀️":"◐"}
 document.getElementById("th").onclick=function(){var v=th(),n=v===""?"light":v==="light"?"dark":"";try{localStorage.setItem(TK,n)}catch(e){}applyTh();toast(n==="dark"?"ডার্ক মোড":n==="light"?"লাইট মোড":"ফোনের সেটিং অনুযায়ী")};
 applyTh();
+var dwOpen=false,dwx={};
+var DI={fr:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.2c2.8.2 4.5 2.3 4.5 5.3"/>',reel:'<rect x="3" y="4" width="18" height="16" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/>',mk:'<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0A2.7 2.7 0 0 0 20 9"/><path d="M5.5 12v8h13v-8"/>',bell:'<path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',dn:'<path d="M6 9l6 6 6-6"/>',up:'<path d="M6 15l6-6 6 6"/>'};
+function dwRow(go,icon,label,extra){return'<button type="button" class="dwr" data-go="'+go+'">'+ic(icon)+'<span class="dwl">'+label+'</span>'+(extra||'')+'</button>'}
+function dwFold(k,icon,label,body){var o=!!dwx[k];return'<div class="dwf"><button type="button" class="dwr" data-x="'+k+'" aria-expanded="'+o+'">'+ic(icon)+'<span class="dwl">'+label+'</span>'+ic(o?DI.up:DI.dn)+'</button>'+(o?'<div class="dwb">'+body+'</div>':'')+'</div>'}
+function dwSetBtn(k,t,v){return'<button type="button" class="dws" data-set="'+k+'"><span>'+t+'</span><b>'+v+'</b></button>'}
+function dwHtml(){
+ var fr=who("friend"),un=S.nt.filter(function(n){return !n.r}).length,tv=th(),bl=Object.keys(S.bl||{}).length;
+ var h='<button type="button" class="dwx" data-mclose="1" aria-label="মেনু বন্ধ করুন">✕</button><div class="dwc"><button type="button" class="dwp" data-go="me" aria-label="আমার প্রোফাইল">'+av(S.me)+'<span class="dwn">'+esc(S.me)+bd(S.me)+'</span></button><button type="button" class="dwbell" data-go="notif" aria-label="বিজ্ঞপ্তি">'+ic(DI.bell)+(un?'<span class="dot">'+(un>9?"৯+":bn(un))+'</span>':'')+'</button></div>';
+ if(fr.length)h+='<h3 class="dwh">আপনার শর্টকাট</h3><div class="dwsc">'+fr.slice(0,12).map(function(u){var im=avImg(nm(u),u);return'<button type="button" class="sc" data-chat="'+esc(u)+'"><span class="scp" style="'+(im?"background:url(\'"+esc(im)+"\') center/cover":"background:"+col(nm(u)))+'">'+(im?'':esc(Array.from(nm(u))[0]||"?"))+'</span><small>'+esc(nm(u))+'</small></button>'}).join("")+'</div>';
+ h+='<div class="dwlist">'+dwRow("friends",DI.fr,"বন্ধু"+(fr.length?" ("+bn(fr.length)+")":""))+dwRow("msg",P.cm,"মেসেজ",msgDot())+dwRow("reel",DI.reel,"রিল")+dwRow("market",DI.mk,"বাজার");
+ if(dwx.more)h+=dwRow("saved",P.sv,"সংরক্ষিত পোস্ট")+dwRow("notif",DI.bell,"বিজ্ঞপ্তি",un?'<span class="dot">'+bn(un)+'</span>':'')+dwRow("me",DI.user,"আমার প্রোফাইল ও পোস্ট");
+ h+='</div><button type="button" class="dwmore" data-x="more">'+(dwx.more?"কম দেখুন":"আরও দেখুন")+'</button>';
+ h+=dwFold("help",DI.help,"সাহায্য ও সহায়তা",'<p>রুজিতে অ্যাকাউন্ট খোলা সম্পূর্ণ ফ্রি।</p><p>কোনো পোস্টে সমস্যা থাকলে পোস্টের ⋯ চেপে রিপোর্ট বা ব্লক করুন।</p><p>প্রোফাইলে গিয়ে ছবি বদলাতে ও ছবি লক করতে পারবেন।</p>');
+ h+=dwFold("set",DI.gear,"সেটিংস ও গোপনীয়তা",dwSetBtn("theme","থিম",tv==="dark"?"ডার্ক":tv==="light"?"লাইট":"ফোন অনুযায়ী")+dwSetBtn("saver","ডেটা সেভার",S.saver?"চালু":"বন্ধ")+(innerWidth>=900?dwSetBtn("wide","স্ক্রিন",wd()==="1"?"বড়":"ছোট"):"")+dwSetBtn("prof","প্রোফাইল সম্পাদনা","খুলুন")+(bl?dwSetBtn("prof","ব্লক করা ব্যবহারকারী",bn(bl)+" জন"):""));
+ h+='<button type="button" class="dwout" data-lo2="1">বের হোন</button>';
+ return h}
+function dwDraw(){var w=document.getElementById("dw");if(!w)return;var p=w.querySelector(".dwd"),y=p.scrollTop;p.innerHTML=(S.me&&S.uid)?dwHtml():"";p.scrollTop=y}
+function dwNav(){Array.prototype.forEach.call(document.querySelectorAll("#nav [data-t]"),function(b){b.className=(dwOpen?b.dataset.t==="me":b.dataset.t===tab)?"on":""})}
+var dwHist=false,dwSkip=false;
+function setMenu(v){var w=document.getElementById("dw");if(!w)return;v=!!v;if(v&&!dwOpen){try{history.pushState({dw:1},"");dwHist=true}catch(x){}}else if(!v&&dwOpen&&dwHist){dwHist=false;dwSkip=true;try{history.back()}catch(x){dwSkip=false}}dwOpen=v;if(dwOpen){var nv=document.getElementById("nav");w.style.setProperty("--nh",(nv&&nv.offsetHeight?nv.offsetHeight:56)+"px");dwDraw()}w.classList.toggle("on",dwOpen);w.setAttribute("aria-hidden",String(!dwOpen));var b=document.querySelector('#nav [data-t="me"]');if(b)b.setAttribute("aria-expanded",String(dwOpen));dwNav()}
+document.getElementById("dw").addEventListener("click",function(e){var t=e.target;
+ if(t.closest("[data-mclose]")){setMenu(false);return}
+ var g=t.closest("[data-go]");if(g){tab=g.dataset.go;chat="";setMenu(false);render();scrollTo(0,0);return}
+ var c=t.closest("[data-chat]");if(c){var u=c.dataset.chat;chat=u;tab="msg";S.rd=S.rd||{};S.rd[u]=Date.now();save();setMenu(false);render();scrollTo(0,document.body.scrollHeight);return}
+ var x=t.closest("[data-x]");if(x){dwx[x.dataset.x]=!dwx[x.dataset.x];dwDraw();return}
+ var s=t.closest("[data-set]");if(s){var k=s.dataset.set;
+  if(k==="theme"){document.getElementById("th").click();dwDraw()}
+  else if(k==="saver"){S.saver=!S.saver;rv={};save();render();toast(S.saver?"ডেটা সেভার চালু":"ডেটা সেভার বন্ধ");dwDraw()}
+  else if(k==="wide"){document.getElementById("wd").click();dwDraw()}
+  else if(k==="prof"){tab="me";chat="";setMenu(false);render();scrollTo(0,0)}
+  return}
+ if(t.closest("[data-lo2]")){setMenu(false);FB.logout()}});
+document.addEventListener("click",function(e){if(e.target.closest("[data-menu]"))setMenu(!dwOpen)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&dwOpen)setMenu(false)});
+addEventListener("popstate",function(){if(dwSkip){dwSkip=false;return}if(dwOpen){dwHist=false;setMenu(false)}});
+(function(){var d=document.querySelector("#dw .dwd"),x0=0,y0=0;d.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});d.addEventListener("touchend",function(e){var t=e.changedTouches[0];if(t.clientX-x0<-60&&Math.abs(t.clientY-y0)<50)setMenu(false)},{passive:true})})();
 var WK="ruji-wide",EXP='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',SHR='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
 function wd(){var v="";try{v=localStorage.getItem(WK)||""}catch(e){}return v}
 function applyWd(){var v=wd(),r=document.documentElement,b=document.getElementById("wd");if(v==="1")r.setAttribute("data-wide","1");else r.removeAttribute("data-wide");if(b){b.innerHTML=v==="1"?SHR:EXP;var l=v==="1"?"ছোট করুন (মোবাইলের মতো)":"বড় করুন";b.setAttribute("aria-label",l);b.title=l}}
