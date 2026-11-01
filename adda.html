@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="adda-manifest.json">
+<meta name="theme-color" content="#E11D48">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Adda">
+<link rel="apple-touch-icon" href="adda-192.png">
+<link rel="icon" href="adda-192.png">
+<title>Adda</title>
+<meta name="description" content="রুজি আড্ডা – রুজির বন্ধুদের সাথে মেসেজ। Ruji Adda messenger.">
+<meta name="keywords" content="রুজি আড্ডা, আড্ডা, রুজি মেসেঞ্জার, Ruji Adda, Adda, Ruji">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#E11D48;--brand2:#F43F5E;--bg:#fff;--card:#F1F3F7;--ink:#14182B;--mute:#6B7390;--line:#E6E9F0;--me:linear-gradient(135deg,#F43F5E,#E11D48 60%,#BE123C);color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1220;--card:#1B2036;--ink:#ECEFF8;--mute:#9AA3C0;--line:#272D47;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.5 "Hind Siliguri",system-ui,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+input{font:inherit;color:var(--ink)}
+#app{height:100%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.top{display:flex;align-items:center;gap:10px;padding:10px 14px;flex:none}
+.lg{display:flex;align-items:center;gap:8px;flex:1;font-weight:700;font-size:26px;letter-spacing:-.5px;color:var(--brand)}
+.ic{width:40px;height:40px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.ic svg{width:20px;height:20px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.srch{margin:0 14px 8px;flex:none}
+.srch input{width:100%;border:0;background:var(--card);border-radius:22px;padding:9px 16px;outline:0}
+#lst{flex:1;overflow:auto;padding-bottom:20px}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:8px 14px;text-align:left}
+.row:active{background:var(--card)}
+.av{flex:none;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;background-size:cover;background-position:center}
+.mid{flex:1;min-width:0}
+.mid b{display:block;font-weight:500}
+.mid small{display:block;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row.un .mid b,.row.un .mid small{font-weight:700;color:var(--ink)}
+.rt{flex:none;display:grid;justify-items:end;gap:4px;color:var(--mute);font-size:12px}
+.dot{min-width:20px;height:20px;border-radius:10px;background:var(--brand);color:#fff;font-size:12px;display:grid;place-items:center;padding:0 6px;font-weight:700}
+.empty{text-align:center;color:var(--mute);padding:40px 24px}
+.empty a,.pri{display:inline-block;background:var(--brand);color:#fff;border-radius:22px;padding:10px 22px;text-decoration:none;font-weight:500;margin-top:12px}
+.sec{padding:10px 14px 2px;color:var(--mute);font-size:14px}
+/* chat */
+.chead{display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line);flex:none}
+.chead b{flex:1;font-weight:500}
+#ml{flex:1;overflow:auto;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.tm{align-self:center;color:var(--mute);font-size:12px;margin:10px 0 4px}
+.b{max-width:78%;padding:7px 13px;border-radius:20px;overflow-wrap:anywhere;white-space:pre-wrap;background:var(--card);align-self:flex-start;animation:pop .18s ease-out}
+.b.me{align-self:flex-end;background:var(--me);color:#fff}
+.b.t1{border-bottom-left-radius:6px}.b.t2{border-top-left-radius:6px}.b.t1.t2{border-radius:6px 20px 20px 6px}
+.b.me.t1{border-bottom-left-radius:20px;border-bottom-right-radius:6px}.b.me.t2{border-top-left-radius:20px;border-top-right-radius:6px}.b.me.t1.t2{border-radius:20px 6px 6px 20px}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:none}}
+.cf{display:flex;align-items:center;gap:8px;padding:8px 10px;flex:none}
+.cf input{flex:1;border:0;background:var(--card);border-radius:22px;padding:10px 16px;outline:0;min-width:0}
+.snd{width:42px;height:42px;border-radius:50%;background:var(--brand);display:grid;place-items:center;flex:none}
+.snd:disabled{opacity:.35}
+.snd svg{width:20px;height:20px;fill:#fff}
+/* login */
+.lgn{margin:auto;width:100%;max-width:360px;padding:24px;text-align:center}
+.lgn h1{margin:10px 0 2px;font-size:34px;color:var(--brand);letter-spacing:-1px}
+.lgn p{margin:0 0 20px;color:var(--mute)}
+.lgn input{width:100%;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:10px;outline:0}
+.lgn input:focus{border-color:var(--brand)}
+.lgn .pri{width:100%;border-radius:14px;padding:12px;font-size:17px;margin-top:4px}
+.er{color:var(--brand);min-height:22px;margin:4px 0}
+.lgn a{color:var(--brand);text-decoration:none;font-weight:500}
+.logo{animation:lp .7s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes lp{from{opacity:0;transform:scale(.4) rotate(-12deg)}to{opacity:1;transform:none}}
+/* sheet */
+.sh{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;z-index:5}
+.sh>div{background:var(--bg);width:100%;border-radius:20px 20px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));display:grid;gap:6px}
+.sh .row{border-radius:12px}
+@media (prefers-reduced-motion:reduce){.b,.logo{animation:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import{getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import{getFirestore,collection,doc,addDoc,getDoc,onSnapshot,query,where,limit}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+var app=initializeApp({apiKey:"AIzaSyC8-2etuX_Pd7wmMY-P9El0omNu3R-Z6EM",authDomain:"ruji-65f33.firebaseapp.com",projectId:"ruji-65f33",storageBucket:"ruji-65f33.firebasestorage.app",messagingSenderId:"1048988656486",appId:"1:1048988656486:web:42a738852930f4e07c1ea7"});
+var auth=getAuth(app),db=getFirestore(app);auth.languageCode="bn";
+var $=function(i){return document.getElementById(i)},A=$("app");
+var U=null,view="login",chat="",sq="",MS={f:[],t:[]},FR={f:[],t:[]},users={},photos={},asked={},stops=[],shell="";
+var RDK="adda-rd",rd={};try{rd=JSON.parse(localStorage.getItem(RDK))||{}}catch(e){}
+var BASE=false;try{BASE=!!localStorage.getItem("adda-init")}catch(e){}
+function saveRd(){try{localStorage.setItem(RDK,JSON.stringify(rd))}catch(e){}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function bn(n){return String(n).replace(/\d/g,function(d){return"০১২৩৪৫৬৭৮৯"[d]})}
+function en(s){return String(s).replace(/[০-৯]/g,function(d){return"০১২৩৪৫৬৭৮৯".indexOf(d)})}
+function col(s){var h=0;s=String(s||"?");for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%360;return"hsl("+h+",55%,45%)"}
+var LOGO='<svg class="logo" width="LL" height="LL" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F43F5E"/><stop offset="1" stop-color="#BE123C"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path fill="#fff" d="M50 18c-17 0-30 11-30 26 0 8 4 15 10 20-1 5-4 9-8 12 8 0 14-3 18-6 3 1 6 1 10 1 17 0 30-11 30-27S67 18 50 18z"/><path fill="#E11D48" fill-rule="evenodd" d="M39 30h14c8 0 13 4 13 11 0 5-3 9-8 10l9 16H59l-8-15h-4v15h-8zM47 36v10h6c3 0 5-2 5-5s-2-5-5-5z"/></svg>';
+function logo(n){return LOGO.replace(/LL/g,n)}
+function pt(t){var d=new Date(t),h=d.getHours(),m=d.getMinutes(),p=h<4?"রাত":h<12?"সকাল":h<16?"দুপুর":h<18?"বিকাল":"রাত";return p+" "+bn(h%12||12)+":"+bn(("0"+m).slice(-2))}
+function short(t){var d=new Date(t),n=new Date(),s=new Date(n.getFullYear(),n.getMonth(),n.getDate()).getTime();if(t>=s)return pt(t);if(t>=s-864e5)return"গতকাল";return bn(d.getDate())+"/"+bn(d.getMonth()+1)}
+function nm(u){return(users[u]&&users[u].name)||(U&&u===U.uid&&U.displayName)||"ব্যবহারকারী"}
+function av(u,sz){sz=sz||44;ask(u);var p=photos[u],im=p&&p.img;return'<span class="av" style="width:'+sz+'px;height:'+sz+'px;font-size:'+Math.round(sz*.42)+'px;'+(im?"background-image:url('"+esc(im)+"')":"background:"+col(nm(u)))+'">'+(im?"":esc(Array.from(nm(u))[0]||"?"))+'</span>'}
+function ask(u){if(asked[u])return;asked[u]=1;getDoc(doc(db,"photos",u)).then(function(s){photos[u]=s.exists()?s.data():{};paint()}).catch(function(){photos[u]={}})}
+function allMsgs(){var m={};MS.f.concat(MS.t).forEach(function(x){m[x.id]=x});return Object.keys(m).map(function(k){return m[k]})}
+function friends(){var m={},me=U.uid;FR.f.concat(FR.t).forEach(function(r){if(r.status==="accepted"){m[r.from===me?r.to:r.from]=1}});return Object.keys(m)}
+function conv(u){var me=U.uid;return allMsgs().filter(function(x){return(x.from===me&&x.to===u)||(x.from===u&&x.to===me)}).sort(function(a,b){return a.t-b.t})}
+function unread(u){var r=rd[u]||0;return conv(u).filter(function(x){return x.from===u&&x.t>r}).length}
+function partners(){var m={},me=U.uid;allMsgs().forEach(function(x){m[x.from===me?x.to:x.from]=1});return Object.keys(m)}
+function totalUn(){var n=0;partners().forEach(function(u){n+=unread(u)});return n}
+function lastT(u){var c=conv(u);return c.length?c[c.length-1].t:0}
+function ico(p){return'<svg viewBox="0 0 24 24">'+p+'</svg>'}
+/* ---------- screens ---------- */
+function loginView(){shell="login";A.innerHTML='<div class="lgn">'+logo(84)+'<h1>Adda</h1><p>রুজির বন্ধুদের সাথে আড্ডা</p><input id="id" type="text" autocomplete="username" placeholder="ইমেইল বা ফোন নম্বর" aria-label="ইমেইল বা ফোন নম্বর"><input id="pw" type="password" autocomplete="current-password" placeholder="পাসওয়ার্ড" aria-label="পাসওয়ার্ড"><div class="er" id="er" role="alert"></div><button class="pri" id="go">ঢুকুন</button><p style="margin:18px 0 0">রুজিতে অ্যাকাউন্ট নেই? <a href="index.html">রুজিতে খুলুন</a></p></div>';
+ var go=function(){var v=en($("id").value.trim()).replace(/[\s\-()]/g,""),p=$("pw").value,e;if(v.indexOf("@")>0)e=v;else{if(/^01[3-9]\d{8}$/.test(v))v="+88"+v;else if(/^8801[3-9]\d{8}$/.test(v))v="+"+v;if(!/^\+8801[3-9]\d{8}$/.test(v)){$("er").textContent="সঠিক ইমেইল বা ১১ সংখ্যার নম্বর দিন";return}e=v.replace("+","")+"@phone.ruji.app"}
+  if(!p){$("er").textContent="পাসওয়ার্ড দিন";return}$("go").disabled=true;$("er").textContent="";
+  signInWithEmailAndPassword(auth,e,p).catch(function(x){$("go").disabled=false;var c=x&&x.code||"";$("er").textContent=c==="auth/too-many-requests"?"অনেকবার চেষ্টা হয়েছে, একটু পরে আবার দেখুন":c==="auth/network-request-failed"?"ইন্টারনেট নেই":"নম্বর/ইমেইল বা পাসওয়ার্ড ভুল"})};
+ $("go").onclick=go;$("pw").onkeydown=function(e){if(e.key==="Enter")go()}}
+function listRows(){var q=sq.trim().toLowerCase(),ps=partners().sort(function(a,b){return lastT(b)-lastT(a)}),h="";
+ ps=ps.filter(function(u){return!q||nm(u).toLowerCase().indexOf(q)>-1});
+ ps.forEach(function(u){var c=conv(u),l=c[c.length-1],n=unread(u);h+='<button class="row'+(n?" un":"")+'" data-o="'+esc(u)+'">'+av(u,52)+'<span class="mid"><b>'+esc(nm(u))+'</b><small>'+esc((l.from===U.uid?"আপনি: ":"")+l.text)+'</small></span><span class="rt"><span>'+short(l.t)+'</span>'+(n?'<span class="dot">'+bn(n>99?"99+":n)+'</span>':"")+'</span></button>'});
+ if(!ps.length)h='<div class="empty">'+(q?"কাউকে পাওয়া যায়নি":"এখনো কোনো আড্ডা শুরু হয়নি।<br>ওপরের ✎ চেপে বন্ধুকে মেসেজ দিন।")+'</div>';return h}
+function listView(){shell="list";A.innerHTML='<div class="top"><div class="lg">'+logo(34)+'Adda</div><button class="ic" id="nw" aria-label="নতুন চ্যাট">'+ico('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/>')+'</button><button id="me" aria-label="মেনু">'+av(U.uid,40)+'</button></div><div class="srch"><input id="sq" type="search" placeholder="খুঁজুন" aria-label="খুঁজুন" value="'+esc(sq)+'"></div><div id="lst">'+listRows()+'</div>';
+ $("nw").onclick=function(){view="new";sq="";paint()};$("me").onclick=menu;$("sq").oninput=function(){sq=this.value;$("lst").innerHTML=listRows()};$("lst").onclick=function(e){var b=e.target.closest("[data-o]");if(b)open(b.dataset.o)}}
+function newView(){shell="new";var q=sq.trim().toLowerCase(),fs=friends().filter(function(u){return!q||nm(u).toLowerCase().indexOf(q)>-1}).sort(function(a,b){return nm(a)<nm(b)?-1:1});
+ var rows=fs.map(function(u){return'<button class="row" data-o="'+esc(u)+'">'+av(u,48)+'<span class="mid"><b>'+esc(nm(u))+'</b></span></button>'}).join("");
+ A.innerHTML='<div class="chead"><button class="ic" id="bk" aria-label="ফিরে যান">'+ico('<path d="M15 5l-7 7 7 7"/>')+'</button><b>নতুন চ্যাট</b></div><div class="srch" style="margin-top:10px"><input id="sq" type="search" placeholder="বন্ধু খুঁজুন" value="'+esc(sq)+'"></div><div id="lst"><div class="sec">বন্ধুরা</div>'+(rows||'<div class="empty">'+(q?"কাউকে পাওয়া যায়নি":'এখনো কোনো বন্ধু নেই।<br>রুজিতে বন্ধু যোগ করলে এখানে দেখা যাবে।<br><a href="index.html">রুজি খুলুন</a>')+'</div>')+'</div>';
+ $("bk").onclick=function(){view="list";sq="";paint()};$("sq").oninput=function(){sq=this.value;newRows()};$("lst").onclick=function(e){var b=e.target.closest("[data-o]");if(b)open(b.dataset.o)}}
+function newRows(){var q=sq.trim().toLowerCase(),fs=friends().filter(function(u){return!q||nm(u).toLowerCase().indexOf(q)>-1});$("lst").innerHTML='<div class="sec">বন্ধুরা</div>'+(fs.map(function(u){return'<button class="row" data-o="'+esc(u)+'">'+av(u,48)+'<span class="mid"><b>'+esc(nm(u))+'</b></span></button>'}).join("")||'<div class="empty">কাউকে পাওয়া যায়নি</div>')}
+function open(u){chat=u;view="chat";rd[u]=Date.now();saveRd();sq="";paint()}
+function chatShell(){shell="chat:"+chat;A.innerHTML='<div class="chead"><button class="ic" id="bk" aria-label="ফিরে যান">'+ico('<path d="M15 5l-7 7 7 7"/>')+'</button>'+av(chat,38)+'<b>'+esc(nm(chat))+'</b></div><div id="ml" role="log" aria-live="polite"></div><div class="cf"><input id="mi" type="text" maxlength="500" autocomplete="off" enterkeyhint="send" placeholder="মেসেজ লিখুন" aria-label="মেসেজ"><button class="snd" id="sd" aria-label="পাঠান" disabled><svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4v6l11 2-11 2z"/></svg></button></div>';
+ $("bk").onclick=function(){view="list";chat="";paint()};var mi=$("mi"),sd=$("sd");mi.oninput=function(){sd.disabled=!mi.value.trim()};
+ var send=function(){var v=mi.value.trim();if(!v)return;mi.value="";sd.disabled=true;addDoc(collection(db,"msgs"),{from:U.uid,to:chat,text:v,t:Date.now()}).catch(function(x){mi.value=v;sd.disabled=false;toast(x&&x.code==="permission-denied"?"অনুমতি নেই। Firebase Rules দেখুন":"পাঠানো যায়নি")});mi.focus()};
+ sd.onclick=send;mi.onkeydown=function(e){if(e.key==="Enter")send()};mi.focus()}
+function chatMsgs(){var ml=$("ml");if(!ml)return;var c=conv(chat),near=ml.scrollHeight-ml.scrollTop-ml.clientHeight<140||!ml.dataset.f,h="",pv=null;
+ if(!c.length)h='<div class="empty">প্রথম মেসেজটি পাঠান 👋</div>';
+ c.forEach(function(x,i){var nx=c[i+1],g=function(a,b){return a&&b&&a.from===b.from&&Math.abs(a.t-b.t)<3e5};if(!pv||x.t-pv.t>9e5)h+='<div class="tm">'+short(x.t)+(new Date(x.t).toDateString()===new Date().toDateString()?"":" "+pt(x.t))+'</div>';
+  var same1=g(pv,x),same2=g(x,nx);h+='<div class="b'+(x.from===U.uid?" me":"")+(same1?" t2":"")+(same2?" t1":"")+'">'+esc(x.text)+'</div>';pv=x});
+ ml.innerHTML=h;ml.dataset.f="1";if(near)ml.scrollTop=ml.scrollHeight;if(rd[chat]<(c.length?c[c.length-1].t:0)){rd[chat]=Date.now();saveRd()}}
+function menu(){var s=document.createElement("div");s.className="sh";s.innerHTML='<div><div class="row" style="cursor:default">'+av(U.uid,48)+'<span class="mid"><b>'+esc(nm(U.uid))+'</b><small>'+esc(U.email&&U.email.indexOf("@phone.ruji.app")<0?U.email:"রুজির অ্যাকাউন্ট")+'</small></span></div><a class="row" href="index.html" style="text-decoration:none;color:inherit"><span class="mid"><b>রুজি খুলুন</b></span></a><button class="row" id="lo"><span class="mid"><b style="color:var(--brand)">লগআউট</b></span></button></div>';
+ s.onclick=function(e){if(e.target===s)s.remove()};document.body.appendChild(s);$("lo").onclick=function(){s.remove();signOut(auth)}}
+function toast(m){var t=document.createElement("div");t.textContent=m;t.style.cssText="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#14182B;color:#fff;padding:10px 18px;border-radius:22px;z-index:9;font-size:15px";document.body.appendChild(t);setTimeout(function(){t.remove()},2400)}
+function paint(){if(!U){if(shell!=="login")loginView();return}
+ document.title=(totalUn()?"("+bn(totalUn())+") ":"")+"Adda";
+ if(view==="chat"){if(shell!=="chat:"+chat)chatShell();chatMsgs();return}
+ if(view==="new"){if(shell!=="new")newView();else newRows();return}
+ if(shell!=="list"||!$("sq")||document.activeElement!==$("sq"))listView();else $("lst").innerHTML=listRows()}
+function base(){if(BASE)return;if(!MS.ready||!(MS.f.length||MS.t.length||MS.done))return;BASE=true;try{localStorage.setItem("adda-init","1")}catch(e){}partners().forEach(function(u){rd[u]=lastT(u)});saveRd()}
+function watch(){var me=U.uid,err=function(x){toast(x&&x.code==="permission-denied"?"অনুমতি নেই। Firebase Rules দেখুন":"লোড হয়নি")},got=0;
+ ["from","to"].forEach(function(f,i){var k=i?"t":"f";stops.push(onSnapshot(query(collection(db,"msgs"),where(f,"==",me)),function(s){MS[k]=s.docs.map(function(d){var x=d.data();x.id=d.id;return x});got|=i+1;if(got===3){MS.ready=1;MS.done=1}base();paint()},err));
+  stops.push(onSnapshot(query(collection(db,"frs"),where(f,"==",me)),function(s){FR[k]=s.docs.map(function(d){var x=d.data();x.id=d.id;return x});paint()},err))});
+ stops.push(onSnapshot(query(collection(db,"users"),limit(300)),function(s){users={};s.docs.forEach(function(d){users[d.id]=d.data()});paint()},err))}
+onAuthStateChanged(auth,function(u){stops.forEach(function(f){try{f()}catch(e){}});stops=[];MS={f:[],t:[]};FR={f:[],t:[]};U=u;shell="";if(u){view="list";watch()}else{view="login";chat=""}paint()});
+addEventListener("online",function(){paint()});
+</script>
+</body>
+</html>
