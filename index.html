@@ -406,6 +406,31 @@ header .bar .ic[data-n=msg] svg path:nth-of-type(2){fill:none!important;stroke:v
 
 /* হোম ফিডে রিল ছোট, রিল ট্যাবে পুরো পর্দা */
 main:has(.box.post) .rlm{height:auto;aspect-ratio:9/16;max-height:72vh;min-height:0}
+
+/* Ruji: red bottom bar with white icons, red post separators */
+nav{background:var(--brand)!important;border-top:0!important}
+.nv button{color:rgba(255,255,255,.72)!important;border-top-color:transparent!important}
+.nv button.on{color:#fff!important;border-top-color:#fff!important}
+.nv button.on svg{stroke-width:2.2!important;fill:#fff!important}
+.nv button.on svg path,.nv button.on svg rect,.nv button.on svg circle{fill:#fff}
+.nv button[data-t=reel].on svg path{fill:var(--brand)!important;stroke:var(--brand)!important}
+.nv .nav-av{border-color:rgba(255,255,255,.6)}
+.nv button.on .nav-av{border-color:#fff!important}
+.nv .dot{background:#fff!important;color:var(--brand)!important;font-weight:800}
+main .box.post{margin-bottom:6px!important;box-shadow:0 6px 0 var(--brand)!important}
+
+/* Ruji: red top bar, white icons */
+header{background:var(--brand)!important;border-bottom:0!important}
+header .logo{color:#fff!important}
+header .bar #me .ic[data-n],header .bar #hm{background:transparent!important;color:#fff!important;border:0!important;box-shadow:none!important}
+header .bar #me .ic[data-n] svg,header .bar #hm svg{stroke:#fff!important}
+header .bar #me .ic[data-n=add] svg rect{fill:#fff!important}
+header .bar #me .ic[data-n=add] svg path{stroke:var(--brand)!important;stroke-width:2.4!important}
+header .bar #me .ic[data-n=search] svg circle{fill:#fff!important}
+header .bar #me .ic[data-n=msg]{background:transparent!important;box-shadow:none!important}
+header .bar #me .ic[data-n=msg] svg path:nth-of-type(1){fill:#fff!important;stroke:#fff!important}
+header .bar #me .ic[data-n=msg] svg path:nth-of-type(2){stroke:var(--brand)!important;fill:none!important}
+header .bar .ic .dot{background:#fff!important;color:var(--brand)!important;border-color:var(--brand)!important}
 </style>
 </head>
 <body>
