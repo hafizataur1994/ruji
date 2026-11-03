@@ -421,6 +421,14 @@ main:has(.box.post) .rlm{height:auto;aspect-ratio:9/16;max-height:72vh;min-heigh
 .aic .soon{color:var(--mute);border-style:dashed;cursor:default}
 .aid{display:block;width:100%;text-align:start;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);line-height:1.5;overflow-wrap:anywhere}
 .aid:active{background:var(--bg)}
+
+/* পরিষ্কার পোস্ট-তৈরি পর্দা */
+.cmpo .cmp1 textarea{border:0!important;background:transparent!important;padding:8px 2px!important;font-size:20px!important;height:130px!important;min-height:130px!important;outline:0}
+.cmpo .prev{position:relative;margin-top:8px}
+.cmpo .prev img{display:block;width:100%;max-height:300px;object-fit:cover;border-radius:12px}
+.cmpo #rm{position:absolute;top:8px;right:8px;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;line-height:34px;text-align:center}
+.cmpo .cmp2{position:sticky;bottom:0;background:var(--card);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.cmpo .cmp2 .pri{padding:10px 26px;font-size:16px}
 </style>
 </head>
 <body>
@@ -464,7 +472,7 @@ function loadPh(l){l.forEach(function(p){var u=p&&p.uid;if(!u||PL[u])return;PL[u
 function bn(n){var c={bn:"bn-BD",en:"en",hi:"hi-IN",ar:"ar-u-nu-latn"}[LANG]||LANG;try{return n.toLocaleString(c)}catch(e){return String(n)}}
 /* ===== ভাষা (i18n) ও ভিডিও সহায়ক ===== */
 var LS="ruji-lang",LANGS={bn:"বাংলা",en:"English",hi:"हिन्दी",ar:"العربية"},LANG="bn",DX={en:{},hi:{},ar:{}},OR=new WeakMap(),RXC={},TRD={},UNM=false,IO=null,AUTO={},RTL=["ar","ur","fa","iw","ps"];var MORE=[["ur", "اردو"], ["es", "Español"], ["fr", "Français"], ["pt", "Português"], ["ru", "Русский"], ["de", "Deutsch"], ["id", "Bahasa Indonesia"], ["ms", "Bahasa Melayu"], ["tr", "Türkçe"], ["zh-CN", "中文"], ["ja", "日本語"], ["ko", "한국어"], ["it", "Italiano"], ["fa", "فارسی"], ["iw", "עברית"], ["vi", "Tiếng Việt"], ["th", "ไทย"], ["ta", "தமிழ்"], ["te", "తెలుగు"], ["mr", "मराठी"], ["gu", "ગુજરાતી"], ["pa", "ਪੰਜਾਬੀ"], ["kn", "ಕನ್ನಡ"], ["ml", "മലയാളം"], ["ne", "नेपाली"], ["si", "සිංහල"], ["my", "မြန်မာ"], ["km", "ខ្មែរ"], ["tl", "Filipino"], ["sw", "Kiswahili"], ["ha", "Hausa"], ["am", "አማርኛ"], ["so", "Soomaali"], ["ps", "پښتو"], ["nl", "Nederlands"], ["pl", "Polski"], ["uk", "Українська"], ["ro", "Română"], ["el", "Ελληνικά"], ["cs", "Čeština"], ["hu", "Magyar"], ["sv", "Svenska"], ["no", "Norsk"], ["da", "Dansk"], ["fi", "Suomi"], ["bg", "Български"], ["sr", "Српски"], ["hr", "Hrvatski"], ["uz", "Oʻzbek"], ["kk", "Қазақша"], ["az", "Azərbaycan"], ["af", "Afrikaans"], ["zu", "isiZulu"], ["yo", "Yorùbá"], ["ig", "Igbo"], ["sq", "Shqip"], ["hy", "Հայերեն"], ["ka", "ქართული"], ["mn", "Монгол"], ["lo", "ລາວ"]];MORE.forEach(function(m){LANGS[m[0]]=m[1]});
-var LSET=false;(function(){var s="";try{s=localStorage.getItem(LS)||""}catch(e){}LSET=!!LANGS[s];if(!LANGS[s]){s=(navigator.language||"bn").slice(0,2).toLowerCase();if(!LANGS[s])s="en"}LANG=s})();
+var LSET=false;(function(){var s="";try{s=localStorage.getItem(LS)||""}catch(e){}LSET=!!LANGS[s];if(!LANGS[s]){s="en"}LANG=s})();
 var RWS=`হোম|Home|होम|الرئيسية
 রিল|Reels|रील्स|ريلز
 রিলস|Reels|रील्स|ريلز
@@ -609,7 +617,7 @@ function tx(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT|Node
 var moB=false,moT=0,mo=new MutationObserver(function(){if(moB)return;cancelAnimationFrame(moT);moT=requestAnimationFrame(trRun)});
 function trRun(){moB=true;mo.disconnect();try{tx(document.body)}catch(e){}mo.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["placeholder","aria-label","title"]});moB=false}
 function setLang(l,q){if(!LANGS[l])return;LANG=l;try{localStorage.setItem(LS,l)}catch(e){}var r=document.documentElement;r.lang=l;r.dir=RTL.indexOf(l)>-1?"rtl":"ltr";var s=document.getElementById("lg");if(s)s.value=l;if(!q){render();trRun();toast(LANGS[l])}}
-(function(){var s=document.getElementById("lg");if(s){s.innerHTML=Object.keys(LANGS).map(function(k){return'<option value="'+k+'">'+LANGS[k]+'</option>'}).join("");s.onchange=function(){pickLang(s.value)}}if(LANG!=="bn"&&!DX[LANG]){try{var cc=JSON.parse(localStorage.getItem("ruji-tr-"+LANG));if(cc){DX[LANG]=cc;AUTO[LANG]=1}}catch(e){}if(!DX[LANG])LANG="en"}setLang(LANG,1);trRun();if(!LSET)langGate()})();
+(function(){var s=document.getElementById("lg");if(s){s.innerHTML=Object.keys(LANGS).map(function(k){return'<option value="'+k+'">'+LANGS[k]+'</option>'}).join("");s.onchange=function(){pickLang(s.value)}}if(LANG!=="bn"&&!DX[LANG]){try{var cc=JSON.parse(localStorage.getItem("ruji-tr-"+LANG));if(cc){DX[LANG]=cc;AUTO[LANG]=1}}catch(e){}if(!DX[LANG])LANG="en"}setLang(LANG,1);trRun()})();
 var _cf=window.confirm,_pr=window.prompt;window.confirm=function(s){return _cf.call(window,TR(s))};window.prompt=function(s,d){return _pr.call(window,TR(s),d)};
 function trBtn(p){if(!p.text||p.text.length<2)return"";var d=TRD[p.id];if(d==="…")return'<p class="note" style="margin:0 0 8px;text-align:left">…</p>';if(d)return'<p class="txt" style="color:var(--mute);border-left:3px solid var(--brand);padding-left:8px">'+esc(d)+'</p><button class="more" data-a="tr" style="margin-bottom:8px">অনুবাদ লুকান</button>';return'<button class="more" data-a="tr" style="margin-bottom:8px">অনুবাদ দেখুন</button>'}
 function gtr(q,l){return fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl="+l+"&dt=t&q="+encodeURIComponent(q)).then(function(r){return r.json()}).then(function(j){var s=(j[0]||[]).map(function(x){return x[0]}).join("");if(!s)throw 0;return s}).catch(function(){return fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(q.slice(0,150))+"&langpair=Autodetect|"+l).then(function(r){return r.json()}).then(function(j){var s=j&&j.responseData&&j.responseData.translatedText;if(!s||(j.responseStatus&&+j.responseStatus!==200))throw 0;return s})})}
@@ -679,7 +687,7 @@ function render(){
  if(!S.uid){meEl.innerHTML="";app.innerHTML=PHONE_ON?authView():emailView();if(PHONE_ON)bindAuth();else bindEmail();return}if(!S.me||S.needPw){meEl.innerHTML="";app.innerHTML=nameView();bindName();return}
  meEl.innerHTML='<button class="ic" data-n="add" aria-label="নতুন পোস্ট">'+ic('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>')+'</button><button class="ic" data-n="search" aria-label="খুঁজুন">'+ic('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>')+'</button><button class="ic" data-n="msg" aria-label="মেসেজ">'+ic('<path d="M12 3C6.9 3 3 6.8 3 11.5c0 2.6 1.2 4.9 3.1 6.4V21l3-1.7c.9.2 1.9.4 2.9.4 5.1 0 9-3.800 9-8.200S17.100 3 12 3z"/><path d="M7.500 13.500l3.200-3.400 2.400 2 3.400-3.600" stroke-width="1.800"/>')+msgDot()+'</button>';
  if(tab==="dash"){app.innerHTML=dashView();return}if(tab==="friends"){app.innerHTML=frView();return}if(tab==="notif"){app.innerHTML=ntView();return}if(tab==="market"){app.innerHTML=mkView();bindMk();return}if(tab==="msg"){app.innerHTML=chView();return}
- var h=(tab==="me"?profCard2()+saverBar():tab==="u"?userCard():"")+(tab==="reel"?"":upg())+(tab==="saved"||tab==="u"||(tab==="reel"&&!cmpOpen)?'':!cmpOpen?cmpBar():'<div class="box cmp cmpo">'+cmpHd()+'<div class="cmp1"><button type="button" class="avb" data-prof="1" aria-label="প্রোফাইল খুলুন বা বন্ধ করুন">'+av(S.me)+'</button><textarea id="tx" rows="1" placeholder="'+PHT[mode]+'" aria-label="নতুন পোস্ট"></textarea><button type="button" id="ph" class="ic cph" aria-label="'+(mode==='reel'?'ভিডিও বাছুন':'ছবি বা ভিডিও')+'">'+ic('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/>')+'</button><input type="file" id="fl" accept="'+(mode==='reel'?'video/*':'image/*,video/*')+'" hidden></div><div id="pv"></div><div id="aiw"></div><div class="cmp2"><div class="seg" role="tablist">'+segs()+'</div><button class="pri" id="pb" disabled>'+PB[mode]+'</button></div></div>')+(tab==="home"?storyBar():"")+searchBar()+peopleRes();
+ var h=(tab==="me"?profCard2()+saverBar():tab==="u"?userCard():"")+(tab==="reel"?"":upg())+(tab==="saved"||tab==="u"||(tab==="reel"&&!cmpOpen)?'':!cmpOpen?cmpBar():'<div class="box cmp cmpo">'+cmpHd()+'<div class="cmp1"><button type="button" class="avb" data-prof="1" aria-label="প্রোফাইল খুলুন বা বন্ধ করুন">'+av(S.me)+'</button><textarea id="tx" rows="1" placeholder="'+PHT[mode]+'" aria-label="নতুন পোস্ট"></textarea><button type="button" id="ph" class="ic cph" aria-label="'+(mode==='reel'?'ভিডিও বাছুন':'ছবি বা ভিডিও')+'">'+ic('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/>')+'</button><input type="file" id="fl" accept="'+(mode==='reel'?'video/*':'image/*,video/*')+'" hidden></div><div id="pv"></div><div class="cmp2"><div class="seg" role="tablist">'+segs()+'</div><button class="pri" id="pb" disabled>'+PB[mode]+'</button></div></div>')+(tab==="home"?storyBar():"")+searchBar()+peopleRes();
  var ps=S.posts.filter(function(p){return !hid[p.id]&&!isBl(p.uid)&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):tab==="u"?(p.uid===pu):tab==="saved"?!!(S.sv&&S.sv[p.id]):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
  if(!ps.length)h+='<div class="empty">'+(tab==="saved"?"এখনো কিছু সংরক্ষণ করা হয়নি।":tab==="u"?"এখনো কোনো পোস্ট নেই।":tab==="reel"?"এখনো কোনো রিল নেই। ওপরের + চেপে প্রথম রিলটি আপনিই দিন।":"এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন।")+'</div>';
  ps.forEach(function(p){
@@ -759,7 +767,7 @@ function profCard(){var l=S.level||1,pf=S.pf||{},big=pf.img?'<div class="av" sty
  +'<input type="file" id="pff" accept="image/*" hidden></div>'+blkBox()+'<div class="box"><button data-lo="1" style="border:1px solid var(--line)">বের হোন</button></div>'}
 function pimg(p){if(S.saver&&!rv[p.id])return'<button class="phold" data-a="show">ছবি দেখুন</button>';return'<img class="pimg" data-zoom alt="" src="'+p.img+'">'}
 function saverBar(){return'<div class="box row" style="justify-content:space-between"><div><b>ডেটা সেভার</b><div style="color:var(--mute);font-size:14px">'+(S.saver?'ছবি লুকানো আছে, চাইলে দেখুন বাটনে চাপুন':'বন্ধ, সব ছবি দেখা যাচ্ছে')+'</div></div><button class="'+(S.saver?'pri':'')+'" style="border:1px solid var(--line)" data-sv="1" role="switch" aria-checked="'+!!S.saver+'">'+(S.saver?'চালু':'বন্ধ')+'</button></div>'}
-function pv(){var e=document.getElementById("pv");if(!e)return;e.innerHTML=draftImg||draftVid?'<div class="prev">'+(draftVid?'<video src="'+draftVid+'" muted playsinline controls style="width:100%;max-height:260px;border-radius:10px"></video>':'<img alt="" src="'+draftImg+'">')+'<button id="rm">সরান</button></div>':"";var r=document.getElementById("rm");if(r)r.onclick=function(){draftImg="";draftVid="";pv();var b=document.getElementById("pb");b.disabled=mode==="reel"||!document.getElementById("tx").value.trim()}}
+function pv(){var e=document.getElementById("pv");if(!e)return;e.innerHTML=draftImg||draftVid?'<div class="prev">'+(draftVid?'<video src="'+draftVid+'" muted playsinline controls style="width:100%;max-height:260px;border-radius:10px"></video>':'<img alt="" src="'+draftImg+'">')+'<button id="rm" type="button" aria-label="Remove">✕</button></div>':"";var r=document.getElementById("rm");if(r)r.onclick=function(){draftImg="";draftVid="";pv();var b=document.getElementById("pb");b.disabled=mode==="reel"||!document.getElementById("tx").value.trim()}}
 function shrink(f,cb,mx){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,(mx||800)/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.7))};im.src=r.result};r.readAsDataURL(f)}
  
 function isBl(u){return !!(u&&S.bl&&S.bl[u])}
@@ -1030,8 +1038,9 @@ var unsubs=[];
 function stopWatch(){unsubs.forEach(function(f){try{f()}catch(e){}});unsubs=[]}
 function rr(){clearTimeout(rr.k);rr.k=setTimeout(function(){if(!typing()&&!cmpOpen)render()},60)}
 function startWatch(uid){var W=function(n){return function(x){fail(x,n)}},add=function(f){unsubs.push(f)};
- add(FB.watch(function(l){S.posts=l;mergeCm();loadPh(l);rr()},W("posts")));
- add(FB.watchComments(function(l){var m={};l.sort(function(a,b){return a.t-b.t}).forEach(function(c){(m[c.post]=m[c.post]||[]).push(c)});S.cm=m;mergeCm();rr()},W("comments")));
+ var cmU={};function syncCm(){var ids=S.posts.slice(0,40).map(function(p){return p.id});Object.keys(cmU).forEach(function(id){if(ids.indexOf(id)<0){try{cmU[id]()}catch(e){}delete cmU[id];delete S.cm[id]}});ids.forEach(function(id){if(cmU[id])return;cmU[id]=FB.watchPostComments(id,function(l){S.cm[id]=l.sort(function(a,b){return a.t-b.t});mergeCm();rr()},W("comments"))})}
+ add(function(){Object.keys(cmU).forEach(function(k){try{cmU[k]()}catch(e){}});cmU={}});
+ add(FB.watch(uid,function(l){S.posts=l;syncCm();mergeCm();loadPh(l);rr()},W("posts")));
  add(FB.watchUsers(function(m){S.users=m;var mu=m[S.uid];if(mu){S.pf=S.pf||{};if(typeof mu.bio==="string"){if(S.pf.bio!==mu.bio){S.pf.bio=mu.bio;save()}}else if(S.pf.bio)FB.setBio(S.pf.bio).catch(function(){})}rr()},W("users")));
  add(FB.watchFollows(uid,function(l){S.fw=l;rr()},W("follows")));
  add(FB.watchFollowers(uid,function(l){S.flr=l;rr()},function(){}));
@@ -1080,8 +1089,13 @@ window.FB={
  setup:function(n,pw){var u=auth.currentUser,t=n?updateProfile(u,{displayName:n}):Promise.resolve();return t.then(function(){return u.providerData.some(function(d){return d.providerId==="password"})?updatePassword(u,pw):linkWithCredential(u,EmailAuthProvider.credential(pe(u.phoneNumber),pw))})},
  reset:function(){try{if(RV)RV.clear()}catch(e){}RV=null;CR=null},
  logout:function(){return signOut(auth)},
- watch:function(cb,err){return onSnapshot(query(PC,orderBy("t","desc"),limit(100)),function(s){cb(s.docs.map(function(d){var x=d.data();x.id=d.id;x.likes=x.likes||[];x.lc=x.comments||[];x.comments=x.lc;return x}))},err)},
- add:function(o){return addDoc(PC,o)},
+ watch:function(uid,cb,err){var A=[],B=[],fx={};function mp(d){var x=d.data();x.id=d.id;x.likes=x.likes||[];x.lc=x.comments||[];x.comments=x.lc;return x}
+  function emit(){var m={};A.concat(B).forEach(function(x){m[x.id]=x});cb(Object.keys(m).map(function(k){return m[k]}).sort(function(p,q){return (q.t||0)-(p.t||0)}))}
+  var u1=onSnapshot(query(PC,where("priv","==","pub"),orderBy("t","desc"),limit(100)),function(s){A=s.docs.map(mp);emit()},err);
+  var u2=onSnapshot(query(PC,where("uid","==",uid),orderBy("t","desc"),limit(100)),function(s){B=s.docs.map(mp);emit();s.docs.forEach(function(d){if(!d.data().priv&&!fx[d.id]){fx[d.id]=1;updateDoc(d.ref,{priv:"pub"}).catch(function(){})}})},err);
+  return function(){u1();u2()}},
+ watchPostComments:function(pid,cb,err){return onSnapshot(query(collection(db,"comments"),where("post","==",pid)),function(s){cb(s.docs.map(ld))},err)},
+ add:function(o){o.priv=o.priv||"pub";return addDoc(PC,o)},
  set:function(id,o){return updateDoc(doc(db,"posts",id),o)},
  del:function(id,cids){return Promise.all((cids||[]).map(function(c){return deleteDoc(doc(db,"comments",c)).catch(function(){})})).then(function(){return deleteDoc(doc(db,"posts",id))})},
  watchFollows:function(uid,cb,err){return onSnapshot(query(collection(db,"follows"),where("follower","==",uid)),function(s){cb(s.docs.map(function(d){return d.data().followee}))},err)},
