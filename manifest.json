@@ -1,38 +1,34 @@
 {
- "name": "Ruji",
- "short_name": "Ruji",
- "lang": "bn",
- "start_url": "./",
- "scope": "./",
- "display": "standalone",
- "orientation": "portrait",
- "background_color": "#F1F4F9",
- "theme_color": "#E11D48",
- "icons": [
-  {
-   "src": "icon-192.png",
-   "sizes": "192x192",
-   "type": "image/png",
-   "purpose": "any"
-  },
-  {
-   "src": "icon-512.png",
-   "sizes": "512x512",
-   "type": "image/png",
-   "purpose": "any"
-  },
-  {
-   "src": "icon-maskable-192.png",
-   "sizes": "192x192",
-   "type": "image/png",
-   "purpose": "maskable"
-  },
-  {
-   "src": "icon-maskable-512.png",
-   "sizes": "512x512",
-   "type": "image/png",
-   "purpose": "maskable"
-  }
- ],
- "description": "রুজি – সবার বাংলা সোশ্যাল নেটওয়ার্ক"
+  "name": "রুজি – বাংলা সোশ্যাল নেটওয়ার্ক",
+  "short_name": "রুজি",
+  "description": "বন্ধুদের সাথে পোস্ট, ছবি, মেসেজ ও আরও অনেক কিছু, সম্পূর্ণ বিনামূল্যে।",
+  "lang": "bn",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F1F4F9",
+  "theme_color": "#E11D48",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "./index.html"
 }
