@@ -389,7 +389,7 @@ main .box.cmp:not(.cmpo){padding:10px 10px 10px 12px}
 .act2 .rxc{display:flex;align-items:center;padding:4px 0;background:none;border:0;min-height:40px}
 .rxb{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:15px;line-height:1;background:var(--bg);border:2px solid var(--card);margin-left:-7px}
 .rxb:first-child{margin-left:0}
-.rxb.lk{background:#1B74E4;filter:none}
+.rxb.lk{background:var(--brand);filter:none}
 .rxb.lk{color:transparent;text-shadow:0 0 0 #fff}
 .rxe{font-size:26px;line-height:1;color:var(--mute)}
 
@@ -430,7 +430,7 @@ main:has(.box.post) .rlm{height:auto;aspect-ratio:9/16;max-height:72vh;min-heigh
 .cmpo .cmp2{position:sticky;bottom:0;background:var(--card);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 .cmpo .cmp2 .pri{padding:10px 26px;font-size:16px}
 
-.cmpf{background:var(--card)}.cfh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.cfh b{font-size:18px;flex:1;text-align:center}.cfh .pri{border-radius:10px;padding:8px 18px;background:#0866ff;color:#fff}
+.cmpf{background:var(--card)}.cfh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.cfh b{font-size:18px;flex:1;text-align:center}.cfh .pri{border-radius:10px;padding:8px 18px;background:var(--brand);color:var(--on-brand)}
 .cfu{display:flex;gap:10px;align-items:center;margin:6px 0 10px}.cxn{font-size:14px;color:var(--mute);line-height:1.4}.cxn b{color:var(--ink)}
 .cfc{display:flex;gap:8px;overflow-x:auto;padding:4px 0 8px}.cfc button,.cfchip{flex:none;display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:20px;padding:8px 14px;font-size:15px;white-space:nowrap}.cfc button.on{border-color:var(--brand);color:var(--brand)}
 .cmpf .cft{display:block;width:100%;border:0!important;background:transparent!important;font-size:20px;min-height:90px;outline:none;resize:none;padding:8px 2px;color:var(--ink);border-radius:0!important}
@@ -442,8 +442,9 @@ main:has(.box.post) .rlm{height:auto;aspect-ratio:9/16;max-height:72vh;min-heigh
 .pymk{padding:12px 0 10px}.pyh{display:flex;justify-content:space-between;align-items:center;padding:0 14px 8px}.pyt{font-weight:700;font-size:17px}.pyh button{background:none;border:0;font-size:20px;color:var(--mute)}
 .pyr{display:flex;gap:10px;overflow-x:auto;padding:0 14px 6px}.pyc{flex:none;width:190px;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding-bottom:10px;background:var(--card)}
 .pyi{width:100%;height:190px;display:grid;place-items:center;font-size:64px;color:#fff;font-weight:700}.pyn{padding:0 10px;font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pyc .pri,.pyx{margin:0 10px;border-radius:8px;padding:9px 0;font-size:15px}.pyc .pri{background:#0866ff;color:#fff}.pyx{background:var(--bg);border:0;color:var(--ink);font-weight:600}
+.pyc .pri,.pyx{margin:0 10px;border-radius:8px;padding:9px 0;font-size:15px}.pyc .pri{background:var(--brand);color:var(--on-brand)}.pyx{background:var(--bg);border:0;color:var(--ink);font-weight:600}
 .pya{display:block;margin:6px auto 0;background:none;border:0;color:var(--mute);font-size:16px}
+.rls{padding:12px 0 10px}.rlh2{display:flex;align-items:center;gap:10px;padding:0 14px 8px;font-weight:700;font-size:17px}.rlh2 svg{width:22px;height:22px}.rlh2 .rla{margin-left:auto;background:none;border:0;color:var(--brand);font-weight:700;font-size:14px}.rlr{display:flex;gap:8px;overflow-x:auto;padding:0 14px 6px;scroll-snap-type:x proximity}.rlc2{flex:none;position:relative;width:128px;height:220px;border-radius:14px;overflow:hidden;background:#000;color:#fff;padding:0;border:0;scroll-snap-align:start;text-align:left}.rlc2 video,.rlc2 .rlb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}.rlc2 .rlg{position:absolute;left:0;right:0;bottom:0;padding:28px 8px 8px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-size:13px;line-height:1.3}.rlc2 .rlg b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rlc2 .rlp{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.45);border-radius:12px;padding:2px 8px;font-size:12px}
 </style>
 </head>
 <body>
@@ -622,11 +623,273 @@ var RWS=`হোম|Home|होम|الرئيسية
 সংক্ষেপে|Short|संक्षेप में|مختصر
 লেখার ভাষা|Writing language|लेखन की भाषा|لغة الكتابة
 প্রতিটি খসড়া ভালো করে যাচাই করে তারপর পোস্ট করুন।|Please review every draft carefully before you post it.|हर ड्राफ्ट को ध्यान से जाँचकर ही पोस्ट करें।|راجع كل مسودة جيدًا قبل أن تنشرها.
-আরও ভাষা শীঘ্রই আসছে|More languages are coming soon|और भाषाएँ जल्द आ रही हैं|المزيد من اللغات قريبًا`;
+আরও ভাষা শীঘ্রই আসছে|More languages are coming soon|और भाषाएँ जल्द आ रही हैं|المزيد من اللغات قريبًا
+স্ক্রিন বড় করুন|Enlarge screen|Enlarge screen|Enlarge screen
+প্রধান মেনু|Main menu|Main menu|Main menu
+জায়গা শেষ, সেভ হয়নি|Storage full, not saved|Storage full, not saved|Storage full, not saved
+বাংলা|বাংলা|বাংলা|বাংলা
+আমি|Me|Me|Me
+লেখার সহায়ক|Writing helper|Writing helper|Writing helper
+👥 পরিচিত হতে পারেন এমন মানুষ|👥 People you may know|👥 People you may know|👥 People you may know
+সরিয়ে দিন|Remove|Remove|Remove
+সবাই দেখুন ›|See all ›|See all ›|See all ›
+স্টোরি তৈরি করুন|Create story|Create story|Create story
+মিনিট আগে|min ago|min ago|min ago
+ঘণ্টা আগে|h ago|h ago|h ago
+দিন আগে|d ago|d ago|d ago
+# মন্তব্য|# comments|# comments|# comments
+এখনো কিছু সংরক্ষণ করা হয়নি|Nothing saved yet|Nothing saved yet|Nothing saved yet
+এখনো কোনো পোস্ট নেই|No posts yet|No posts yet|No posts yet
+এখনো কোনো রিল নেই। ওপরের + চেপে প্রথম রিলটি আপনিই দিন|No reels yet. Tap + above and post the first one|No reels yet. Tap + above and post the first one|No reels yet. Tap + above and post the first one
+পোস্ট, লাইক, মন্তব্য, স্টোরি, বন্ধু, মেসেজ ও বাজার সবই সবার জন্য আসল ডাটাবেসে থাকে। সংরক্ষণ ও ডেটা সেভার শুধু আপনার ফোনে|Posts, likes, comments, stories, friends, messages and marketplace are stored in the real shared database. Saved items and Data saver stay only on your phone|Posts, likes, comments, stories, friends, messages and marketplace are stored in the real shared database. Saved items and Data saver stay only on your phone|Posts, likes, comments, stories, friends, messages and marketplace are stored in the real shared database. Saved items and Data saver stay only on your phone
+এই ভিডিও চালানো যাচ্ছে না|This video cannot be played|This video cannot be played|This video cannot be played
+ভিডিও স্টোরি পরের ধাপে আসছে|Video stories are coming in the next step|Video stories are coming in the next step|Video stories are coming in the next step
+অনুমতি নেই|Permission denied|Permission denied|Permission denied
+সমস্যা হয়েছে|Something went wrong|Something went wrong|Something went wrong
+সমস্যা হয়েছে, আবার চেষ্টা করুন|Something went wrong, please try again|Something went wrong, please try again|Something went wrong, please try again
+ফোন যাচাই|Phone verified|Phone verified|Phone verified
+ফোন ও সেলফি যাচাই|Phone & selfie verified|Phone & selfie verified|Phone & selfie verified
+ফোন, সেলফি ও এনআইডি যাচাই|Phone, selfie & NID verified|Phone, selfie & NID verified|Phone, selfie & NID verified
+ফোন যাচাই করা|Phone verified|Phone verified|Phone verified
+ফোন ও সেলফি যাচাই করা|Phone & selfie verified|Phone & selfie verified|Phone & selfie verified
+ফোন, সেলফি ও এনআইডি যাচাই করা|Phone, selfie & NID verified|Phone, selfie & NID verified|Phone, selfie & NID verified
+ফ্রি অ্যাকাউন্ট (ফোন যাচাই হয়নি)|Free account (phone not verified)|Free account (phone not verified)|Free account (phone not verified)
+সেলফি দিয়ে ✓✓ ব্যাজ নিন|Get the ✓✓ badge with a selfie|Get the ✓✓ badge with a selfie|Get the ✓✓ badge with a selfie
+এনআইডি দিয়ে ★ ব্যাজ নিন|Get the ★ badge with NID|Get the ★ badge with NID|Get the ★ badge with NID
+ব্যাজ বাড়ান|Upgrade badge|Upgrade badge|Upgrade badge
+✓ ফোন · ✓✓ ফোন ও সেলফি · ★ ফোন, সেলফি ও এনআইডি|✓ Phone · ✓✓ Phone & selfie · ★ Phone, selfie & NID|✓ Phone · ✓✓ Phone & selfie · ★ Phone, selfie & NID|✓ Phone · ✓✓ Phone & selfie · ★ Phone, selfie & NID
+প্রোটোটাইপ: ছবি কোথাও পাঠানো বা সেভ হয় না|Prototype: the photo is not sent or saved anywhere|Prototype: the photo is not sent or saved anywhere|Prototype: the photo is not sent or saved anywhere
+ফোন নম্বর যাচাই|Verify phone number|Verify phone number|Verify phone number
+একটি নম্বরে একটি অ্যাকাউন্ট। এতে ভুয়া অ্যাকাউন্ট কমে|One account per number. This reduces fake accounts|One account per number. This reduces fake accounts|One account per number. This reduces fake accounts
+কোড পাঠান|Send code|Send code|Send code
+প্রোটোটাইপ: আসল এসএমএস যাবে না, কোড স্ক্রিনেই দেখানো হবে|Prototype: no real SMS is sent, the code is shown on screen|Prototype: no real SMS is sent, the code is shown on screen|Prototype: no real SMS is sent, the code is shown on screen
+১১ সংখ্যার সঠিক বাংলাদেশি নম্বর দিন, যেমন ০১৭XXXXXXXX|Enter a valid 11-digit Bangladeshi number, e.g. 017XXXXXXXX|Enter a valid 11-digit Bangladeshi number, e.g. 017XXXXXXXX|Enter a valid 11-digit Bangladeshi number, e.g. 017XXXXXXXX
+কোড লিখুন|Enter code|Enter code|Enter code
+নম্বরে ৪ সংখ্যার কোড পাঠানো হয়েছে|A 4-digit code was sent to the number|A 4-digit code was sent to the number|A 4-digit code was sent to the number
+ডেমো কোড|Demo code|Demo code|Demo code
+যাচাই করুন|Verify|Verify|Verify
+নম্বর বদলান|Change number|Change number|Change number
+ফোন যাচাই হয়েছে|Phone verified|Phone verified|Phone verified
+কোড মেলেনি। আবার চেষ্টা করুন|Code did not match. Try again|Code did not match. Try again|Code did not match. Try again
+ভিডিওটি এই প্রোটোটাইপে সেভ থাকে না, নতুন করে দিন|The video is not kept in this prototype, please add it again|The video is not kept in this prototype, please add it again|The video is not kept in this prototype, please add it again
+এই স্টোরিটি মুছবেন?|Delete this story?|Delete this story?|Delete this story?
+ভালোবাসা|Love|Love|Love
+ভালো জুতা|Good shoe|Good shoe|Good shoe
+ছেঁড়া জুতা|Torn shoe|Torn shoe|Torn shoe
+থাপ্পড়|Slap|Slap|Slap
+গোলাপ|Rose|Rose|Rose
+আপনি|You|You|You
+একজন|Someone|Someone|Someone
+🔖 সংরক্ষণ সরান|🔖 Unsave|🔖 Unsave|🔖 Unsave
+🔖 সংরক্ষণ করুন|🔖 Save|🔖 Save|🔖 Save
+✏️ পোস্ট সম্পাদনা|✏️ Edit post|✏️ Edit post|✏️ Edit post
+🗑️ পোস্ট মুছুন|🗑️ Delete post|🗑️ Delete post|🗑️ Delete post
+➖ আনফলো করুন|➖ Unfollow|➖ Unfollow|➖ Unfollow
+➕ ফলো করুন|➕ Follow|➕ Follow|➕ Follow
+🚩 রিপোর্ট করুন|🚩 Report|🚩 Report|🚩 Report
+🚫 ব্লক করুন|🚫 Block|🚫 Block|🚫 Block
+সম্পাদিত|edited|edited|edited
+এডিট করা|edited|edited|edited
+সেভ|Save|Save|Save
+বাতিল|Cancel|Cancel|Cancel
+🔓 ছবি খুলে দিন|🔓 Unlock photo|🔓 Unlock photo|🔓 Unlock photo
+🔒 ছবি লক করুন|🔒 Lock photo|🔒 Lock photo|🔒 Lock photo
+পরিচিতি বদলান|Edit bio|Edit bio|Edit bio
+পরিচিতি লিখুন|Write a bio|Write a bio|Write a bio
+ছবি লুকানো আছে, চাইলে দেখুন বাটনে চাপুন|Photo is hidden, tap View to see it|Photo is hidden, tap View to see it|Photo is hidden, tap View to see it
+বন্ধ, সব ছবি দেখা যাচ্ছে|Off, all photos are visible|Off, all photos are visible|Off, all photos are visible
+মূল|Original|Original|Original
+সাদাকালো|B&W|B&W|B&W
+উষ্ণ|Warm|Warm|Warm
+উজ্জ্বল|Bright|Bright|Bright
+😊 খুশি|😊 Happy|😊 Happy|😊 Happy
+😍 ভালোবাসায়|😍 In love|😍 In love|😍 In love
+🤩 উচ্ছ্বসিত|🤩 Excited|🤩 Excited|🤩 Excited
+😇 কৃতজ্ঞ|😇 Grateful|😇 Grateful|😇 Grateful
+🤲 ধন্য|🤲 Blessed|🤲 Blessed|🤲 Blessed
+😢 মন খারাপ|😢 Sad|😢 Sad|😢 Sad
+😴 ক্লান্ত|😴 Tired|😴 Tired|😴 Tired
+😡 রাগান্বিত|😡 Angry|😡 Angry|😡 Angry
+নতুন রিল|New reel|New reel|New reel
+নতুন স্টোরি|New story|New story|New story
+পরবর্তী|Next|Next|Next
+গান|Music|Music|Music
+ট্যাগ/সহযোগী|Tag / collaborator|Tag / collaborator|Tag / collaborator
+ট্যাগ / সহযোগী|Tag / collaborator|Tag / collaborator|Tag / collaborator
+লোকেশন|Location|Location|Location
+অনুভূতি|Feeling|Feeling|Feeling
+🔒 শুধু আমি|🔒 Only me|🔒 Only me|🔒 Only me
+🌐 সবাই|🌐 Everyone|🌐 Everyone|🌐 Everyone
+গান যোগ করুন|Add music|Add music|Add music
+কারা দেখতে পারবেন|Who can see this|Who can see this|Who can see this
+🖼️ অন্য ছবি বা ভিডিও বাছুন|🖼️ Choose another photo or video|🖼️ Choose another photo or video|🖼️ Choose another photo or video
+↩️ মূল ছবি ফেরান|↩️ Restore original photo|↩️ Restore original photo|↩️ Restore original photo
+গানের নাম|Song name|Song name|Song name
+কাদের সাথে আছেন|Who are you with|Who are you with|Who are you with
+কোথায় আছেন|Where are you|Where are you|Where are you
+ঠিক আছে|OK|OK|OK
+মূল ছবি|Original photo|Original photo|Original photo
+মিডিয়া যোগ করুন|Add media|Add media|Add media
+🖼️ মিডিয়া যোগ করুন|🖼️ Add media|🖼️ Add media|🖼️ Add media
+ব্যবহারকারী|Users|Users|Users
+পাঠানো অনুরোধ|Sent requests|Sent requests|Sent requests
+পাঠানো হয়েছে|Sent|Sent|Sent
+এখনো কেউ নেই। আরও মানুষ যোগ দিলে এখানে দেখা যাবে|No one yet. More people will appear here as they join|No one yet. More people will appear here as they join|No one yet. More people will appear here as they join
+মানুষ|People|People|People
+ব্লক করা ব্যবহারকারী|Blocked users|Blocked users|Blocked users
+আনব্লক|Unblock|Unblock|Unblock
+মন্তব্য এডিট|Edit comment|Edit comment|Edit comment
+আরও অপশন|More options|More options|More options
+নতুন চ্যাট শুরু করুন|Start a new chat|Start a new chat|Start a new chat
+মেসেজ করতে আগে কাউকে বন্ধু বানান|Add someone as a friend first to send messages|Add someone as a friend first to send messages|Add someone as a friend first to send messages
+বন্ধু খুঁজুন|Find friends|Find friends|Find friends
+প্রথম মেসেজটি পাঠান|Send the first message|Send the first message|Send the first message
+এখন আপনার বন্ধু|Now your friend|Now your friend|Now your friend
+আনব্লক করা হয়েছে|Unblocked|Unblocked|Unblocked
+সংরক্ষণ সরানো হয়েছে|Removed from saved|Removed from saved|Removed from saved
+সংরক্ষণ করা হয়েছে|Saved|Saved|Saved
+কেন রিপোর্ট করছেন? সংক্ষেপে লিখুন|Why are you reporting this? Write briefly|Why are you reporting this? Write briefly|Why are you reporting this? Write briefly
+রিপোর্ট পাঠানো হয়েছে। ধন্যবাদ|Report sent. Thank you|Report sent. Thank you|Report sent. Thank you
+ব্লক করা হয়েছে|Blocked|Blocked|Blocked
+এডিট করুন|Edit|Edit|Edit
+মন্তব্যটি মুছে ফেলবেন?|Delete this comment?|Delete this comment?|Delete this comment?
+মন্তব্য মুছে গেছে|Comment deleted|Comment deleted|Comment deleted
+মন্তব্য খালি রাখা যাবে না|Comment cannot be empty|Comment cannot be empty|Comment cannot be empty
+মন্তব্য এডিট হয়েছে|Comment edited|Comment edited|Comment edited
+কপি হয়েছে|Copied|Copied|Copied
+কপি করা যায়নি|Could not copy|Could not copy|Could not copy
+ডেটা সেভার চালু|Data saver on|Data saver on|Data saver on
+ডেটা সেভার বন্ধ|Data saver off|Data saver off|Data saver off
+যাচাই হচ্ছে|Verifying|Verifying|Verifying
+সেলফি যাচাই হয়েছে|Selfie verified|Selfie verified|Selfie verified
+এনআইডি যাচাই হয়েছে|NID verified|NID verified|NID verified
+এটি শীঘ্রই আসছে|This is coming soon|This is coming soon|This is coming soon
+আপনাকে একটি বার্তা পাঠিয়েছেন|sent you a message|sent you a message|sent you a message
+কোনো জিনিস পাওয়া যায়নি|No items found|No items found|No items found
+বিক্রি হয়েছে|Sold|Sold|Sold
+আবার বিক্রয়ে|Back on sale|Back on sale|Back on sale
+ছবি বাছুন|Choose photo|Choose photo|Choose photo
+প্রকাশ করুন|Publish|Publish|Publish
+নাম, দাম আর এলাকা দিন|Enter name, price and area|Enter name, price and area|Enter name, price and area
+বিজ্ঞাপন প্রকাশিত হয়েছে|Ad published|Ad published|Ad published
+এই বিজ্ঞাপনটি মুছে ফেলবেন?|Delete this ad?|Delete this ad?|Delete this ad?
+ডার্ক মোড|Dark mode|Dark mode|Dark mode
+লাইট মোড|Light mode|Light mode|Light mode
+ফোনের সেটিং অনুযায়ী|Follow phone setting|Follow phone setting|Follow phone setting
+রুজিতে অ্যাকাউন্ট খোলা সম্পূর্ণ ফ্রি|Opening an account on Ruji is completely free|Opening an account on Ruji is completely free|Opening an account on Ruji is completely free
+কোনো পোস্টে সমস্যা থাকলে পোস্টের ⋯ চেপে রিপোর্ট বা ব্লক করুন|If a post has a problem, tap ⋯ on the post to report or block|If a post has a problem, tap ⋯ on the post to report or block|If a post has a problem, tap ⋯ on the post to report or block
+প্রোফাইলে গিয়ে ছবি বদলাতে ও ছবি লক করতে পারবেন|In your profile you can change and lock your photo|In your profile you can change and lock your photo|In your profile you can change and lock your photo
+স্ক্রিন|Screen|Screen|Screen
+বড়|Large|Large|Large
+ছোট|Small|Small|Small
+ফলো মোড|Follow mode|Follow mode|Follow mode
+প্রোফাইল সম্পাদনা|Edit profile|Edit profile|Edit profile
+খুলুন|Open|Open|Open
+ফলো চালু: এখন সবাই আপনাকে ফলো করতে পারবে|Follow on: anyone can now follow you|Follow on: anyone can now follow you|Follow on: anyone can now follow you
+ফলো বন্ধ|Follow off|Follow off|Follow off
+কভার ছবি বদলানো হয়েছে|Cover photo changed|Cover photo changed|Cover photo changed
+💬 মেসেজ|💬 Message|💬 Message|💬 Message
+বন্ধু তালিকা থেকে সরান|Remove from friends|Remove from friends|Remove from friends
+আপনার কাজের সারসংক্ষেপ|Your activity summary|Your activity summary|Your activity summary
+স্টোরি (আজ)|Stories (today)|Stories (today)|Stories (today)
+পছন্দ পেয়েছেন|Likes received|Likes received|Likes received
+মন্তব্য পেয়েছেন|Comments received|Comments received|Comments received
+ফলোয়ার|Followers|Followers|Followers
+ফলোইং|Following|Following|Following
+সবচেয়ে জনপ্রিয় পোস্ট|Most popular post|Most popular post|Most popular post
+ছবির পোস্ট|Photo post|Photo post|Photo post
+ভিডিও|Video|Video|Video
+পোস্টে পছন্দ পেলে সবচেয়ে জনপ্রিয় পোস্ট এখানে দেখা যাবে|Once your posts get likes, your most popular post will show here|Once your posts get likes, your most popular post will show here|Once your posts get likes, your most popular post will show here
+কাজ (যেমন: শিক্ষক, অমুক মাদ্রাসা)|Work (e.g. Teacher, ABC Madrasa)|Work (e.g. Teacher, ABC Madrasa)|Work (e.g. Teacher, ABC Madrasa)
+শিক্ষা (যেমন: অমুক বিশ্ববিদ্যালয়)|Education (e.g. XYZ University)|Education (e.g. XYZ University)|Education (e.g. XYZ University)
+📷 কভার বদলান|📷 Change cover|📷 Change cover|📷 Change cover
+ছোট করুন (মোবাইলের মতো)|Make small (like mobile)|Make small (like mobile)|Make small (like mobile)
+বড় করুন|Enlarge|Enlarge|Enlarge
+বড় স্ক্রিন|Large screen|Large screen|Large screen
+মোবাইলের মতো ছোট স্ক্রিন|Small mobile-like screen|Small mobile-like screen|Small mobile-like screen
+লেখা খালি রাখা যাবে না|Text cannot be empty|Text cannot be empty|Text cannot be empty
+পোস্ট সম্পাদিত হয়েছে|Post edited|Post edited|Post edited
+ছবি|Photo|Photo|Photo
+আগে ছবি দিন|Add a photo first|Add a photo first|Add a photo first
+ছবি লক হয়েছে। অন্যরা দেখবে না|Photo locked. Others will not see it|Photo locked. Others will not see it|Photo locked. Others will not see it
+ছবি সবার জন্য খোলা|Photo is open to everyone|Photo is open to everyone|Photo is open to everyone
+পরিচিতি সেভ হয়েছে|Bio saved|Bio saved|Bio saved
+ব্যাকআপ ফাইল নামছে|Downloading backup file|Downloading backup file|Downloading backup file
+ছবি বদলানো হয়েছে|Photo changed|Photo changed|Photo changed
+বর্তমান সব তথ্য ফাইলের তথ্য দিয়ে বদলে যাবে। চালিয়ে যাবেন?|All current data will be replaced with the data in the file. Continue?|All current data will be replaced with the data in the file. Continue?|All current data will be replaced with the data in the file. Continue?
+তথ্য ফেরত আনা হয়েছে|Data restored|Data restored|Data restored
+এটি রুজির সঠিক ব্যাকআপ ফাইল নয়|This is not a valid Ruji backup file|This is not a valid Ruji backup file|This is not a valid Ruji backup file
+Firebase-এ ইনডেক্স লাগবে|An index is needed in Firebase|An index is needed in Firebase|An index is needed in Firebase
+আজ আর কোড পাঠানো যাবে না, কাল আবার চেষ্টা করুন|No more codes can be sent today, try again tomorrow|No more codes can be sent today, try again tomorrow|No more codes can be sent today, try again tomorrow
+# সেকেন্ড পরে আবার চেষ্টা করুন|Try again in # seconds|Try again in # seconds|Try again in # seconds
+আবার কোড পাঠান (#)|Resend code (#)|Resend code (#)|Resend code (#)
+আবার কোড পাঠান|Resend code|Resend code|Resend code
+নম্বরটি সঠিক নয়|The number is not valid|The number is not valid|The number is not valid
+অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন|Too many attempts. Try again later|Too many attempts. Try again later|Too many attempts. Try again later
+কোডের সময় শেষ। নতুন কোড নিন|Code expired. Get a new code|Code expired. Get a new code|Code expired. Get a new code
+ইন্টারনেট সংযোগ দেখুন|Check your internet connection|Check your internet connection|Check your internet connection
+যাচাই ব্যর্থ হয়েছে, পাতা রিফ্রেশ করে আবার চেষ্টা করুন|Verification failed, refresh the page and try again|Verification failed, refresh the page and try again|Verification failed, refresh the page and try again
+এই প্রকল্পে এসএমএস চালু নেই (Firebase-এ Blaze প্ল্যান লাগবে)|SMS is not enabled in this project (Firebase Blaze plan needed)|SMS is not enabled in this project (Firebase Blaze plan needed)|SMS is not enabled in this project (Firebase Blaze plan needed)
+Firebase-এ ফোন সাইন-ইন চালু করা হয়নি|Phone sign-in is not enabled in Firebase|Phone sign-in is not enabled in Firebase|Phone sign-in is not enabled in Firebase
+এই ডোমেইন Firebase-এ অনুমোদিত নয়|This domain is not authorized in Firebase|This domain is not authorized in Firebase|This domain is not authorized in Firebase
+আজকের এসএমএস সীমা শেষ|Today's SMS limit is over|Today's SMS limit is over|Today's SMS limit is over
+নম্বর বা পাসওয়ার্ড মেলেনি। নতুন হলে অ্যাকাউন্ট খুলুন, ভুলে গেলে পাসওয়ার্ড বদলান|Number or password did not match. If you are new, create an account; if you forgot, reset your password|Number or password did not match. If you are new, create an account; if you forgot, reset your password|Number or password did not match. If you are new, create an account; if you forgot, reset your password
+পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে|Password must be at least 6 characters|Password must be at least 6 characters|Password must be at least 6 characters
+এই নম্বরে আগেই পাসওয়ার্ড দেওয়া আছে। 'পাসওয়ার্ড ভুলে গেছেন?' দিয়ে বদলান|A password already exists for this number. Use 'Forgot password?' to change it|A password already exists for this number. Use 'Forgot password?' to change it|A password already exists for this number. Use 'Forgot password?' to change it
+নম্বর ও পাসওয়ার্ড দিয়ে ঢুকুন|Sign in with number and password|Sign in with number and password|Sign in with number and password
+নতুন অ্যাকাউন্ট খুলুন|Create a new account|Create a new account|Create a new account
+পাসওয়ার্ড বদলান|Change password|Change password|Change password
+নম্বর ও পাসওয়ার্ড দিন|Enter number and password|Enter number and password|Enter number and password
+আপনার নম্বরে এসএমএসে ৬ সংখ্যার কোড যাবে। একটি নম্বরে একটি অ্যাকাউন্ট|A 6-digit code will be sent by SMS to your number. One account per number|A 6-digit code will be sent by SMS to your number. One account per number|A 6-digit code will be sent by SMS to your number. One account per number
+নম্বরে ৬ সংখ্যার কোড পাঠানো হয়েছে|A 6-digit code was sent to the number|A 6-digit code was sent to the number|A 6-digit code was sent to the number
+ফ্রি|Free|Free|Free
+রুজিতে অ্যাকাউন্ট খোলা সম্পূর্ণ ফ্রি, আপনার কোনো টাকা লাগবে না। নম্বর ঠিক আছে কিনা দেখে তারপর চাপুন। দিনে সর্বোচ্চ ৩ বার কোড পাওয়া যাবে|Opening an account on Ruji is completely free, you pay nothing. Check that the number is correct, then tap. You can get up to 3 codes a day|Opening an account on Ruji is completely free, you pay nothing. Check that the number is correct, then tap. You can get up to 3 codes a day|Opening an account on Ruji is completely free, you pay nothing. Check that the number is correct, then tap. You can get up to 3 codes a day
+নতুন? অ্যাকাউন্ট খুলুন|New? Create an account|New? Create an account|New? Create an account
+পাসওয়ার্ড দিয়ে ঢুকুন|Sign in with password|Sign in with password|Sign in with password
+কোড পাঠানো হয়েছে|Code sent|Code sent|Code sent
+৬ সংখ্যার কোড লিখুন|Enter the 6-digit code|Enter the 6-digit code|Enter the 6-digit code
+১১ সংখ্যার সঠিক বাংলাদেশি নম্বর দিন|Enter a valid 11-digit Bangladeshi number|Enter a valid 11-digit Bangladeshi number|Enter a valid 11-digit Bangladeshi number
+পাসওয়ার্ড লিখুন|Enter password|Enter password|Enter password
+নতুন কোড পাঠানো হয়েছে|A new code was sent|A new code was sent|A new code was sent
+ইমেইলটি সঠিক নয়|The email is not valid|The email is not valid|The email is not valid
+এই ইমেইলে আগেই অ্যাকাউন্ট আছে। 'ঢুকুন' চাপুন বা পাসওয়ার্ড বদলান|An account already exists for this email. Tap 'Sign in' or reset your password|An account already exists for this email. Tap 'Sign in' or reset your password|An account already exists for this email. Tap 'Sign in' or reset your password
+ইমেইল বা পাসওয়ার্ড মেলেনি|Email or password did not match|Email or password did not match|Email or password did not match
+Firebase-এ ইমেইল সাইন-ইন চালু করা হয়নি|Email sign-in is not enabled in Firebase|Email sign-in is not enabled in Firebase|Email sign-in is not enabled in Firebase
+ইমেইল ও পাসওয়ার্ড দিন|Enter email and password|Enter email and password|Enter email and password
+নাম, ইমেইল ও পাসওয়ার্ড দিন|Enter name, email and password|Enter name, email and password|Enter name, email and password
+ইমেইল দিন। পাসওয়ার্ড বদলানোর লিংক সেই ইমেইলে যাবে|Enter your email. The password reset link will be sent there|Enter your email. The password reset link will be sent there|Enter your email. The password reset link will be sent there
+পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)|Password (at least 6 characters)|Password (at least 6 characters)|Password (at least 6 characters)
+রুজিতে অ্যাকাউন্ট খোলা সম্পূর্ণ ফ্রি, আপনার কোনো টাকা লাগবে না। আসল ইমেইল দিন, নইলে পাসওয়ার্ড ভুলে গেলে ফিরে পাবেন না|Opening an account on Ruji is completely free, you pay nothing. Use a real email, otherwise you cannot recover a forgotten password|Opening an account on Ruji is completely free, you pay nothing. Use a real email, otherwise you cannot recover a forgotten password|Opening an account on Ruji is completely free, you pay nothing. Use a real email, otherwise you cannot recover a forgotten password
+লিংক পাঠান|Send link|Send link|Send link
+👑 ভিআইপি অ্যাকাউন্ট|👑 VIP account|👑 VIP account|👑 VIP account
+শীঘ্রই খোলা হবে। ফোন নম্বরসহ বাড়তি যাচাই করা হবে, ভিআইপি ব্যাজ সহ|Opening soon. Extra verification including phone number, with a VIP badge|Opening soon. Extra verification including phone number, with a VIP badge|Opening soon. Extra verification including phone number, with a VIP badge
+ভিআইপি অ্যাকাউন্ট (শীঘ্রই আসছে)|VIP account (coming soon)|VIP account (coming soon)|VIP account (coming soon)
+সঠিক ইমেইল লিখুন, যেমন apni@gmail.com|Enter a valid email, e.g. you@gmail.com|Enter a valid email, e.g. you@gmail.com|Enter a valid email, e.g. you@gmail.com
+ইমেইলে লিংক পাঠানো হয়েছে। ইনবক্স ও স্প্যাম দেখুন|Link sent by email. Check inbox and spam|Link sent by email. Check inbox and spam|Link sent by email. Check inbox and spam
+কমপক্ষে ২ অক্ষরের নাম লিখুন|Enter a name of at least 2 characters|Enter a name of at least 2 characters|Enter a name of at least 2 characters
+নাম ও পাসওয়ার্ড দিন|Enter name and password|Enter name and password|Enter name and password
+নতুন পাসওয়ার্ড দিন|Enter a new password|Enter a new password|Enter a new password
+নম্বর যাচাই হয়েছে। এখন থেকে এই নম্বর ও পাসওয়ার্ড দিয়ে ঢুকবেন|Number verified. From now on, sign in with this number and password|Number verified. From now on, sign in with this number and password|Number verified. From now on, sign in with this number and password
+আপনার নাম লিখুন ও একটি পাসওয়ার্ড দিন|Enter your name and a password|Enter your name and a password|Enter your name and a password
+এখন থেকে নতুন পাসওয়ার্ড দিয়ে ঢুকবেন|From now on, sign in with the new password|From now on, sign in with the new password|From now on, sign in with the new password
+শুরু করুন|Get started|Get started|Get started
+সেভ করুন|Save|Save|Save
+পাসওয়ার্ড সেভ হয়েছে|Password saved|Password saved|Password saved
+লোড করা যাচ্ছে না। ইন্টারনেট সংযোগ দেখে পাতাটি আবার খুলুন|Cannot load. Check your internet connection and reopen the page|Cannot load. Check your internet connection and reopen the page|Cannot load. Check your internet connection and reopen the page
+ইমেইল|Email|Email|Email
+মোবাইল নম্বর|Mobile number|Mobile number|Mobile number
+বন্ধু (#)|Friends (#)|Friends (#)|Friends (#)
+আপনি:|You:|You:|You:
+ডেমো কোড:|Demo code:|Demo code:|Demo code:
+কোড পাঠানো হয়েছে।|Code sent.|Code sent.|Code sent.
+~-কে বন্ধু তালিকা থেকে সরাবেন?|~: Remove from your friends list?|~: Remove from your friends list?|~: Remove from your friends list?
+~-কে ব্লক করবেন? তাঁর পোস্ট ও মেসেজ আপনি আর দেখবেন না।|~: Block this person? You will no longer see their posts or messages.|~: Block this person? You will no longer see their posts or messages.|~: Block this person? You will no longer see their posts or messages.
+👥 ফলো মোড|👥 Follow mode|👥 Follow mode|👥 Follow mode
+🔒 ছবি লক করা|🔒 Photo locked|🔒 Photo locked|🔒 Photo locked`;
 RWS.split("\n").forEach(function(r){var c=r.split("|");if(c.length<4)return;DX.en[c[0]]=c[1];DX.hi[c[0]]=c[2];DX.ar[c[0]]=c[3]});
 function RX(k){return RXC[k]||(RXC[k]=new RegExp("^"+k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace("#","(\\S+)")+"$"))}
-function TR(s){if(LANG==="bn"||!s)return s;var d=DX[LANG];if(!d)return s;s=String(s);var k=s.trim();if(!k||!/[\u0980-\u09FF]/.test(k))return s;if(d[k]!==undefined)return s.replace(k,function(){return d[k]});
- for(var key in d){var v=d[key];if(key.charAt(0)==="~"){var q=key.slice(1);if(k.length>q.length&&k.slice(-q.length)===q)return s.replace(k,function(){return k.slice(0,-q.length)+v.slice(1)})}else if(key.indexOf("#")>-1){var m=k.match(RX(key));if(m)return s.replace(k,function(){return v.replace("#",m[1])})}}return s}
+function TR(s){if(LANG==="bn"||!s)return s;var d=DX[LANG];if(!d)return s;s=String(s);var k=s.trim();if(!k||!/[\u0980-\u09FF]/.test(k))return s;if(d[k]!==undefined)return s.replace(k,function(){return d[k]});var t2=k.replace(/[?!।.:…]+$/,"");if(t2&&t2!==k&&d[t2]!==undefined){var tl=k.slice(t2.length).replace(/।/g,".");return s.replace(k,function(){return d[t2]+tl})}
+ for(var key in d){var v=d[key];if(key.charAt(0)==="~"){var q=key.slice(1);if(k.length>q.length&&k.slice(-q.length)===q)return s.replace(k,function(){return k.slice(0,-q.length)+v.slice(1)})}else if(key.indexOf("#")>-1){var m=k.match(RX(key));if(m)return s.replace(k,function(){return v.replace("#",m[1])})}}if(k.indexOf(" · ")>0){var pp=k.split(" · "),ch=false,rr=pp.map(function(x){var y=TR(x);if(y!==x)ch=true;return y});if(ch)return s.replace(k,function(){return rr.join(" · ")})}return s}
 function atr(el){["placeholder","aria-label","title"].forEach(function(a){var c=el.getAttribute(a);if(c===null)return;var o=el._o||(el._o={}),r=o[a],b=r&&r.t===c?r.o:c,t=TR(b);if(t!==c)el.setAttribute(a,t);o[a]={o:b,t:t}})}
 function tx(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT,{acceptNode:function(n){if(n.nodeType===1){var g=n.nodeName;if(g==="SCRIPT"||g==="STYLE"||g==="TEXTAREA")return NodeFilter.FILTER_REJECT;atr(n)}else{var c=n.nodeValue,r=OR.get(n),b=r&&r.t===c?r.o:c,t=TR(b);if(t!==c)n.nodeValue=t;if(t!==b||r)OR.set(n,{o:b,t:t})}return NodeFilter.FILTER_SKIP}});while(w.nextNode());}
 var moB=false,moT=0,mo=new MutationObserver(function(){if(moB)return;cancelAnimationFrame(moT);moT=requestAnimationFrame(trRun)});
@@ -712,15 +975,15 @@ function render(){
  meEl.innerHTML='<button class="ic" data-n="add" aria-label="নতুন পোস্ট">'+ic('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>')+'</button><button class="ic" data-n="search" aria-label="খুঁজুন">'+ic('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>')+'</button><button class="ic" data-n="msg" aria-label="মেসেজ">'+ic('<path d="M12 3C6.9 3 3 6.8 3 11.5c0 2.6 1.2 4.9 3.1 6.4V21l3-1.7c.9.2 1.9.4 2.9.4 5.1 0 9-3.800 9-8.200S17.100 3 12 3z"/><path d="M7.500 13.500l3.200-3.400 2.400 2 3.400-3.600" stroke-width="1.800"/>')+msgDot()+'</button>';
  if(tab==="dash"){app.innerHTML=dashView();return}if(tab==="friends"){app.innerHTML=frView();return}if(tab==="notif"){app.innerHTML=ntView();return}if(tab==="market"){app.innerHTML=mkView();bindMk();return}if(tab==="msg"){app.innerHTML=chView();return}
  var h=(tab==="me"?profCard2()+saverBar():tab==="u"?userCard():"")+(tab==="reel"?"":upg())+(tab==="saved"||tab==="u"||(tab==="reel"&&!cmpOpen)?'':!cmpOpen?cmpBar():cmpFull())+(tab==="home"?storyBar():"")+searchBar()+peopleRes();
- var ps=S.posts.filter(function(p){return !hid[p.id]&&!isBl(p.uid)&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):tab==="u"?(p.uid===pu):tab==="saved"?!!(S.sv&&S.sv[p.id]):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
- if(!ps.length)h+='<div class="empty">'+(tab==="saved"?"এখনো কিছু সংরক্ষণ করা হয়নি।":tab==="u"?"এখনো কোনো পোস্ট নেই।":tab==="reel"?"এখনো কোনো রিল নেই। ওপরের + চেপে প্রথম রিলটি আপনিই দিন।":"এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন।")+'</div>';
+ var rst=tab==="home"&&!sq?rlStrip():"";  var ps=S.posts.filter(function(p){return !hid[p.id]&&!isBl(p.uid)&&!(tab==="home"&&!sq&&p.kind==="reel")&&(tab==="reel"?p.kind==="reel":tab==="me"?(p.uid===S.uid):tab==="u"?(p.uid===pu):tab==="saved"?!!(S.sv&&S.sv[p.id]):true)&&(!sq||(p.author+" "+p.text).indexOf(sq)>-1)}).sort(function(a,b){return b.t-a.t});
+ if(!ps.length&&!rst)h+='<div class="empty">'+(tab==="saved"?"এখনো কিছু সংরক্ষণ করা হয়নি।":tab==="u"?"এখনো কোনো পোস্ট নেই।":tab==="reel"?"এখনো কোনো রিল নেই। ওপরের + চেপে প্রথম রিলটি আপনিই দিন।":"এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন।")+'</div>';
  ps.forEach(function(p,ix){
   var liked=p.likes.indexOf(S.uid)>-1;if(p.kind==="reel"){h+=reelCard(p,liked);return}
   h+='<article class="box post" data-id="'+p.id+'">'+postHd(p)
   +(edt[p.id]?edBox(p):(p.text?txt(p):''))+(p.img?pimg(p):'')+(p.v?pvid(p):'')
   +actBar(p,liked);
   if(open[p.id]){h+='<div class="cm">'+cmList(p)+''+cmIn()+'</div>'}
-  h+='</article>';if(ix===1&&tab==="home")h+=pymk()});if(tab==="home"&&ps.length<2)h+=pymk();
+  h+='</article>';if(ix===0&&rst)h+=rst;if(ix===1&&tab==="home")h+=pymk()});if(rst&&!ps.length)h+=rst;if(tab==="home"&&ps.length<2)h+=pymk();
  if(tab==="me")h+='<p class="note">পোস্ট, লাইক, মন্তব্য, স্টোরি, বন্ধু, মেসেজ ও বাজার সবই সবার জন্য আসল ডাটাবেসে থাকে। সংরক্ষণ ও ডেটা সেভার শুধু আপনার ফোনে।</p>';
  var kv=[].map.call(app.querySelectorAll("video"),function(v){return{s:v.getAttribute("src"),t:v.currentTime,p:!v.paused}});app.innerHTML=h;vidFx(app,kv);
  var tx=document.getElementById("tx"),pb=document.getElementById("pb"),fl=document.getElementById("fl");if(!tx)return;
@@ -760,8 +1023,10 @@ function ab(a,icon,count,on,label){return'<button data-a="'+a+'" class="ab'+(on?
 var RX=[["like","👍","পছন্দ"],["love","❤️","ভালোবাসা"],["shoe","👞","ভালো জুতা"],["torn",'<span style="display:inline-block;transform:rotate(25deg);filter:grayscale(1) brightness(.75)">🥿</span>',"ছেঁড়া জুতা"],["slap","🖐️","থাপ্পড়"],["rose","🌹","গোলাপ"]];function rxIc(p,liked,dflt){var m=liked&&p.rx&&p.rx[S.uid];if(!m||m==="like")return dflt;var r=RX.filter(function(x){return x[0]===m})[0];return r?'<span style="font-size:20px;line-height:1">'+r[1]+'</span>':dflt}
 function rxCl(p){var c={},o=p.rx||{};p.likes.forEach(function(u){var t=o[u]||"like";c[t]=(c[t]||0)+1});var ks=Object.keys(c).sort(function(a,b){return c[b]-c[a]}).slice(0,3);if(!ks.length)return'<button data-a="rxm" class="rxc" aria-label="রিঅ্যাকশন বাছুন"><span class="rxe">☺</span></button>';return'<button data-a="rxm" class="rxc" aria-label="রিঅ্যাকশন বাছুন">'+ks.map(function(k){var r=RX.filter(function(x){return x[0]===k})[0];return'<span class="rxb'+(k==="like"?' lk':'')+'">'+(r?r[1]:"👍")+'</span>'}).join("")+'</button>'}
 function actBar(p,liked){var n=function(x){return x?'<span>'+bn(x)+'</span>':''};return'<div class="act2">'+ab("like",rxIc(p,liked,ic(P.like,liked?"currentColor":"")),n(p.likes.length),liked,"পছন্দ")+ab("cm",ic(P.cm),n(p.comments.length),open[p.id],"মন্তব্য")+ab("sh",ic(P.sh),n(p.sh||0),false,"শেয়ার")+'<span style="flex:1"></span>'+rxCl(p)+'</div>'+rxLine(p)}
-function rxLine(p){var l=p.likes||[];if(!l.length)return'';var me=l.indexOf(S.uid)>-1,f=me?"আপনি":(esc(nm(l[0])||"একজন")),n=l.length;return'<div class="rxl">'+(n>1?f+' ও আরও '+bn(n-1)+' জন':f+' রিঅ্যাক্ট করেছেন')+'</div>'}
+function rxLine(p){var l=p.likes||[];if(!l.length)return'';var me=l.indexOf(S.uid)>-1,f=me?(LANG==="bn"?"আপনি":"You"):(esc(nm(l[0])||(LANG==="bn"?"একজন":"Someone"))),n=l.length;return'<div class="rxl">'+(n>1?(LANG==="bn"?f+' ও আরও '+bn(n-1)+' জন':f+' and '+bn(n-1)+' others'):(LANG==="bn"?f+' রিঅ্যাক্ট করেছেন':f+' reacted'))+'</div>'}
 function cmBox(p){return'<div class="cm rlc">'+cmList(p)+''+cmIn()+'</div>'}
+function rlStrip(){var rs=S.posts.filter(function(p){return p.kind==="reel"&&!hid[p.id]&&!isBl(p.uid)&&vurl(p)}).sort(function(a,b){return b.t-a.t}).slice(0,12);if(!rs.length)return"";return'<section class="box rls" aria-label="Reels"><div class="rlh2">'+ic('<rect x="3" y="4" width="18" height="16" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/>')+'<span>রিলস</span><button type="button" class="rla" data-a="rlopen">সব দেখুন</button></div><div class="rlr">'+rs.map(function(p){var vu=vurl(p),lite=S.saver&&!rv[p.id];return'<button type="button" class="rlc2" data-a="rlopen" data-id="'+p.id+'">'+(lite?'<span class="rlb"></span>':'<video muted playsinline preload="metadata" src="'+esc(vu)+'#t=0.1"></video>')+'<span class="rlp">▶ '+bn(p.likes.length)+'</span><span class="rlg"><b>'+esc(p.author)+'</b></span></button>'}).join("")+'</div></section>'}
+document.getElementById("app").addEventListener("click",function(e){var b=e.target.closest('[data-a="rlopen"]');if(!b)return;e.stopPropagation();var id=b.dataset.id;lastTab=tab;tab="reel";chat="";render();setTimeout(function(){var a=id&&document.querySelector('article.rl[data-id="'+id+'"]');if(a)a.scrollIntoView();else scrollTo(0,0)},0)},true);
 function reelCard(p,liked){var sv=!!(S.sv&&S.sv[p.id]),t=p.text||"",c=t.length>80&&!ex[p.id]?esc(t.slice(0,80))+'… <button class="more" data-a="more" style="color:#fff">আরও</button>':esc(t),own=(p.uid===S.uid),fw=(S.fw||[]).indexOf(p.uid)>-1;var vu=vurl(p),m=!vu?'<p class="rlh">ভিডিওটি এই প্রোটোটাইপে সেভ থাকে না, নতুন করে দিন।</p>':(S.saver&&!rv[p.id]?'<button class="phold" data-a="show">ভিডিও দেখুন</button>':'<video controls playsinline loop preload="metadata" src="'+esc(vu)+'"></video>');return'<article class="box rl" data-id="'+p.id+'"><div class="rlm">'+m+'<div class="rtop">'+(own?'<button data-a="del" aria-label="পোস্ট মুছুন">মুছুন</button>':'')+'<button data-a="hide" aria-label="পোস্ট লুকান">✕</button></div><div class="rail">'+ab("like",rxIc(p,liked,ic(P.like,liked?"currentColor":"")),'<span>'+bn(p.likes.length)+'</span>',liked,"পছন্দ")+ab("cm",ic(P.cm),'<span>'+bn(p.comments.length)+'</span>',open[p.id],"মন্তব্য")+ab("sh",ic(P.sh),'<span>'+bn(p.sh||0)+'</span>',false,"শেয়ার")+ab("sv",ic(P.sv,sv?"currentColor":""),"",sv,"সংরক্ষণ")+'</div><div class="cap"><div class="nm">'+pul(p.uid,esc(p.author))+bd(p.author)+(own?'':'<button class="fol" data-a="fl">'+(fw?'ফলো করছেন':'ফলো')+'</button>')+'</div><div>'+c+'</div><small>'+ago(p.t)+'</small></div></div>'+(open[p.id]?cmBox(p):'')+'</article>'}
 function ic(p,f){return'<svg viewBox="0 0 24 24" width="22" height="22" fill="'+(f||'none')+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>'}
 function avImg(n,u){return (u&&PH[u])||(n===S.me&&S.pf&&S.pf.img)||""}
@@ -806,7 +1071,7 @@ function cmpFull(){var ttl={post:"নতুন পোস্ট",reel:"নতু�
 function cxDraw(){var c=document.getElementById("cxc");if(!c)return;
  var ch=function(k,ic,lb,v){return'<button type="button" data-cx="'+k+'" class="'+(v?'on':'')+'"><span>'+ic+'</span> '+esc(v?v.slice(0,14):lb)+'</button>'};
  c.innerHTML=ch("music","🎵","গান",CX.music)+ch("tag","👥","ট্যাগ/সহযোগী",CX.tag)+ch("loc","📍","লোকেশন",CX.loc)+ch("feel","😊","অনুভূতি",CX.feel);
- var n=document.getElementById("cxn");if(n){var t="";if(CX.feel)t+=" — "+esc(CX.feel)+" অনুভব করছেন";if(CX.tag)t+=" — "+esc(CX.tag)+" এর সাথে";if(CX.loc)t+=" — 📍 "+esc(CX.loc);if(CX.music)t+=" — 🎵 "+esc(CX.music);n.innerHTML=t}
+ var n=document.getElementById("cxn");if(n){var t="";if(CX.feel)t+=LANG==="bn"?" — "+esc(CX.feel)+" অনুভব করছেন":" — feeling "+esc(TR(CX.feel));if(CX.tag)t+=LANG==="bn"?" — "+esc(CX.tag)+" এর সাথে":" — with "+esc(CX.tag);if(CX.loc)t+=" — 📍 "+esc(CX.loc);if(CX.music)t+=" — 🎵 "+esc(CX.music);n.innerHTML=t}
  var a=document.getElementById("cxa");if(a)a.innerHTML=(CX.aud==="me"?"🔒 শুধু আমি":"🌐 সবাই")}
 function pxt(p){var t="";if(p.feel)t+=" — "+esc(p.feel)+" অনুভব করছেন";if(p.tag)t+=" — "+esc(p.tag)+" এর সাথে";if(p.loc)t+=" — 📍 "+esc(p.loc);if(p.mus)t+='<div class="pmus">🎵 '+esc(p.mus)+'</div>';return t}
 function cxSheet(k){var o=document.createElement("div");o.className="sv";o.style.cssText="justify-content:flex-end;padding:0;background:rgba(10,14,28,.55);z-index:60";
@@ -863,7 +1128,7 @@ function lastT(u){var c=conv(u);return c.length?c[c.length-1].t:0}
 function unread(u){var r=(S.rd||{})[u]||0;return S.msgs.filter(function(m){return m.from===u&&m.to===S.uid&&m.t>r}).length}
 function msgDot(){var n=0;S.msgs.forEach(function(m){if(m.to===S.uid&&!isBl(m.from)&&m.t>((S.rd||{})[m.from]||0))n++});return n?'<span class="dot" style="margin-left:2px">'+bn(n)+'</span>':''}
 function chView(){
- if(!chat){var ps=partners().sort(function(a,b){return lastT(b)-lastT(a)});return''+(ps.length?ps.map(function(u){var L=conv(u),l=L[L.length-1],n=unread(u);return'<button class="box row" style="width:100%;text-align:left;color:var(--ink)" data-c="open" data-p="'+esc(u)+'">'+av(nm(u),u)+'<span style="flex:1;min-width:0"><b>'+esc(nm(u))+'</b><small style="display:block;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(l?(l.from===S.uid?"আপনি: ":"")+esc(l.text):"নতুন চ্যাট শুরু করুন")+'</small></span>'+(n?'<span class="dot">'+bn(n)+'</span>':'')+'</button>'}).join(""):'<div class="empty">মেসেজ করতে আগে কাউকে বন্ধু বানান।<br><br><button class="pri" data-c="fr">বন্ধু খুঁজুন</button></div>')}
+ if(!chat){var ps=partners().sort(function(a,b){return lastT(b)-lastT(a)});return''+(ps.length?ps.map(function(u){var L=conv(u),l=L[L.length-1],n=unread(u);return'<button class="box row" style="width:100%;text-align:left;color:var(--ink)" data-c="open" data-p="'+esc(u)+'">'+av(nm(u),u)+'<span style="flex:1;min-width:0"><b>'+esc(nm(u))+'</b><small style="display:block;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(l?(l.from===S.uid?(LANG==="bn"?"আপনি: ":"You: "):"")+esc(l.text):"নতুন চ্যাট শুরু করুন")+'</small></span>'+(n?'<span class="dot">'+bn(n)+'</span>':'')+'</button>'}).join(""):'<div class="empty">মেসেজ করতে আগে কাউকে বন্ধু বানান।<br><br><button class="pri" data-c="fr">বন্ধু খুঁজুন</button></div>')}
  S.rd=S.rd||{};S.rd[chat]=Date.now();var L=conv(chat);
  return'<div class="box row"><button data-c="back" aria-label="ফিরে যান">←</button>'+pul(chat,av(nm(chat),chat),"div")+'<b class="pul" data-pu="'+esc(chat)+'" style="flex:1">'+esc(nm(chat))+'</b></div><div class="box" style="display:grid;gap:8px;min-height:180px;align-content:start">'+(L.length?L.map(function(x){var me=x.from===S.uid;return'<div style="justify-self:'+(me?'end':'start')+';max-width:80%;padding:8px 12px;border-radius:14px;overflow-wrap:anywhere;background:'+(me?'var(--brand)':'var(--bg)')+';color:'+(me?'var(--on-brand)':'var(--ink)')+'">'+esc(x.text)+'<small style="display:block;opacity:.7;font-size:12px">'+ago(x.t)+'</small></div>'}).join(""):'<div class="empty">প্রথম মেসেজটি পাঠান।</div>')+'</div><div class="box row"><input type="text" id="mi" maxlength="500" placeholder="মেসেজ লিখুন" aria-label="মেসেজ"><button class="pri" data-c="send">পাঠান</button></div>'}
 function sendMsg(){var i=document.getElementById("mi"),v=i.value.trim();if(!v)return;i.value="";FB.send(S.uid,chat,v).then(function(){scrollTo(0,document.body.scrollHeight)}).catch(function(x){i.value=v;fail(x,"msgs")})}
