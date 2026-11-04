@@ -8,7 +8,7 @@ try {
   firebase.initializeApp({ apiKey: "AIzaSyC8-2etuX_Pd7wmMY-P9El0omNu3R-Z6EM", authDomain: "ruji-65f33.firebaseapp.com", projectId: "ruji-65f33", storageBucket: "ruji-65f33.firebasestorage.app", messagingSenderId: "1048988656486", appId: "1:1048988656486:web:42a738852930f4e07c1ea7" });
   firebase.messaging();
 } catch (err) {}
-var CACHE = "ruji-v6", LIB = "ruji-lib-v1";
+var CACHE = "ruji-v7", LIB = "ruji-lib-v1";
 var CORE = ["./", "index.html", "privacy.html", "delete-account.html", "manifest.json", "icon-192.png", "icon-512.png", "icon-maskable-512.png"];
 
 self.addEventListener("install", function (e) {
