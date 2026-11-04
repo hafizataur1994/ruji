@@ -13,6 +13,7 @@
 <title>Ruji</title>
 <meta name="description" content="রুজি – সবার বাংলা সোশ্যাল নেটওয়ার্ক। Ruji: বন্ধুদের সাথে পোস্ট, ছবি, মেসেজ ও আরও অনেক কিছু, সম্পূর্ণ বিনামূল্যে।">
 <meta name="keywords" content="রুজি, রুজি অ্যাপ, বাংলা সোশ্যাল নেটওয়ার্ক, Ruji, Ruji app, Bangla social network">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin><link rel="preconnect" href="https://firestore.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F1F4F9;--card:#fff;--ink:#16203A;--mute:#5B6783;--line:#DCE2EE;--brand:#E11D48;--on-brand:#fff;--accent:#F2A900;--like:#D6336C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -445,6 +446,54 @@ main:has(.box.post) .rlm{height:auto;aspect-ratio:9/16;max-height:72vh;min-heigh
 .pyc .pri,.pyx{margin:0 10px;border-radius:8px;padding:9px 0;font-size:15px}.pyc .pri{background:var(--brand);color:var(--on-brand)}.pyx{background:var(--bg);border:0;color:var(--ink);font-weight:600}
 .pya{display:block;margin:6px auto 0;background:none;border:0;color:var(--mute);font-size:16px}
 .rls{padding:12px 0 10px}.rlh2{display:flex;align-items:center;gap:10px;padding:0 14px 8px;font-weight:700;font-size:17px}.rlh2 svg{width:22px;height:22px}.rlh2 .rla{margin-left:auto;background:none;border:0;color:var(--brand);font-weight:700;font-size:14px}.rlr{display:flex;gap:8px;overflow-x:auto;padding:0 14px 6px;scroll-snap-type:x proximity}.rlc2{flex:none;position:relative;width:128px;height:220px;border-radius:14px;overflow:hidden;background:#000;color:#fff;padding:0;border:0;scroll-snap-align:start;text-align:left}.rlc2 video,.rlc2 .rlb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}.rlc2 .rlg{position:absolute;left:0;right:0;bottom:0;padding:28px 8px 8px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-size:13px;line-height:1.3}.rlc2 .rlg b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rlc2 .rlp{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.45);border-radius:12px;padding:2px 8px;font-size:12px}
+
+/* ফেসবুক-ধাঁচ: লাল আইকন-মাত্র চিপ */
+.cfc{gap:10px!important;padding:6px 0 10px!important}
+.cfc button.cxi{width:64px;height:46px;padding:0!important;justify-content:center;gap:0;background:var(--card)!important;border:1.5px solid var(--line)!important;color:var(--brand)!important;border-radius:23px!important}
+.cfc button.cxi svg{width:26px;height:26px}
+.cfc button.cxi.on{background:color-mix(in srgb,var(--brand) 14%,var(--card))!important;border-color:var(--brand)!important}
+.cfc button.cxi:active{transform:scale(.94)}
+.cfchip{color:var(--brand)!important;background:var(--card)!important;border:1.5px solid var(--line)!important;font-weight:600;color:var(--ink)!important}
+.cfchip svg{width:22px;height:22px;color:var(--brand)}
+.cfadd{display:flex;align-items:center;gap:8px}.cfadd svg{width:22px;height:22px;color:var(--brand)}
+.cfa .cfadd2{display:flex;align-items:center;gap:8px;border-radius:10px;padding:0 14px;font-weight:600}
+.cfa .cfadd2 svg{width:22px;height:22px}
+.cfa .cfr{width:42px;min-width:42px;height:42px;padding:0;border-radius:50%;display:grid;place-items:center}
+.cfa .cfr svg{width:22px;height:22px}
+.cmpf .cft::placeholder{color:var(--mute)}
+
+/* ===== রুজি প্রিমিয়াম পোস্ট-তৈরি পর্দা ===== */
+.cmpf{padding-top:calc(10px + env(safe-area-inset-top,0px))!important}
+.cfh{padding-bottom:10px;border-bottom:1px solid var(--line);margin:0 -14px 12px!important;padding-left:14px;padding-right:14px}
+.cfh b{font-size:19px;letter-spacing:-.2px}
+.cfh .pri{border-radius:10px!important;padding:8px 20px!important;min-height:40px;box-shadow:none}
+.cfh .pri:disabled{box-shadow:none}
+.cfh .ic{width:40px;height:40px}
+.cfu .av{width:48px;height:48px;font-size:20px;box-shadow:none}
+.cfu b{font-size:18px}
+.cfc{margin:0 -14px;padding:6px 14px 12px!important;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.cfc::-webkit-scrollbar{display:none}
+.cfc button.cxi{width:auto!important;height:42px!important;padding:0 16px 0 12px!important;gap:8px!important;border-radius:21px!important;box-shadow:none;font-weight:600;font-size:15.5px}
+.cfc button.cxi svg{width:22px!important;height:22px!important}
+.cfc button.cxi .cxl{color:var(--ink);line-height:1}
+.cfc button.cxi.on .cxl{color:var(--brand)}
+.cmpf .cft{font-size:22px!important;line-height:1.5;min-height:120px!important;padding:10px 2px!important}
+.cmpf .cft::placeholder{color:var(--mute);opacity:.85}
+.cfp{border-radius:0}
+.cfa .cfadd2{background:rgba(40,50,60,.8)}
+.cfa .cfr{background:rgba(40,50,60,.8)}
+.cfadd{border-radius:12px;padding:12px 16px;font-weight:600;border:1.5px dashed var(--line);width:100%;justify-content:center}
+.cfb{border-top:1px solid var(--line);margin:10px -14px 0!important;padding:12px 14px calc(10px + env(safe-area-inset-bottom,0px))!important}
+.cfb .cfchip{display:flex;align-items:center;gap:8px;border-radius:21px;padding:8px 16px;min-height:42px;box-shadow:none}
+@media(max-width:350px){.cfc button.cxi{padding:0 12px 0 10px!important}}
+
+/* ফেসবুক-ধাঁচ: স্টোরি তৈরি + রিল তৈরি কার্ড (রুজির নিজস্ব রঙে) */
+.stories .stc{flex:none;width:clamp(100px,29.5vw,132px);aspect-ratio:116/214;display:flex;flex-direction:column;gap:6px}
+.stories .stb{flex:1;min-height:0;border:0;border-radius:14px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:6px;font-weight:600;font-size:14px;line-height:1.25;text-align:center}
+.stories .stb svg{width:30px;height:30px}
+.stories .sb1{background:linear-gradient(160deg,#FB7185,#BE123C)}
+.stories .sb2{background:linear-gradient(160deg,#F59E0B,#B45309)}
+.stories .stb:active{transform:scale(.96)}
 </style>
 </head>
 <body>
@@ -457,7 +506,7 @@ main:has(.box.post) .rlm{height:auto;aspect-ratio:9/16;max-height:72vh;min-heigh
   <div class="me"><div class="me" id="me"></div><label class="ic" id="lgw" style="position:relative;cursor:pointer"><span aria-hidden="true">🌐</span><select id="lg" aria-label="Language" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer"></select></label><button class="ic" id="th" style="display:none" aria-label="থিম বদলান">◐</button><button class="ic" id="wd" aria-label="স্ক্রিন বড় করুন"></button></div>
 </div></header>
 <div id="spl" aria-hidden="true"><div class="spw"><div class="spb"><i class="spr"></i><i class="spr b"></i><svg class="spf" viewBox="-100 -100 200 200"><defs><path id="spp" d="M0 0C-40-22-46-68 0-88C46-68 40-22 0 0Z" stroke="#9F1239" stroke-width="1.6" stroke-linejoin="round"/></defs><g class="ly" style="animation-delay:.51s"><use href="#spp" fill="#BE123C" transform="rotate(0.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(60.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(120.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(180.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(240.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(300.0) scale(1.0)"/></g><g class="ly" style="animation-delay:.48s"><use href="#spp" fill="#E11D48" transform="rotate(36.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(108.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(180.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(252.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(324.0) scale(0.76)"/></g><g class="ly" style="animation-delay:.45s"><use href="#spp" fill="#F43F5E" transform="rotate(12.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(84.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(156.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(228.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(300.0) scale(0.54)"/></g><g class="ly" style="animation-delay:.42s"><use href="#spp" fill="#FB7185" transform="rotate(25.0) scale(0.34)"/><use href="#spp" fill="#FB7185" transform="rotate(115.0) scale(0.34)"/><use href="#spp" fill="#FB7185" transform="rotate(205.0) scale(0.34)"/><use href="#spp" fill="#FB7185" transform="rotate(295.0) scale(0.34)"/></g><g class="ly" style="animation-delay:.42s"><circle r="9" fill="#9F1239"/><path d="M0 0C4-2 6 2 2 5C-3 8-9 2-6-4C-3-10 6-10 9-3" fill="none" stroke="#FB7185" stroke-width="2" stroke-linecap="round"/></g></svg><div class="spT">Ruji</div><div class="fx"><div class="fy"><div class="fr"><svg viewBox="-100 -100 200 200" width="34" height="34"><g><use href="#spp" fill="#BE123C" transform="rotate(0.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(60.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(120.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(180.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(240.0) scale(1.0)"/><use href="#spp" fill="#BE123C" transform="rotate(300.0) scale(1.0)"/></g><g><use href="#spp" fill="#E11D48" transform="rotate(36.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(108.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(180.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(252.0) scale(0.76)"/><use href="#spp" fill="#E11D48" transform="rotate(324.0) scale(0.76)"/></g><g><use href="#spp" fill="#F43F5E" transform="rotate(12.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(84.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(156.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(228.0) scale(0.54)"/><use href="#spp" fill="#F43F5E" transform="rotate(300.0) scale(0.54)"/></g><g><use href="#spp" fill="#FB7185" transform="rotate(25.0) scale(0.34)"/><use href="#spp" fill="#FB7185" transform="rotate(115.0) scale(0.34)"/><use href="#spp" fill="#FB7185" transform="rotate(205.0) scale(0.34)"/><use href="#spp" fill="#FB7185" transform="rotate(295.0) scale(0.34)"/></g><g><circle r="9" fill="#9F1239"/><path d="M0 0C4-2 6 2 2 5C-3 8-9 2-6-4C-3-10 6-10 9-3" fill="none" stroke="#FB7185" stroke-width="2" stroke-linecap="round"/></g></svg></div><i class="fw"></i></div></div></div><div class="spb2"><div class="spk" style="--dx:150px;--dy:0px;--r:-8deg;color:#E11D48;animation-delay:.65s">Ruji</div><div class="spk" style="--dx:105px;--dy:105px;--r:10deg;color:#FB7185;animation-delay:.658s">Ruji</div><div class="spk" style="--dx:0px;--dy:150px;--r:-6deg;color:#BE123C;animation-delay:.666s">Ruji</div><div class="spk" style="--dx:-105px;--dy:105px;--r:8deg;color:#E11D48;animation-delay:.674s">Ruji</div><div class="spk" style="--dx:-150px;--dy:0px;--r:-10deg;color:#FB7185;animation-delay:.682s">Ruji</div><div class="spk" style="--dx:-105px;--dy:-105px;--r:6deg;color:#BE123C;animation-delay:.69s">Ruji</div><div class="spk" style="--dx:0px;--dy:-150px;--r:-4deg;color:#E11D48;animation-delay:.698s">Ruji</div><div class="spk" style="--dx:105px;--dy:-105px;--r:12deg;color:#FB7185;animation-delay:.706s">Ruji</div></div></div></div>
-<script>(function(){var s=document.getElementById("spl");function rm(){if(s&&s.parentNode)s.parentNode.removeChild(s)}try{if(sessionStorage.getItem("spl")){rm();return}sessionStorage.setItem("spl","1")}catch(e){}try{var l=document.querySelector(".logo"),b=s.querySelector(".spb");var r=l.getBoundingClientRect(),q=b.getBoundingClientRect();var c=l.cloneNode(true);c.className="logo spc";c.style.cssText="position:absolute;margin:0;left:"+r.left+"px;top:"+r.top+"px";s.appendChild(c);s.style.setProperty("--sx",(r.left+r.width/2-(q.left+q.width/2))+"px");s.style.setProperty("--sy",(r.top+r.height/2-(q.top+q.height/2))+"px")}catch(e){rm();return}s.addEventListener("click",rm);setTimeout(rm,1100)})();</script>
+<script>(function(){var s=document.getElementById("spl");function rm(){if(s&&s.parentNode)s.parentNode.removeChild(s)}try{if(sessionStorage.getItem("spl")||localStorage.getItem("ruji_in")){rm();return}sessionStorage.setItem("spl","1")}catch(e){}try{var l=document.querySelector(".logo"),b=s.querySelector(".spb");var r=l.getBoundingClientRect(),q=b.getBoundingClientRect();var c=l.cloneNode(true);c.className="logo spc";c.style.cssText="position:absolute;margin:0;left:"+r.left+"px;top:"+r.top+"px";s.appendChild(c);s.style.setProperty("--sx",(r.left+r.width/2-(q.left+q.width/2))+"px");s.style.setProperty("--sy",(r.top+r.height/2-(q.top+q.height/2))+"px")}catch(e){rm();return}s.addEventListener("click",rm);setTimeout(rm,1100)})();</script>
 
 <main id="app"><div class="empty">লোড হচ্ছে...</div></main>
 <nav id="nav" style="display:none" aria-label="প্রধান মেনু"><div class="nv">
@@ -602,6 +651,7 @@ var RWS=`হোম|Home|होम|الرئيسية
 ছবি দেখুন|View photo|फ़ोटो देखें|عرض الصورة
 পোস্ট তৈরি করুন|Create post|पोस्ट बनाएँ|إنشاء منشور
 রিল তৈরি করুন|Create reel|रील बनाएँ|إنشاء ريل
+রিল তৈরি|Create reel|रील बनाएँ|إنشاء ريل
 তৈরি করুন|Create|बनाएँ|إنشاء
 বন্ধ করুন|Close|बंद करें|إغلاق
 ✨ লেখার সহায়ক|✨ Writing helper|✨ लेखन सहायक|✨ مساعد الكتابة
@@ -1016,8 +1066,15 @@ function verify(app){
 }
 function pvid(p){var vu=vurl(p);if(!vu)return'<p class="phold" style="display:grid;place-items:center;text-align:center;padding:8px">ভিডিওটি এই প্রোটোটাইপে সেভ থাকে না, নতুন করে দিন।</p>';if(S.saver&&!rv[p.id])return'<button class="phold" data-a="show">ভিডিও দেখুন</button>';return'<video class="pimg" controls playsinline preload="metadata" src="'+esc(vu)+'"></video>'}
 function segs(){return[["post","পোস্ট"],["reel","রিল"],["story","স্টোরি"]].map(function(x){return'<button type="button" data-md="'+x[0]+'" role="tab" aria-selected="'+(mode===x[0])+'" class="sg'+(mode===x[0]?' on':'')+'">'+x[1]+'</button>'}).join("")}
-function storyBar(){var seen={},list=S.stories.filter(function(s){return Date.now()-s.t<864e5&&!isBl(s.uid)}).sort(function(a,b){return b.t-a.t}).filter(function(s){if(seen[s.uid])return false;seen[s.uid]=1;return true});var mine=avImg(S.me,S.uid);var add='<button class="st add" data-md="story" aria-label="স্টোরি যোগ করুন"><span class="sta" style="'+(mine?"background-image:url('"+esc(mine)+"')":"background:"+col(S.me))+'">'+(mine?'':esc(Array.from(S.me||"?")[0]||"?"))+'</span><span class="ring">+</span><small>স্টোরি তৈরি</small></button>';return'<div class="stories">'+add+list.map(function(s){var bg=s.img?"background-image:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0) 40%,rgba(0,0,0,.6)),url('"+esc(s.img)+"')":"background:linear-gradient(170deg,"+col(s.author)+",#16203A)";var a=avImg(s.author,s.uid);return'<button class="st" data-st="'+esc(s.id)+'" style="'+bg+'"><span class="ring" style="'+(a?"background:url('"+esc(a)+"') center/cover":"background:"+col(s.author))+'">'+(a?'':esc(Array.from(s.author)[0]||"?"))+'</span><small>'+esc(s.author)+'</small></button>'}).join("")+'</div>'}
-function viewSt(id){var s=S.stories.filter(function(x){return x.id===id})[0];if(!s)return;var o=document.createElement("div");o.className="sv";o.setAttribute("role","dialog");var inner=(s.img?'<img src="'+s.img+'" alt="">':'')+(s.text?'<p>'+esc(s.text)+'</p>':'');o.innerHTML='<div class="spg"><i></i></div><div class="svh">'+av(s.author,s.uid)+'<b>'+esc(s.author)+'</b><small>'+ago(s.t)+'</small>'+(s.uid===S.uid?'<button type="button" data-sdel="1">মুছুন</button>':'')+'<button type="button" aria-label="বন্ধ করুন">✕</button></div><div class="svb">'+inner+'</div>';var tm;var close=function(){clearTimeout(tm);o.remove()};tm=setTimeout(close,8000);o.onclick=function(e){if(e.target.dataset&&e.target.dataset.sdel){clearTimeout(tm);if(confirm("এই স্টোরিটি মুছবেন?"))FB.delStory(s.id).then(close).catch(function(x){fail(x,"stories")});else tm=setTimeout(close,8000);return}close()};document.body.appendChild(o)}
+function storyBar(){var seen={},list=S.stories.filter(function(s){return Date.now()-s.t<864e5&&!isBl(s.uid)}).sort(function(a,b){return b.t-a.t}).filter(function(s){if(seen[s.uid])return false;seen[s.uid]=1;return true});var add='<div class="stc"><button type="button" class="stb sb1" data-md="story" aria-label="স্টোরি তৈরি">'+ic('<circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><path d="M12 8v8M8 12h8"/>')+'<span>স্টোরি তৈরি</span></button><button type="button" class="stb sb2" data-md="reel" aria-label="রিল তৈরি">'+ic('<rect x="3.500" y="4" width="17" height="16" rx="4"/><path d="M3.500 9h17M9 4l2 5M14 4l2 5"/><path d="M10.500 12.500v4l3.500-2z" fill="currentColor"/>')+'<span>রিল তৈরি</span></button></div>';return'<div class="stories">'+add+list.map(function(s){var bg=s.img?"background-image:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0) 40%,rgba(0,0,0,.6)),url('"+esc(s.img)+"')":"background:linear-gradient(170deg,"+col(s.author)+",#16203A)";var a=avImg(s.author,s.uid);return'<button class="st" data-st="'+esc(s.id)+'" style="'+bg+'"><span class="ring" style="'+(a?"background:url('"+esc(a)+"') center/cover":"background:"+col(s.author))+'">'+(a?'':esc(Array.from(s.author)[0]||"?"))+'</span><small>'+esc(s.author)+'</small></button>'}).join("")+'</div>'}
+function stList(){var seen={},us=S.stories.filter(function(x){return Date.now()-x.t<864e5&&!isBl(x.uid)}).sort(function(a,b){return b.t-a.t}).filter(function(x){if(seen[x.uid])return false;seen[x.uid]=1;return true}).map(function(x){return x.uid}),L=[];us.forEach(function(u){S.stories.filter(function(x){return x.uid===u&&Date.now()-x.t<864e5}).sort(function(a,b){return a.t-b.t}).forEach(function(x){L.push(x)})});return L}
+function viewSt(id){var L=stList(),c=L.filter(function(x){return x.id===id})[0];if(!c)return;var i=0;for(var k=0;k<L.length;k++){if(L[k].uid===c.uid){i=k;break}}
+ var o=document.createElement("div");o.className="sv";o.setAttribute("role","dialog");var tm;
+ var close=function(){clearTimeout(tm);o.remove()};
+ var go=function(d){i+=d;if(i<0)i=0;if(i>=L.length){close();return}show()};
+ var show=function(){var s=L[i];if(!s){close();return}clearTimeout(tm);var inner=(s.img?'<img src="'+s.img+'" alt="">':'')+(s.text?'<p>'+esc(s.text)+'</p>':'');o.innerHTML='<div class="spg"><i></i></div><div class="svh">'+av(s.author,s.uid)+'<b>'+esc(s.author)+'</b><small>'+ago(s.t)+'</small>'+(s.uid===S.uid?'<button type="button" data-sdel="1">মুছুন</button>':'')+'<button type="button" aria-label="বন্ধ করুন">✕</button></div><div class="svb">'+inner+'</div>';tm=setTimeout(function(){go(1)},8000);if(typeof TR==="function"&&LANG!=="bn")trRun()};
+ o.onclick=function(e){var b=e.target.closest("button");if(b){if(b.dataset.sdel){clearTimeout(tm);var cur=L[i];if(confirm("এই স্টোরিটি মুছবেন?"))FB.delStory(cur.id).then(close).catch(function(x){fail(x,"stories")});else tm=setTimeout(function(){go(1)},8000);return}close();return}go(e.clientX<o.clientWidth/3?-1:1)};
+ document.body.appendChild(o);show()}
 var P={like:'<path d="M7 11v9H4v-9z"/><path d="M7 11l4-8c1.6 0 2.6 1.1 2.3 2.7L12.8 9H19a2 2 0 0 1 2 2.4l-1.2 6A2 2 0 0 1 17.8 19H7"/>',cm:'<path d="M4 5h16v11H9l-5 4z"/>',sh:'<path d="M14 4l7 7-7 7v-4c-5 0-8 1-10 5 1-6 4-10 10-11z"/>',sv:'<path d="M6 3h12v18l-6-4-6 4z"/>'};
 function ab(a,icon,count,on,label){return'<button data-a="'+a+'" class="ab'+(on?' on':'')+'" aria-label="'+label+'" aria-pressed="'+!!on+'">'+icon+count+'</button>'}
 var RX=[["like","👍","পছন্দ"],["love","❤️","ভালোবাসা"],["shoe","👞","ভালো জুতা"],["torn",'<span style="display:inline-block;transform:rotate(25deg);filter:grayscale(1) brightness(.75)">🥿</span>',"ছেঁড়া জুতা"],["slap","🖐️","থাপ্পড়"],["rose","🌹","গোলাপ"]];function rxIc(p,liked,dflt){var m=liked&&p.rx&&p.rx[S.uid];if(!m||m==="like")return dflt;var r=RX.filter(function(x){return x[0]===m})[0];return r?'<span style="font-size:20px;line-height:1">'+r[1]+'</span>':dflt}
@@ -1054,13 +1111,13 @@ function profCard(){var l=S.level||1,pf=S.pf||{},big=pf.img?'<div class="av" sty
  return'<div class="box" style="text-align:center">'+big+'<h2 style="margin:8px 0 2px">'+esc(S.me)+bd(S.me)+'</h2><div style="color:var(--mute)">'+(S.pv?['','ফোন যাচাই করা','ফোন ও সেলফি যাচাই করা','ফোন, সেলফি ও এনআইডি যাচাই করা'][l]:'ফ্রি অ্যাকাউন্ট (ফোন যাচাই হয়নি)')+'</div>'
  +(pfEdit?'<textarea id="bio" maxlength="120" placeholder="নিজের সম্পর্কে ছোট করে লিখুন" aria-label="পরিচিতি" style="margin-top:10px;min-height:64px">'+esc(pf.bio||"")+'</textarea><div class="row" style="justify-content:center;margin-top:8px"><button class="pri" data-pf="save">সেভ</button><button data-pf="cancel">বাতিল</button></div>':(pf.bio?'<p style="margin:10px 0 0;overflow-wrap:anywhere">'+esc(pf.bio)+'</p>':'')+'<div class="row" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><button data-pf="photo" style="border:1px solid var(--line)">ছবি বদলান</button><button data-pf="lock" style="border:1px solid var(--line)">'+(pf.lock?"🔓 ছবি খুলে দিন":"🔒 ছবি লক করুন")+'</button><button data-pf="bio" style="border:1px solid var(--line)">'+(pf.bio?'পরিচিতি বদলান':'পরিচিতি লিখুন')+'</button></div>')
  +'<input type="file" id="pff" accept="image/*" hidden></div>'+blkBox()+'<div class="box"><button data-lo="1" style="border:1px solid var(--line)">বের হোন</button></div>'}
-function pimg(p){if(S.saver&&!rv[p.id])return'<button class="phold" data-a="show">ছবি দেখুন</button>';return'<img class="pimg" data-zoom alt="" src="'+p.img+'">'}
+function pimg(p){if(S.saver&&!rv[p.id])return'<button class="phold" data-a="show">ছবি দেখুন</button>';return'<img class="pimg" data-zoom alt="" loading="lazy" decoding="async" src="'+p.img+'">'}
 function saverBar(){return'<div class="box row" style="justify-content:space-between"><div><b>ডেটা সেভার</b><div style="color:var(--mute);font-size:14px">'+(S.saver?'ছবি লুকানো আছে, চাইলে দেখুন বাটনে চাপুন':'বন্ধ, সব ছবি দেখা যাচ্ছে')+'</div></div><button class="'+(S.saver?'pri':'')+'" style="border:1px solid var(--line)" data-sv="1" role="switch" aria-checked="'+!!S.saver+'">'+(S.saver?'চালু':'বন্ধ')+'</button></div>'}
 
-var cxNew=function(){return{feel:"",loc:"",tag:"",music:"",aud:"pub"}},CX=cxNew(),draftOrig="",fIdx=0;
+var cxNew=function(){return{feel:"",loc:"",tag:"",music:"",alb:"",aud:"pub"}},CX=cxNew(),draftOrig="",fIdx=0;
 var FLT=[["মূল",""],["সাদাকালো","grayscale(1)"],["উষ্ণ","sepia(.5) saturate(1.2)"],["উজ্জ্বল","brightness(1.15) contrast(1.1)"]];
 var FEELS=["😊 খুশি","😍 ভালোবাসায়","🤩 উচ্ছ্বসিত","😇 কৃতজ্ঞ","🤲 ধন্য","😢 মন খারাপ","😴 ক্লান্ত","😡 রাগান্বিত"];
-window.CXF=function(){return{priv:CX.aud,feel:CX.feel,loc:CX.loc,tag:CX.tag,mus:CX.music}};
+window.CXF=function(){return{priv:CX.aud,feel:CX.feel,loc:CX.loc,tag:CX.tag,mus:CX.music,alb:CX.alb}};
 function cmpFull(){var ttl={post:"নতুন পোস্ট",reel:"নতুন রিল",story:"নতুন স্টোরি"}[mode]||"নতুন পোস্ট";
  return'<div class="box cmp cmpo cmpf"><div class="cfh"><button type="button" class="ic" data-op="close" aria-label="বন্ধ করুন">✕</button><b>'+ttl+'</b><button class="pri" id="pb" disabled>'+(mode==="post"?"পরবর্তী":PB[mode])+'</button></div>'
  +'<div class="cfu"><button type="button" class="avb" data-prof="1" aria-label="প্রোফাইল">'+av(S.me)+'</button><div><b>'+esc(S.me)+'</b><div id="cxn" class="cxn"></div></div></div>'
@@ -1068,23 +1125,36 @@ function cmpFull(){var ttl={post:"নতুন পোস্ট",reel:"নতু�
  +'<textarea id="tx" class="cft" rows="3" placeholder="'+PHT[mode]+'" aria-label="নতুন পোস্ট"></textarea>'
  +'<input type="file" id="fl" accept="'+(mode==="reel"?"video/*":"image/*,video/*")+'" hidden><div id="pv"></div>'
  +'<div class="cfb"><button type="button" class="cfchip" data-cx="aud" id="cxa"></button></div></div>'}
+var RI=(function(){var w=function(b){return'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+b+'</svg>'};return{
+ music:w('<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.8" fill="currentColor"/><circle cx="17.5" cy="16" r="2.8" fill="currentColor"/>'),
+ tag:w('<circle cx="10" cy="8" r="3.6" fill="currentColor"/><path d="M3.5 20c0-3.6 2.9-6 6.500-6 1.200 0 2.300.3 3.200.8"/><circle cx="18" cy="17" r="3"/><path d="M20.200 19.200L22 21"/>'),
+ loc:w('<path d="M12 21s-7-6.200-7-11.200A7 7 0 0 1 19 9.800C19 14.800 12 21 12 21z" fill="currentColor"/><circle cx="12" cy="9.800" r="2.600" fill="var(--card)" stroke="none"/>'),
+ feel:w('<circle cx="12" cy="12" r="9.500" fill="currentColor"/><circle cx="9" cy="10" r="1.200" fill="var(--card)" stroke="none"/><circle cx="15" cy="10" r="1.200" fill="var(--card)" stroke="none"/><path d="M8 14.500c1.200 1.800 2.500 2.500 4 2.500s2.800-.7 4-2.500" stroke="var(--card)"/>'),
+ album:w('<circle cx="12" cy="12" r="9.500" fill="currentColor"/><path d="M12 7.500v9M7.500 12h9" stroke="var(--card)" stroke-width="2.400"/>'),
+ media:w('<rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 21h11a3 3 0 0 0 3-3V8"/><path d="M10 7v6M7 10h6"/>'),
+ more:w('<circle cx="5" cy="12" r="1.400" fill="currentColor"/><circle cx="12" cy="12" r="1.400" fill="currentColor"/><circle cx="19" cy="12" r="1.400" fill="currentColor"/>'),
+ edit:w('<path d="M4 20l1-4L16.500 4.500a2.100 2.100 0 0 1 3 3L8 19z"/><path d="M14.500 6.500l3 3"/>'),
+ del:w('<path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13M9 7V4h6v3"/>'),
+ globe:w('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.400 3.200 3.400 14.800 0 18M12 3c-3.400 3.200-3.400 14.800 0 18"/>'),
+ lock:w('<rect x="5" y="11" width="14" height="10" rx="2.500"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>')}})();
 function cxDraw(){var c=document.getElementById("cxc");if(!c)return;
- var ch=function(k,ic,lb,v){return'<button type="button" data-cx="'+k+'" class="'+(v?'on':'')+'"><span>'+ic+'</span> '+esc(v?v.slice(0,14):lb)+'</button>'};
- c.innerHTML=ch("music","🎵","গান",CX.music)+ch("tag","👥","ট্যাগ/সহযোগী",CX.tag)+ch("loc","📍","লোকেশন",CX.loc)+ch("feel","😊","অনুভূতি",CX.feel);
- var n=document.getElementById("cxn");if(n){var t="";if(CX.feel)t+=LANG==="bn"?" — "+esc(CX.feel)+" অনুভব করছেন":" — feeling "+esc(TR(CX.feel));if(CX.tag)t+=LANG==="bn"?" — "+esc(CX.tag)+" এর সাথে":" — with "+esc(CX.tag);if(CX.loc)t+=" — 📍 "+esc(CX.loc);if(CX.music)t+=" — 🎵 "+esc(CX.music);n.innerHTML=t}
- var a=document.getElementById("cxa");if(a)a.innerHTML=(CX.aud==="me"?"🔒 শুধু আমি":"🌐 সবাই")}
-function pxt(p){var t="";if(p.feel)t+=" — "+esc(p.feel)+" অনুভব করছেন";if(p.tag)t+=" — "+esc(p.tag)+" এর সাথে";if(p.loc)t+=" — 📍 "+esc(p.loc);if(p.mus)t+='<div class="pmus">🎵 '+esc(p.mus)+'</div>';return t}
+ var ch=function(k,ico,lb,v,sh){sh=sh||lb;return'<button type="button" data-cx="'+k+'" class="cxi'+(v?' on':'')+'" aria-label="'+lb+(v?': '+esc(v):'')+'" title="'+lb+'">'+RI[ico]+'<span class="cxl">'+esc(sh)+'</span></button>'};
+ c.innerHTML=ch("music","music","গান",CX.music)+ch("tag","tag","ট্যাগ/সহযোগী",CX.tag)+ch("loc","loc","লোকেশন",CX.loc)+ch("feel","feel","অনুভূতি",CX.feel)+ch("alb","album","অ্যালবাম",CX.alb);
+ var n=document.getElementById("cxn");if(n){var t="";if(CX.feel)t+=LANG==="bn"?" — "+esc(CX.feel)+" অনুভব করছেন":" — feeling "+esc(TR(CX.feel));if(CX.tag)t+=LANG==="bn"?" — "+esc(CX.tag)+" এর সাথে":" — with "+esc(CX.tag);if(CX.loc)t+=" — 📍 "+esc(CX.loc);if(CX.music)t+=" — 🎵 "+esc(CX.music);if(CX.alb)t+=" — 📁 "+esc(CX.alb);n.innerHTML=t}
+ var a=document.getElementById("cxa");if(a)a.innerHTML=(CX.aud==="me"?RI.lock+" শুধু আমি":RI.globe+" সবাই")}
+function pxt(p){var t="";if(p.feel)t+=" — "+esc(p.feel)+" অনুভব করছেন";if(p.tag)t+=" — "+esc(p.tag)+" এর সাথে";if(p.loc)t+=" — 📍 "+esc(p.loc);if(p.alb)t+=" — 📁 "+esc(p.alb);if(p.mus)t+='<div class="pmus">🎵 '+esc(p.mus)+'</div>';return t}
 function cxSheet(k){var o=document.createElement("div");o.className="sv";o.style.cssText="justify-content:flex-end;padding:0;background:rgba(10,14,28,.55);z-index:60";
- var T={music:"গান যোগ করুন",tag:"ট্যাগ / সহযোগী",loc:"লোকেশন",feel:"অনুভূতি",aud:"কারা দেখতে পারবেন?",more:"আরও"},h="";
+ var T={music:"গান যোগ করুন",tag:"ট্যাগ / সহযোগী",loc:"লোকেশন",feel:"অনুভূতি",aud:"কারা দেখতে পারবেন?",alb:"অ্যালবাম",more:"আরও"},h="";
  if(k==="feel")h=FEELS.map(function(f){return'<button type="button" class="dwr" data-v="'+esc(f)+'"><span class="dwl">'+esc(f)+'</span></button>'}).join("")+'<button type="button" class="dwr" data-v=""><span class="dwl">মুছুন</span></button>';
  else if(k==="aud")h='<button type="button" class="dwr" data-v="pub"><span class="dwl">🌐 সবাই'+(CX.aud==="pub"?" ✓":"")+'</span></button><button type="button" class="dwr" data-v="me"><span class="dwl">🔒 শুধু আমি'+(CX.aud==="me"?" ✓":"")+'</span></button>';
  else if(k==="more")h='<button type="button" class="dwr" data-v="add"><span class="dwl">🖼️ অন্য ছবি বা ভিডিও বাছুন</span></button>'+(draftOrig?'<button type="button" class="dwr" data-v="orig"><span class="dwl">↩️ মূল ছবি ফেরান</span></button>':'');
- else{var cur=k==="music"?CX.music:k==="tag"?CX.tag:CX.loc;h='<input type="text" id="cxi" maxlength="60" value="'+esc(cur)+'" placeholder="'+(k==="music"?"গানের নাম":k==="tag"?"কাদের সাথে আছেন":"কোথায় আছেন")+'" style="width:100%;margin:10px 0"><div class="row" style="gap:8px"><button type="button" class="pri" data-v="ok" style="flex:1;padding:10px">ঠিক আছে</button><button type="button" data-v="" style="flex:1;padding:10px;border:1px solid var(--line)">মুছুন</button></div>'}
+ else{var cur=k==="music"?CX.music:k==="tag"?CX.tag:k==="alb"?CX.alb:CX.loc;h='<input type="text" id="cxi" maxlength="60" value="'+esc(cur)+'" placeholder="'+(k==="music"?"গানের নাম":k==="tag"?"কাদের সাথে আছেন":k==="alb"?"অ্যালবামের নাম, যেমন: ঈদের স্মৃতি":"কোথায় আছেন")+'" style="width:100%;margin:10px 0"><div class="row" style="gap:8px"><button type="button" class="pri" data-v="ok" style="flex:1;padding:10px">ঠিক আছে</button><button type="button" data-v="" style="flex:1;padding:10px;border:1px solid var(--line)">মুছুন</button></div>';if(k==="alb"){var seenA={},al=S.posts.filter(function(x){return x.uid===S.uid&&x.alb&&!seenA[x.alb]&&(seenA[x.alb]=1)}).map(function(x){return x.alb}).slice(0,8);if(al.length)h+='<div style="margin-top:10px;color:var(--mute);font-size:14px">আপনার অ্যালবাম</div>'+al.map(function(a){return'<button type="button" class="dwr" data-v="alb:'+esc(a)+'"><span class="dwl">📁 '+esc(a)+'</span></button>'}).join("")}}
  o.innerHTML='<div style="background:var(--card);color:var(--ink);border-radius:16px 16px 0 0;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));max-height:70vh;overflow:auto"><b style="font-size:18px">'+T[k]+'</b>'+h+'</div>';
  o.onclick=function(e){var b=e.target.closest("[data-v]");if(!b){if(e.target===o)o.remove();return}var v=b.dataset.v;
   if(k==="feel")CX.feel=v;else if(k==="aud")CX.aud=v;
   else if(k==="more"){if(v==="add")document.getElementById("fl").click();else if(v==="orig"&&draftOrig){draftImg=draftOrig;draftOrig="";fIdx=0;pv()}}
-  else{var iv=document.getElementById("cxi"),val=v==="ok"?iv.value.trim():"";if(k==="music")CX.music=val;else if(k==="tag")CX.tag=val;else CX.loc=val}
+  else if(k==="alb"&&v.indexOf("alb:")===0)CX.alb=v.slice(4);
+  else{var iv=document.getElementById("cxi"),val=v==="ok"?iv.value.trim():"";if(k==="music")CX.music=val;else if(k==="tag")CX.tag=val;else if(k==="alb")CX.alb=val;else CX.loc=val}
   o.remove();cxDraw()};document.body.appendChild(o);var ii=o.querySelector("#cxi");if(ii)ii.focus()}
 function cxEdit(){if(!draftImg)return;if(!fIdx&&!draftOrig)draftOrig=draftImg;fIdx=(fIdx+1)%FLT.length;var f=FLT[fIdx];
  if(!f[1]){draftImg=draftOrig;draftOrig="";fIdx=0;pv();toast("মূল ছবি");return}
@@ -1094,8 +1164,8 @@ document.addEventListener("click",function(e){var b=e.target.closest("[data-cx]"
  else if(k==="del"){draftImg="";draftVid="";draftFile=null;draftOrig="";fIdx=0;pv();var p=document.getElementById("pb"),t=document.getElementById("tx");if(p&&t)p.disabled=mode==="reel"||!t.value.trim()}
  else cxSheet(k)});
 function pv(){var e=document.getElementById("pv");if(!e)return;
- if(!(draftImg||draftVid)){e.innerHTML='<button type="button" class="cfadd" data-cx="add">🖼️ '+(mode==="reel"?"ভিডিও বাছুন":"মিডিয়া যোগ করুন")+'</button>';return}
- e.innerHTML='<div class="prev cfp">'+(draftVid?'<video src="'+draftVid+'" muted playsinline controls></video>':'<img alt="" src="'+draftImg+'">')+'<div class="cfa"><button type="button" data-cx="add" class="cfadd2">🖼️ মিডিয়া যোগ করুন</button><span style="flex:1"></span><button type="button" data-cx="more" aria-label="আরও">⋯</button>'+(draftVid?'':'<button type="button" data-cx="edit" aria-label="সম্পাদনা">✏️</button>')+'<button type="button" data-cx="del" aria-label="মুছুন">🗑️</button></div></div>'}
+ if(!(draftImg||draftVid)){e.innerHTML='<button type="button" class="cfadd" data-cx="add">'+RI.media+' '+(mode==="reel"?"ভিডিও বাছুন":"মিডিয়া যোগ করুন")+'</button>';return}
+ e.innerHTML='<div class="prev cfp">'+(draftVid?'<video src="'+draftVid+'" muted playsinline controls></video>':'<img alt="" src="'+draftImg+'">')+'<div class="cfa"><button type="button" data-cx="add" class="cfadd2">'+RI.media+' মিডিয়া যোগ করুন</button><span style="flex:1"></span><button type="button" data-cx="more" class="cfr" aria-label="আরও">'+RI.more+'</button>'+(draftVid?'':'<button type="button" data-cx="edit" class="cfr" aria-label="সম্পাদনা">'+RI.edit+'</button>')+'<button type="button" data-cx="del" class="cfr" aria-label="মুছুন">'+RI.del+'</button></div></div>'}
 function shrink(f,cb,mx){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,(mx||800)/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.7))};im.src=r.result};r.readAsDataURL(f)}
  
 function isBl(u){return !!(u&&S.bl&&S.bl[u])}
@@ -1378,7 +1448,7 @@ function startWatch(uid){var W=function(n){return function(x){fail(x,n)}},add=fu
  add(FB.watchNotifs(uid,function(l){S.nt=l.sort(function(a,b){return b.t-a.t});rr()},W("notifs")));
  add(FB.watchMarket(function(l){S.mk=l;rr()},W("market")));
  add(FB.watchBlocks(uid,function(m){S.bl=m;rr()},W("blocks")))}
-function boot(){FB.onUser(function(u){S.uid=u?u.uid:"";S.me=u?(u.displayName||window.__nn||""):"";S.phone=u&&u.phoneNumber||"";S.needPw=!!u&&(FB.needPw()||oa.mode==="reset");S.verified=!!u;S.pv=!!(u&&u.phoneNumber);S.level=S.level||1;
+function boot(){FB.onUser(function(u){try{if(u)localStorage.setItem("ruji_in","1");else localStorage.removeItem("ruji_in")}catch(e){}S.uid=u?u.uid:"";S.me=u?(u.displayName||window.__nn||""):"";S.phone=u&&u.phoneNumber||"";S.needPw=!!u&&(FB.needPw()||oa.mode==="reset");S.verified=!!u;S.pv=!!(u&&u.phoneNumber);S.level=S.level||1;
  if(u&&S.me)FB.ensureUser(S.me).catch(function(x){fail(x,"users")});
  if(u)loadPh([{uid:u.uid}]);if(u&&!unsubs.length)startWatch(u.uid);
  if(!u){stopWatch();var z=blank();Object.keys(z).forEach(function(k){S[k]=z[k]});PH={};PL={};tab="home";chat="";oa={mode:"login",step:1,phone:""};FB.reset()}
@@ -1390,9 +1460,9 @@ setTimeout(function(){if(!ready)document.getElementById("app").innerHTML='<div c
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,RecaptchaVerifier,signInWithPhoneNumber,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,EmailAuthProvider,linkWithCredential,updatePassword,updateProfile,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{getFirestore,collection,doc,addDoc,updateDoc,deleteDoc,onSnapshot,query,orderBy,limit,where,setDoc,getDoc,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getFirestore,initializeFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,addDoc,updateDoc,deleteDoc,onSnapshot,query,orderBy,limit,where,setDoc,getDoc,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 var app=initializeApp({apiKey:"AIzaSyC8-2etuX_Pd7wmMY-P9El0omNu3R-Z6EM",authDomain:"ruji-65f33.firebaseapp.com",projectId:"ruji-65f33",storageBucket:"ruji-65f33.firebasestorage.app",messagingSenderId:"1048988656486",appId:"1:1048988656486:web:42a738852930f4e07c1ea7"});
-var auth=getAuth(app),db=getFirestore(app),PC=collection(db,"posts"),RV=null,CR=null;
+var auth=getAuth(app),db=(function(){try{return initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})})}catch(e){return getFirestore(app)}})(),PC=collection(db,"posts"),RV=null,CR=null;
 function ld(d){var x=d.data();x.id=d.id;return x}
 function dual(c,f1,f2,uid,mp,cb,err){var a=[],b=[],em=function(){var m={};a.concat(b).forEach(function(r){m[r.id]=r});cb(Object.keys(m).map(function(k){return m[k]}))},u1=onSnapshot(query(collection(db,c),where(f1,"==",uid)),function(s){a=s.docs.map(mp);em()},err),u2=onSnapshot(query(collection(db,c),where(f2,"==",uid)),function(s){b=s.docs.map(mp);em()},err);return function(){u1();u2()}}auth.languageCode="bn";function pe(ph){return String(ph).replace("+","")+"@phone.ruji.app"}
 var CLD={cloud:"",preset:""};
@@ -1419,7 +1489,7 @@ window.FB={
  logout:function(){return signOut(auth)},
  watch:function(uid,cb,err){var A=[],B=[],fx={};function mp(d){var x=d.data();x.id=d.id;x.likes=x.likes||[];x.lc=x.comments||[];x.comments=x.lc;return x}
   function emit(){var m={};A.concat(B).forEach(function(x){m[x.id]=x});cb(Object.keys(m).map(function(k){return m[k]}).sort(function(p,q){return (q.t||0)-(p.t||0)}))}
-  var u1=onSnapshot(query(PC,where("priv","==","pub"),orderBy("t","desc"),limit(100)),function(s){A=s.docs.map(mp);emit()},err);
+  var u1=onSnapshot(query(PC,where("priv","==","pub"),orderBy("t","desc"),limit(40)),function(s){A=s.docs.map(mp);emit()},err);
   var u2=onSnapshot(query(PC,where("uid","==",uid),orderBy("t","desc"),limit(100)),function(s){B=s.docs.map(mp);emit();s.docs.forEach(function(d){if(!d.data().priv&&!fx[d.id]){fx[d.id]=1;updateDoc(d.ref,{priv:"pub"}).catch(function(){})}})},err);
   return function(){u1();u2()}},
  watchPostComments:function(pid,cb,err){return onSnapshot(query(collection(db,"comments"),where("post","==",pid)),function(s){cb(s.docs.map(ld))},err)},
